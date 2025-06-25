@@ -1,0 +1,379 @@
+@model QLPhongKham.Models.MedicalRecord
+
+@{
+    ViewData["Title"] = "Chi tiết hồ sơ bệnh án #" + Model.MedicalRecordId.ToString("D6");
+    Layout = "~/Areas/BenhNhan/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-file-medical me-2"></i>Chi tiết hồ sơ bệnh án #@Model.MedicalRecordId.ToString("D6")
+        </h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="BenhNhan" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a asp-area="BenhNhan" asp-controller="MedicalRecord" asp-action="Index">Hồ sơ bệnh án</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        <!-- Medical Record Details -->
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-file-medical-alt me-2"></i>Thông tin hồ sơ bệnh án
+                    </h6>
+                    <div>
+                        <a asp-action="Print" asp-route-id="@Model.MedicalRecordId" 
+                           class="btn btn-success btn-sm" target="_blank">
+                            <i class="fas fa-print me-1"></i>In hồ sơ
+                        </a>
+                        <a asp-action="DownloadPDF" asp-route-id="@Model.MedicalRecordId" 
+                           class="btn btn-danger btn-sm">
+                            <i class="fas fa-file-pdf me-1"></i>Tải PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Record Basic Info -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Thông tin khám bệnh</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Mã hồ sơ:</strong></td>
+                                    <td>#@Model.MedicalRecordId.ToString("D6")</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ngày khám:</strong></td>
+                                    <td>@Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                </tr>
+                                @if (Model.Appointment != null)
+                                {
+                                    <tr>
+                                        <td><strong>Lịch hẹn:</strong></td>
+                                        <td>
+                                            #@Model.AppointmentId - @Model.Appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Doctor != null)
+                                {
+                                    <tr>
+                                        <td><strong>Bác sĩ khám:</strong></td>
+                                        <td>
+                                            <strong>@Model.Doctor.FullName</strong>
+                                            <br>
+                                            <small class="text-muted">@Model.Doctor.Specialty</small>
+                                        </td>
+                                    </tr>
+                                }
+                                else if (Model.Appointment?.Doctor != null)
+                                {
+                                    <tr>
+                                        <td><strong>Bác sĩ khám:</strong></td>
+                                        <td>
+                                            <strong>@Model.Appointment.Doctor.FullName</strong>
+                                            <br>
+                                            <small class="text-muted">@Model.Appointment.Doctor.Specialty</small>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Thông tin bệnh nhân</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Họ tên:</strong></td>
+                                    <td>@Model.Patient.FullName</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ngày sinh:</strong></td>
+                                    <td>@Model.Patient.DateOfBirth.ToString("dd/MM/yyyy") (@Model.Patient.Age tuổi)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Giới tính:</strong></td>
+                                    <td>@Model.Patient.Gender</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Số điện thoại:</strong></td>
+                                    <td>@Model.Patient.Phone</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td>@Model.Patient.Email</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Medical Information -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">Thông tin y tế</h5>
+                            
+                            <!-- Diagnosis -->
+                            <div class="card mb-3">
+                                <div class="card-header bg-light">
+                                    <h6 class="m-0">
+                                        <i class="fas fa-stethoscope me-2 text-primary"></i>Chẩn đoán
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    @if (!string.IsNullOrEmpty(Model.Diagnosis))
+                                    {
+                                        <p class="mb-0">@Html.Raw(Model.Diagnosis.Replace("\n", "<br/>"))</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted mb-0">Chưa có thông tin chẩn đoán.</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Treatment -->
+                            <div class="card mb-3">
+                                <div class="card-header bg-light">
+                                    <h6 class="m-0">
+                                        <i class="fas fa-medkit me-2 text-success"></i>Phương pháp điều trị
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    @if (!string.IsNullOrEmpty(Model.Treatment))
+                                    {
+                                        <p class="mb-0">@Html.Raw(Model.Treatment.Replace("\n", "<br/>"))</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted mb-0">Chưa có thông tin điều trị.</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Prescription -->
+                            @if (!string.IsNullOrEmpty(Model.Prescription))
+                            {
+                                <div class="card mb-3">
+                                    <div class="card-header bg-light">
+                                        <h6 class="m-0">
+                                            <i class="fas fa-prescription-bottle me-2 text-info"></i>Đơn thuốc
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-0">@Html.Raw(Model.Prescription.Replace("\n", "<br/>"))</p>
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- Advice -->
+                            @if (!string.IsNullOrEmpty(Model.Advice))
+                            {
+                                <div class="card mb-3">
+                                    <div class="card-header bg-light">
+                                        <h6 class="m-0">
+                                            <i class="fas fa-lightbulb me-2 text-warning"></i>Lời khuyên của bác sĩ
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-0">@Html.Raw(Model.Advice.Replace("\n", "<br/>"))</p>
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- Notes -->
+                            <div class="card mb-3">
+                                <div class="card-header bg-light">
+                                    <h6 class="m-0">
+                                        <i class="fas fa-sticky-note me-2 text-secondary"></i>Ghi chú
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    @if (!string.IsNullOrEmpty(Model.Notes))
+                                    {
+                                        <p class="mb-0">@Html.Raw(Model.Notes.Replace("\n", "<br/>"))</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted mb-0">Không có ghi chú bổ sung.</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Quick Actions -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-tasks me-2"></i>Thao tác nhanh
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-action="Print" asp-route-id="@Model.MedicalRecordId" 
+                           class="btn btn-success" target="_blank">
+                            <i class="fas fa-print me-2"></i>In hồ sơ bệnh án
+                        </a>
+                        <a asp-action="DownloadPDF" asp-route-id="@Model.MedicalRecordId" 
+                           class="btn btn-danger">
+                            <i class="fas fa-file-pdf me-2"></i>Tải xuống PDF
+                        </a>
+                        <a asp-area="BenhNhan" asp-controller="Appointment" asp-action="Index" 
+                           class="btn btn-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>Đặt lịch hẹn mới
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medical Summary -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-chart-line me-2"></i>Tóm tắt y tế
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-calendar-check fa-2x text-primary mb-2"></i>
+                            <div>
+                                <strong>Ngày khám</strong>
+                                <br>
+                                <span class="text-muted">@Model.CreatedDate.ToString("dd/MM/yyyy")</span>
+                            </div>
+                        </div>
+                          @if (Model.Doctor != null || Model.Appointment?.Doctor != null)
+                        {
+                            var doctor = Model.Doctor ?? Model.Appointment?.Doctor;
+                            if (doctor != null)
+                            {
+                            <div class="mb-3">
+                                <i class="fas fa-user-md fa-2x text-success mb-2"></i>
+                                <div>
+                                    <strong>Bác sĩ khám</strong>
+                                    <br>
+                                    <span class="text-muted">@doctor.FullName</span>
+                                    <br>
+                                    <small class="text-muted">@doctor.Specialty</small>
+                                </div>
+                            </div>
+                            }
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.Prescription))
+                        {
+                            <div class="mb-3">
+                                <i class="fas fa-prescription-bottle fa-2x text-info mb-2"></i>
+                                <div>
+                                    <strong>Có đơn thuốc</strong>
+                                    <br>
+                                    <span class="badge bg-success">Đã kê đơn</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <i class="fas fa-prescription-bottle fa-2x text-muted mb-2"></i>
+                                <div>
+                                    <strong>Đơn thuốc</strong>
+                                    <br>
+                                    <span class="badge bg-secondary">Không có</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Information -->
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-info-circle me-2"></i>Thông tin liên quan
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Lịch sử khám:</strong>
+                        <br>
+                        <a asp-action="Index" class="text-decoration-none">
+                            <i class="fas fa-history me-1"></i>Xem tất cả hồ sơ
+                        </a>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Hóa đơn:</strong>
+                        <br>
+                        <a asp-area="BenhNhan" asp-controller="Invoice" asp-action="Index" 
+                           class="text-decoration-none">
+                            <i class="fas fa-file-invoice-dollar me-1"></i>Xem hóa đơn
+                        </a>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Lịch hẹn:</strong>
+                        <br>
+                        <a asp-area="BenhNhan" asp-controller="Appointment" asp-action="Index" 
+                           class="text-decoration-none">
+                            <i class="fas fa-calendar-alt me-1"></i>Quản lý lịch hẹn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="text-center">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
+                </a>
+                <a asp-action="Print" asp-route-id="@Model.MedicalRecordId" 
+                   class="btn btn-success" target="_blank">
+                    <i class="fas fa-print me-2"></i>In hồ sơ bệnh án
+                </a>
+                <a asp-action="DownloadPDF" asp-route-id="@Model.MedicalRecordId" 
+                   class="btn btn-danger">
+                    <i class="fas fa-file-pdf me-2"></i>Tải xuống PDF
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

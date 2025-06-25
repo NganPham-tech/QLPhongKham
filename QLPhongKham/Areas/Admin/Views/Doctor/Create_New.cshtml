@@ -1,0 +1,170 @@
+@model QLPhongKham.ViewModels.DoctorCreateViewModel
+
+@{
+    ViewData["Title"] = "Thêm Bác sĩ mới";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Thêm Bác sĩ mới</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <!-- Photo Upload Section -->
+                        <div class="form-group text-center mb-4">
+                            <div class="photo-preview mb-3">
+                                <img id="photoPreview" src="/images/default-doctor.jpg" alt="Ảnh đại diện" 
+                                     class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+                            </div>
+                            <div class="custom-file">
+                                <input asp-for="PhotoFile" class="custom-file-input" id="photoFile" accept="image/*">
+                                <label class="custom-file-label" for="photoFile">Chọn ảnh đại diện</label>
+                            </div>
+                            <span asp-validation-for="PhotoFile" class="text-danger"></span>
+                            <small class="form-text text-muted">Chọn file ảnh (JPG, PNG, GIF). Kích thước tối đa: 5MB</small>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="control-label">Họ và tên đệm</label>
+                                    <input asp-for="FirstName" class="form-control" placeholder="Nhập họ và tên đệm" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="control-label">Tên</label>
+                                    <input asp-for="LastName" class="form-control" placeholder="Nhập tên" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="DateOfBirth" class="control-label">Ngày sinh</label>
+                                    <input asp-for="DateOfBirth" class="form-control" type="date" />
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Gender" class="control-label">Giới tính</label>
+                                    <select asp-for="Gender" class="form-control">
+                                        <option value="">-- Chọn giới tính --</option>
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                        <option value="Khác">Khác</option>
+                                    </select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label">Email</label>
+                                    <input asp-for="Email" class="form-control" type="email" placeholder="doctor@phongkham.com" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                    <small class="form-text text-muted">Sẽ tự động tạo tài khoản đăng nhập với mật khẩu: Doctor@123456</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Phone" class="control-label">Số điện thoại</label>
+                                    <input asp-for="Phone" class="form-control" placeholder="0123456789" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Specialty" class="control-label">Chuyên khoa</label>
+                                    <select asp-for="Specialty" class="form-control">
+                                        <option value="">-- Chọn chuyên khoa --</option>                                        @if (ViewBag.Specialties != null)
+                                        {
+                                            @foreach (var specialty in (ViewBag.Specialties as List<string>) ?? new List<string>())
+                                            {
+                                                <option value="@specialty">@specialty</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span asp-validation-for="Specialty" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Qualification" class="control-label">Trình độ chuyên môn</label>
+                                    <select asp-for="Qualification" class="form-control">
+                                        <option value="">-- Chọn trình độ --</option>
+                                        <option value="Bác sĩ">Bác sĩ</option>
+                                        <option value="Thạc sĩ">Thạc sĩ</option>
+                                        <option value="Tiến sĩ">Tiến sĩ</option>
+                                        <option value="Phó Giáo sư">Phó Giáo sư</option>
+                                        <option value="Giáo sư">Giáo sư</option>
+                                        <option value="Bác sĩ chuyên khoa I">Bác sĩ chuyên khoa I</option>
+                                        <option value="Bác sĩ chuyên khoa II">Bác sĩ chuyên khoa II</option>
+                                    </select>
+                                    <span asp-validation-for="Qualification" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label">Địa chỉ</label>
+                            <input asp-for="Address" class="form-control" placeholder="Nhập địa chỉ" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label">Mô tả / Kinh nghiệm</label>
+                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Mô tả kinh nghiệm, thành tích, hoặc thông tin bổ sung về bác sĩ..."></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Lưu thông tin
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Preview uploaded image
+        document.getElementById('photoFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('photoPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+                
+                // Update label text
+                const label = document.querySelector('.custom-file-label');
+                label.textContent = file.name;
+            }
+        });
+    </script>
+}

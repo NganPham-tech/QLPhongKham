@@ -1,0 +1,182 @@
+@model QLPhongKham.ViewModels.CreateMedicalRecordViewModel
+@{
+    ViewData["Title"] = "Chỉnh sửa hồ sơ bệnh án";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 fw-bold text-primary">
+                        <i class="bi bi-pencil-square me-2"></i>Chỉnh sửa hồ sơ bệnh án #@Model.MedicalRecord.MedicalRecordId
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" asp-route-id="@Model.MedicalRecord.MedicalRecordId" method="post">
+                        <input asp-for="MedicalRecord.MedicalRecordId" type="hidden" />
+                        <input asp-for="MedicalRecord.AppointmentId" type="hidden" />
+                        <input asp-for="MedicalRecord.PatientId" type="hidden" />
+                        
+                        <div class="row">
+                            <!-- Left Column - Patient Info -->
+                            <div class="col-md-4">
+                                <div class="card bg-light">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="bi bi-person me-2"></i>Thông tin bệnh nhân
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-2">
+                                            <label class="form-label small fw-bold">Họ tên:</label>
+                                            <p class="mb-1">@Model.PatientName</p>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label small fw-bold">Số điện thoại:</label>
+                                            <p class="mb-1">@Model.PatientPhone</p>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label small fw-bold">Ngày sinh:</label>
+                                            <p class="mb-1">@Model.PatientDateOfBirth?.ToString("dd/MM/yyyy")</p>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label small fw-bold">Giới tính:</label>
+                                            <p class="mb-1">@Model.PatientGender</p>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label small fw-bold">Ngày tạo hồ sơ:</label>
+                                            <p class="mb-1 text-muted">@Model.MedicalRecord.CreatedDate.ToString("dd/MM/yyyy HH:mm")</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column - Medical Record Form -->
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <!-- Vital Signs -->
+                                    <div class="col-12 mb-4">
+                                        <h6 class="fw-bold text-secondary mb-3">
+                                            <i class="bi bi-activity me-2"></i>Chỉ số sinh hiệu
+                                        </h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-3">
+                                                <label asp-for="MedicalRecord.BloodPressure" class="form-label small"></label>
+                                                <input asp-for="MedicalRecord.BloodPressure" class="form-control form-control-sm" placeholder="120/80" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label asp-for="MedicalRecord.HeartRate" class="form-label small"></label>
+                                                <input asp-for="MedicalRecord.HeartRate" type="number" class="form-control form-control-sm" placeholder="72" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label asp-for="MedicalRecord.Temperature" class="form-label small"></label>
+                                                <input asp-for="MedicalRecord.Temperature" type="number" step="0.1" class="form-control form-control-sm" placeholder="36.5" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label asp-for="MedicalRecord.Weight" class="form-label small"></label>
+                                                <input asp-for="MedicalRecord.Weight" type="number" step="0.1" class="form-control form-control-sm" placeholder="65" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Medical Information -->
+                                    <div class="col-12">
+                                        <h6 class="fw-bold text-secondary mb-3">
+                                            <i class="bi bi-clipboard-pulse me-2"></i>Thông tin y tế
+                                        </h6>
+                                        
+                                        <div class="mb-3">
+                                            <label asp-for="MedicalRecord.Symptoms" class="form-label"></label>
+                                            <textarea asp-for="MedicalRecord.Symptoms" class="form-control" rows="3" placeholder="Mô tả triệu chứng của bệnh nhân..."></textarea>
+                                            <span asp-validation-for="MedicalRecord.Symptoms" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="MedicalRecord.Diagnosis" class="form-label"></label>
+                                            <textarea asp-for="MedicalRecord.Diagnosis" class="form-control" rows="2" placeholder="Chẩn đoán bệnh..."></textarea>
+                                            <span asp-validation-for="MedicalRecord.Diagnosis" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="MedicalRecord.Treatment" class="form-label"></label>
+                                            <textarea asp-for="MedicalRecord.Treatment" class="form-control" rows="3" placeholder="Phương pháp điều trị..."></textarea>
+                                            <span asp-validation-for="MedicalRecord.Treatment" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label asp-for="MedicalRecord.DoctorId" class="form-label"></label>
+                                                    <select asp-for="MedicalRecord.DoctorId" class="form-select" 
+                                                            asp-items="@(new SelectList(Model.AvailableDoctors, "DoctorId", "FullName"))">
+                                                        <option value="">Chọn bác sĩ khám</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label asp-for="MedicalRecord.NextAppointmentDate" class="form-label"></label>
+                                                    <input asp-for="MedicalRecord.NextAppointmentDate" type="datetime-local" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="MedicalRecord.Prescription" class="form-label"></label>
+                                            <textarea asp-for="MedicalRecord.Prescription" class="form-control" rows="3" placeholder="Đơn thuốc kê cho bệnh nhân..."></textarea>
+                                            <span asp-validation-for="MedicalRecord.Prescription" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="MedicalRecord.Advice" class="form-label"></label>
+                                            <textarea asp-for="MedicalRecord.Advice" class="form-control" rows="2" placeholder="Lời khuyên cho bệnh nhân..."></textarea>
+                                            <span asp-validation-for="MedicalRecord.Advice" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="MedicalRecord.Notes" class="form-label"></label>
+                                            <textarea asp-for="MedicalRecord.Notes" class="form-control" rows="2" placeholder="Ghi chú thêm..."></textarea>
+                                            <span asp-validation-for="MedicalRecord.Notes" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-end">
+                                    <a asp-action="Details" asp-route-id="@Model.MedicalRecord.MedicalRecordId" class="btn btn-secondary me-2">
+                                        <i class="bi bi-arrow-left me-1"></i>Quay lại
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-save me-1"></i>Cập nhật hồ sơ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Auto-resize textareas
+            $('textarea').on('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+
+            // Initialize textarea heights
+            $('textarea').each(function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+        });
+    </script>
+}

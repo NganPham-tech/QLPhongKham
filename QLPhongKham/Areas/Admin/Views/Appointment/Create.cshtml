@@ -1,0 +1,192 @@
+@model QLPhongKham.ViewModels.AppointmentCreateViewModel
+
+@{
+    ViewData["Title"] = "Tạo Lịch hẹn mới";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-calendar-plus"></i> Tạo Lịch hẹn mới
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="PatientId" class="control-label">Bệnh nhân</label>
+                                    <select asp-for="PatientId" class="form-control select2" asp-items="@(new SelectList(Model.Patients, "PatientId", "FullName"))">
+                                        <option value="">-- Chọn bệnh nhân --</option>
+                                    </select>
+                                    <span asp-validation-for="PatientId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="DoctorId" class="control-label">Bác sĩ</label>
+                                    <select asp-for="DoctorId" class="form-control select2" asp-items="@(new SelectList(Model.Doctors, "DoctorId", "FullName"))">
+                                        <option value="">-- Chọn bác sĩ --</option>
+                                    </select>
+                                    <span asp-validation-for="DoctorId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ServiceId" class="control-label">Dịch vụ</label>
+                                    <select asp-for="ServiceId" class="form-control select2" asp-items="@(new SelectList(Model.Services, "ServiceId", "Name"))" id="serviceSelect">
+                                        <option value="">-- Chọn dịch vụ --</option>
+                                    </select>
+                                    <span asp-validation-for="ServiceId" class="text-danger"></span>
+                                    <div id="serviceInfo" class="mt-2" style="display: none;">
+                                        <small class="text-info">
+                                            <i class="fas fa-money-bill-wave"></i> Giá: <span id="servicePrice"></span><br>
+                                            <i class="fas fa-clock"></i> Thời gian: <span id="serviceDuration"></span> phút<br>
+                                            <i class="fas fa-info-circle"></i> <span id="serviceDescription"></span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Status" class="control-label">Trạng thái</label>
+                                    <select asp-for="Status" class="form-control">
+                                        <option value="Pending">Pending</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                        <option value="No Show">No Show</option>
+                                    </select>
+                                    <span asp-validation-for="Status" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="AppointmentDate" class="control-label">Ngày giờ hẹn</label>
+                            <input asp-for="AppointmentDate" class="form-control" type="datetime-local" />
+                            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+                            <small class="form-text text-muted">Chọn ngày và giờ cho cuộc hẹn</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Notes" class="control-label">Ghi chú</label>
+                            <textarea asp-for="Notes" class="form-control" rows="4" placeholder="Ghi chú thêm về cuộc hẹn..."></textarea>
+                            <span asp-validation-for="Notes" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Tạo lịch hẹn
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Service Price Display -->
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Initialize Select2
+            $('.select2').select2({
+                theme: 'bootstrap4',
+                width: '100%'
+            });
+
+            // Service selection change - show price and info
+            $('#serviceSelect').change(function() {
+                var serviceId = $(this).val();
+                if (serviceId) {
+                    $.get('@Url.Action("GetServiceInfo", "Appointment")', { serviceId: serviceId })
+                        .done(function(data) {
+                            if (data.success) {
+                                $('#servicePrice').text(data.price.toLocaleString('vi-VN') + ' VNĐ');
+                                $('#serviceDuration').text(data.duration);
+                                $('#serviceDescription').text(data.description || 'Không có mô tả');
+                                $('#serviceInfo').show();
+                            }
+                        })
+                        .fail(function() {
+                            $('#serviceInfo').hide();
+                        });
+                } else {
+                    $('#serviceInfo').hide();
+                }
+            });
+
+            // Check for appointment conflicts
+            $('#DoctorId, #AppointmentDate').change(function() {
+                var doctorId = $('#DoctorId').val();
+                var appointmentDate = $('#AppointmentDate').val();
+                
+                if (doctorId && appointmentDate) {
+                    $.post('@Url.Action("CheckConflict", "Appointment")', {
+                        doctorId: doctorId,
+                        appointmentDate: appointmentDate,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    })
+                    .done(function(data) {
+                        if (data.hasConflict) {
+                            $('#conflictWarning').remove();
+                            $('<div id="conflictWarning" class="alert alert-warning mt-2">' +
+                              '<i class="fas fa-exclamation-triangle"></i> ' + data.message +
+                              '</div>').insertAfter('#AppointmentDate');
+                        } else {
+                            $('#conflictWarning').remove();
+                        }
+                    });
+                }
+            });
+
+            // Set minimum date to current time
+            var today = new Date();
+            today.setMinutes(today.getMinutes() + 30); // Add 30 minutes buffer
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            var hh = String(today.getHours()).padStart(2, '0');
+            var min = String(today.getMinutes()).padStart(2, '0');
+            
+            var minDateTime = yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + min;
+            $('#AppointmentDate').attr('min', minDateTime);
+
+            // Validate working hours
+            $('#AppointmentDate').on('change', function() {
+                var selectedDate = new Date($(this).val());
+                var hour = selectedDate.getHours();
+                var day = selectedDate.getDay();
+                
+                // Check if it's weekend (Sunday = 0, Saturday = 6)
+                if (day === 0 || day === 6) {
+                    alert('Phòng khám chỉ làm việc từ thứ 2 đến thứ 6. Vui lòng chọn ngày khác.');
+                    $(this).val('');
+                    return;
+                }
+                
+                // Check working hours (8 AM to 5 PM)
+                if (hour < 8 || hour >= 17) {
+                    alert('Phòng khám chỉ làm việc từ 8:00 AM đến 5:00 PM. Vui lòng chọn giờ khác.');
+                    $(this).val('');
+                    return;
+                }
+            });
+        });
+    </script>
+}

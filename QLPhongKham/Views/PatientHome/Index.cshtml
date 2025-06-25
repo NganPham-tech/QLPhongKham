@@ -1,0 +1,166 @@
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "_PatientLayout";
+}
+
+@if (ViewBag.UnreadNotificationCount != null && ViewBag.UnreadNotificationCount > 0)
+{
+    <div class="container mt-3">
+        <div class="alert alert-info alert-dismissible fade show">
+            <h5><i class="fas fa-bell me-2"></i>Bạn có @ViewBag.UnreadNotificationCount thông báo mới!</h5>
+            <p class="mb-2">
+                @if (ViewBag.RecentNotifications != null)
+                {
+                    var notifications = ViewBag.RecentNotifications as List<QLPhongKham.Models.Notification>;
+                    if (notifications != null && notifications.Any())
+                    {
+                        <strong>Thông báo gần nhất:</strong> @notifications.First().Title
+                    }
+                }
+            </p>
+            <a href="@Url.Action("Index", "Notification")" class="btn btn-primary btn-sm">
+                <i class="fas fa-eye me-1"></i>Xem tất cả thông báo
+            </a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-3">Chăm sóc sức khỏe toàn diện cho bạn và gia đình</h1>
+                <p class="lead fs-5 mb-4">Đội ngũ bác sĩ chuyên môn cao, trang thiết bị hiện đại và dịch vụ chăm sóc tận tâm</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="@Url.Action("Index", "Patient")" class="btn btn-light btn-lg px-4 py-2 fw-bold">
+                        <i class="bi bi-calendar-plus me-2"></i>Đặt lịch hẹn ngay
+                    </a>
+                    <a href="@Url.Action("Index", "Doctor")" class="btn btn-outline-light btn-lg px-4 py-2 fw-bold">
+                        <i class="bi bi-people me-2"></i>Đội ngũ bác sĩ
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block text-center">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                     alt="Phòng khám" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bác sĩ nổi bật -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Đội ngũ bác sĩ</h2>
+            <p class="section-subtitle">Các bác sĩ giàu kinh nghiệm và tận tâm</p>
+        </div>
+        
+        <div class="row">
+            @if (ViewBag.FeaturedDoctors != null)
+            {
+                @foreach (var doctor in ViewBag.FeaturedDoctors)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card doctor-card h-100">
+                            <div class="card-body text-center p-4">
+                                <img src="@(doctor.PhotoUrl ?? "/images/default-doctor.jpg")" 
+                                     alt="@doctor.FullName" 
+                                     class="doctor-avatar mb-3">
+                                <h5 class="card-title">@doctor.FullName</h5>
+                                <p class="text-muted">@(doctor.Specialty ?? "Bác sĩ đa khoa")</p>
+                                <p class="card-text">@(doctor.YearsOfExperience) năm kinh nghiệm</p>
+                                <a href="@Url.Action("Details", "Doctor", new { id = doctor.DoctorId })" 
+                                   class="btn btn-outline-primary">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Index", "Doctor")" class="btn btn-primary">Xem tất cả bác sĩ</a>
+        </div>
+    </div>
+</section>
+
+<!-- Dịch vụ nổi bật -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Dịch vụ y tế</h2>
+            <p class="section-subtitle">Các dịch vụ chăm sóc sức khỏe toàn diện</p>
+        </div>
+        
+        <div class="row">
+            @if (ViewBag.FeaturedServices != null)
+            {
+                @foreach (var service in ViewBag.FeaturedServices)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card service-card h-100">
+                            <div class="card-body p-4">
+                                <div class="service-icon text-center mb-3">
+                                    <i class="bi bi-heart-pulse"></i>
+                                </div>
+                                <h5 class="card-title text-center">@service.Name</h5>
+                                <p class="card-text">@(service.Description ?? "Dịch vụ chăm sóc sức khỏe chuyên nghiệp")</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary fw-bold">
+                                        @(service.Price?.ToString("C0") ?? "Liên hệ")
+                                    </span>
+                                    <small class="text-muted">@(service.Duration ?? 30) phút</small>
+                                </div>
+                                <a href="@Url.Action("Index", "Patient")" class="btn btn-primary w-100 mt-3">Đặt lịch</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Index", "Service")" class="btn btn-primary">Xem tất cả dịch vụ</a>
+        </div>
+    </div>
+</section>
+
+<!-- Thông tin liên hệ -->
+<section class="contact-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <h5>Hotline</h5>
+                    <p>(028) 1234 5678</p>
+                    <p>Hỗ trợ 24/7</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="bi bi-clock"></i>
+                    </div>
+                    <h5>Giờ làm việc</h5>
+                    <p>Thứ 2 - Thứ 6: 7:00 - 19:00</p>
+                    <p>Thứ 7 - CN: 8:00 - 17:00</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <h5>Địa chỉ</h5>
+                    <p>123 Đường ABC</p>
+                    <p>Quận 1, TP.HCM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

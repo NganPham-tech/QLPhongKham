@@ -1,0 +1,47 @@
+/* Global color variables */
+:root {
+    --primary-color: #2196F3;      /* Xanh dương chủ đạo */
+    --secondary-color: #FFB74D;    /* Cam nhạt cho nút & liên kết */
+    --accent-color: #FFB74D;       /* Cam nhạt cho accent */
+    --light-color: #FFFFFF;        /* Nền trắng */
+    --dark-color: #333333;         /* Text đen/xám đậm */
+    --text-color: #444444;         /* Text xám đậm */
+    --footer-color: #1A237E;       /* Footer xanh navy */
+    --footer-alt-color: #37474F;   /* Footer ghi đậm (alternative) */
+    --background-color: #FFFFFF;   /* Nền chính */
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--primary-color);
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+

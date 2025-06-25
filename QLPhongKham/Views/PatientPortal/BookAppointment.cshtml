@@ -1,0 +1,563 @@
+@{
+    ViewData["Title"] = "Đặt Lịch Khám";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Đặt Lịch Khám</h2>
+            <p>Vui lòng điền thông tin để đặt lịch khám với bác sĩ</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                @if (User.Identity?.IsAuthenticated != true)
+                {
+                    <div class="alert alert-warning text-center">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Cần đăng nhập</h5>
+                        <p>Bạn cần đăng nhập để đặt lịch khám. Nếu chưa có tài khoản, vui lòng đăng ký trước.</p>
+                        <div class="d-flex gap-3 justify-content-center">
+                            <a href="@Url.Action("Login", "Account", new { area = "Identity", returnUrl = Url.Action("BookAppointment") })" 
+                               class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt me-2"></i>Đăng nhập
+                            </a>
+                            <a href="@Url.Action("Register", "Account", new { area = "Identity", returnUrl = Url.Action("BookAppointment") })" 
+                               class="btn btn-outline-primary">
+                                <i class="fas fa-user-plus me-2"></i>Đăng ký
+                            </a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="booking-form">                        <form id="bookingForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="serviceId" class="form-label">Chọn dịch vụ *</label>
+                                    <select id="serviceId" name="serviceId" class="form-select" required>
+                                        <option value="">-- Chọn dịch vụ --</option>
+                                        @if (ViewBag.Services != null)
+                                        {
+                                            @foreach (var service in ViewBag.Services)
+                                            {
+                                                <option value="@service.ServiceId" 
+                                                        data-price="@(service.Price ?? 0)" 
+                                                        data-duration="@(service.Duration ?? 30)"
+                                                        data-specialty="@(service.Specialty ?? "")">
+                                                    @service.Name
+                                                </option>
+                                            }
+                                        }
+                                    </select>
+                                    <div id="serviceInfo" class="mt-2" style="display: none;">
+                                        <small class="text-info">
+                                            <i class="fas fa-money-bill-wave me-1"></i>Giá: <span id="servicePrice"></span><br>
+                                            <i class="fas fa-clock me-1"></i>Thời gian: <span id="serviceDuration"></span> phút
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="doctorId" class="form-label">Chọn bác sĩ *</label>
+                                    <select id="doctorId" name="doctorId" class="form-select" required disabled>
+                                        <option value="">-- Vui lòng chọn dịch vụ trước --</option>
+                                    </select>
+                                    <div id="doctorInfo" class="mt-2" style="display: none;">
+                                        <small class="text-info">
+                                            <i class="fas fa-user-md me-1"></i>Chuyên khoa: <span id="doctorSpecialty"></span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                              <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentDate" class="form-label">Ngày khám *</label>
+                                    <input type="date" id="appointmentDate" name="appointmentDate" 
+                                           class="form-control" required 
+                                           min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")">
+                                    <div class="form-text">
+                                        <small class="text-muted">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Phòng khám làm việc từ Thứ 2 đến Thứ 6, không làm việc cuối tuần và ngày lễ
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentTime" class="form-label">Giờ khám *</label>
+                                    <select id="appointmentTime" name="appointmentTime" class="form-select" required>
+                                        <option value="">-- Chọn giờ --</option>
+                                        @for (int hour = 8; hour <= 16; hour++)
+                                        {
+                                            @for (int minute = 0; minute < 60; minute += 30)
+                                            {
+                                                var time = $"{hour:D2}:{minute:D2}";
+                                                <option value="@time">@time</option>
+                                            }
+                                        }
+                                    </select>
+                                    <div class="form-text">
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i>
+                                            Giờ làm việc: 8:00 - 17:00
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="notes" class="form-label">Ghi chú (tùy chọn)</label>
+                                <textarea id="notes" name="notes" class="form-control" rows="4" 
+                                         placeholder="Mô tả triệu chứng hoặc yêu cầu đặc biệt..."></textarea>
+                            </div>
+                            
+                            <div id="conflictWarning" class="alert alert-warning" style="display: none;">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <span id="conflictMessage"></span>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                    <i class="fas fa-calendar-plus me-2"></i>
+                                    <span id="submitText">Đặt lịch khám</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                                    <i class="fas fa-redo me-2"></i>Làm mới
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>        $(document).ready(function() {
+            // Initialize date picker to exclude weekends and holidays
+            initializeDatePicker();
+              // Show service info and load doctors when service is selected
+            $('#serviceId').change(function() {
+                const selectedOption = $(this).find('option:selected');
+                const serviceId = selectedOption.val();
+                const price = selectedOption.data('price');
+                const duration = selectedOption.data('duration');
+                const specialty = selectedOption.data('specialty');
+                
+                if (serviceId) {
+                    // Show service info
+                    $('#servicePrice').text(price > 0 ? price.toLocaleString() + ' VNĐ' : 'Liên hệ');
+                    $('#serviceDuration').text(duration);
+                    $('#serviceInfo').show();
+                    
+                    // Load doctors for this service
+                    loadDoctorsByService(serviceId);
+                } else {
+                    $('#serviceInfo').hide();
+                    resetDoctorDropdown();
+                }
+            });
+            
+            // Show doctor info when doctor is selected
+            $('#doctorId').change(function() {
+                const selectedOption = $(this).find('option:selected');
+                const specialty = selectedOption.data('specialty');
+                
+                if (selectedOption.val() && specialty) {
+                    $('#doctorSpecialty').text(specialty);
+                    $('#doctorInfo').show();
+                } else {
+                    $('#doctorInfo').hide();
+                }
+                
+                checkConflict();
+            });
+            
+            // Validate selected date when changed
+            $('#appointmentDate').change(function() {
+                validateSelectedDate();
+                checkConflict();
+            });
+              // Check for conflicts when date/time/doctor changes
+            $('#appointmentTime').change(function() {
+                checkConflict();
+            });
+            
+            // Handle form submission
+            $('#bookingForm').submit(function(e) {
+                e.preventDefault();
+                if (validateBookingForm()) {
+                    submitBooking();
+                }
+            });
+        });
+        
+        // Initialize date picker to disable weekends and holidays
+        function initializeDatePicker() {
+            const dateInput = document.getElementById('appointmentDate');
+            
+            // Set minimum date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.min = tomorrow.toISOString().split('T')[0];
+            
+            // Add event listener to validate date selection
+            dateInput.addEventListener('input', function() {
+                validateSelectedDate();
+            });
+        }
+        
+        // Validate if selected date is a working day
+        function validateSelectedDate() {
+            const selectedDate = new Date($('#appointmentDate').val());
+            
+            if (!selectedDate || isNaN(selectedDate.getTime())) {
+                return;
+            }
+            
+            const dayOfWeek = selectedDate.getDay();
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6; // Sunday = 0, Saturday = 6
+            const isHoliday = checkIfHoliday(selectedDate);
+            
+            if (isWeekend) {
+                showDateError('Phòng khám không làm việc vào cuối tuần. Vui lòng chọn ngày từ Thứ 2 đến Thứ 6.');
+                $('#appointmentDate').val('');
+                return false;
+            }
+            
+            if (isHoliday) {
+                showDateError('Ngày bạn chọn là ngày lễ. Phòng khám không làm việc vào ngày này.');
+                $('#appointmentDate').val('');
+                return false;
+            }
+            
+            hideDateError();
+            return true;
+        }
+        
+        // Check if date is a holiday
+        function checkIfHoliday(date) {
+            const holidays = [
+                { month: 1, day: 1 },   // Tết Dương lịch
+                { month: 4, day: 30 },  // Giải phóng miền Nam
+                { month: 5, day: 1 },   // Quốc tế Lao động
+                { month: 9, day: 2 },   // Quốc khánh
+                { month: 12, day: 25 }  // Noel
+            ];
+            
+            return holidays.some(holiday => 
+                date.getMonth() + 1 === holiday.month && date.getDate() === holiday.day
+            );
+        }
+        
+        // Show date validation error
+        function showDateError(message) {
+            let errorDiv = $('#dateError');
+            if (errorDiv.length === 0) {
+                errorDiv = $('<div id="dateError" class="alert alert-danger mt-2" style="display: none;"></div>');
+                $('#appointmentDate').parent().append(errorDiv);
+            }
+            errorDiv.html('<i class="fas fa-exclamation-triangle me-2"></i>' + message).show();
+        }
+        
+        // Hide date validation error
+        function hideDateError() {
+            $('#dateError').hide();
+        }
+        
+        // Validate booking form before submission
+        function validateBookingForm() {
+            const selectedDate = new Date($('#appointmentDate').val());
+            
+            if (!selectedDate || isNaN(selectedDate.getTime())) {
+                showToast('error', 'Lỗi', 'Vui lòng chọn ngày khám hợp lệ');
+                return false;
+            }
+            
+            // Validate working day
+            const dayOfWeek = selectedDate.getDay();
+            if (dayOfWeek === 0 || dayOfWeek === 6) {
+                showToast('error', 'Lỗi', 'Phòng khám không làm việc vào cuối tuần');
+                return false;
+            }
+            
+            if (checkIfHoliday(selectedDate)) {
+                showToast('error', 'Lỗi', 'Phòng khám không làm việc vào ngày lễ');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function checkConflict() {
+            const doctorId = $('#doctorId').val();
+            const date = $('#appointmentDate').val();
+            const time = $('#appointmentTime').val();
+            
+            if (doctorId && date && time) {
+                const appointmentDateTime = new Date(date + 'T' + time);
+                
+                $.post('@Url.Action("CheckConflict", "Admin/Appointment")', {
+                    doctorId: doctorId,
+                    appointmentDate: appointmentDateTime.toISOString()
+                })
+                .done(function(data) {
+                    if (data.hasConflict) {
+                        $('#conflictMessage').text(data.message);
+                        $('#conflictWarning').show();
+                        $('#submitBtn').prop('disabled', true);
+                    } else {
+                        $('#conflictWarning').hide();
+                        $('#submitBtn').prop('disabled', false);
+                    }
+                })
+                .fail(function() {
+                    console.log('Error checking conflict');
+                });
+            }
+        }
+        
+        function submitBooking() {
+            const doctorId = $('#doctorId').val();
+            const serviceId = $('#serviceId').val();
+            const date = $('#appointmentDate').val();
+            const time = $('#appointmentTime').val();
+            const notes = $('#notes').val();
+            
+            if (!doctorId || !serviceId || !date || !time) {
+                alert('Vui lòng điền đầy đủ thông tin bắt buộc');
+                return;
+            }
+            
+            const appointmentDateTime = new Date(date + 'T' + time);
+            
+            // Disable submit button and show loading
+            $('#submitBtn').prop('disabled', true);
+            $('#submitText').text('Đang xử lý...');
+            
+            $.post('@Url.Action("BookAppointment", "PatientPortal")', {
+                doctorId: doctorId,
+                serviceId: serviceId,
+                appointmentDate: appointmentDateTime.toISOString(),
+                notes: notes
+            })            .done(function(data) {
+                if (data.success) {
+                    // Show success toast
+                    showToast('success', 'Đặt lịch thành công', data.message);
+                    resetForm();                    // Redirect to home page after 2 seconds
+                    setTimeout(function() {
+                        window.location.href = '@Url.Action("Index", "PatientPortal", new { bookingSuccess = true })';
+                    }, 2000);
+                } else {
+                    // Show error toast
+                    showToast('error', 'Lỗi', data.message);
+                }
+            })
+            .fail(function() {
+                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            })
+            .always(function() {
+                $('#submitBtn').prop('disabled', false);
+                $('#submitText').text('Đặt lịch khám');
+            });
+        }          function resetForm() {
+            $('#bookingForm')[0].reset();
+            $('#serviceInfo').hide();
+            $('#doctorInfo').hide();
+            $('#conflictWarning').hide();
+            $('#submitBtn').prop('disabled', false);
+            resetDoctorDropdown();
+            hideServiceSpecialtyInfo();
+            hideDateError();
+        }
+        
+        // Function to show toast notifications
+        function showToast(type, title, message) {
+            // Set icon and color based on type
+            if (type === 'success') {
+                $('#toastIcon').removeClass().addClass('fas fa-check-circle me-2 text-success');
+                $('#liveToast').removeClass('bg-danger').addClass('bg-light');
+            } else if (type === 'error') {
+                $('#toastIcon').removeClass().addClass('fas fa-exclamation-circle me-2 text-danger');
+                $('#liveToast').removeClass('bg-success').addClass('bg-light');
+            }
+            
+            // Set title and message
+            $('#toastTitle').text(title);
+            $('#toastMessage').text(message);
+            
+            // Show the toast
+            var toastEl = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+        
+        // Load doctors by selected service
+        function loadDoctorsByService(serviceId) {
+            if (!serviceId) {
+                resetDoctorDropdown();
+                return;
+            }
+            
+            // Show loading state
+            $('#doctorId').html('<option value="">-- Đang tải bác sĩ... --</option>').prop('disabled', true);
+            
+            $.get('@Url.Action("GetDoctorsByService", "PatientPortal")', { serviceId: serviceId })
+                .done(function(response) {
+                    if (response.success) {
+                        populateDoctorDropdown(response.doctors, response.serviceSpecialty);
+                    } else {
+                        showToast('error', 'Lỗi', response.message);
+                        resetDoctorDropdown();
+                    }
+                })
+                .fail(function() {
+                    showToast('error', 'Lỗi', 'Không thể tải danh sách bác sĩ');
+                    resetDoctorDropdown();
+                });
+        }
+        
+        // Populate doctor dropdown with filtered doctors
+        function populateDoctorDropdown(doctors, serviceSpecialty) {
+            const doctorSelect = $('#doctorId');
+            
+            doctorSelect.html('<option value="">-- Chọn bác sĩ --</option>');
+            
+            if (doctors && doctors.length > 0) {
+                doctors.forEach(function(doctor) {
+                    const option = $('<option></option>')
+                        .attr('value', doctor.doctorId)
+                        .attr('data-specialty', doctor.specialty)
+                        .text(doctor.fullName + (doctor.specialty ? ' - ' + doctor.specialty : ''));
+                    doctorSelect.append(option);
+                });
+                
+                doctorSelect.prop('disabled', false);
+                
+                // Show specialty info if available
+                if (serviceSpecialty) {
+                    showServiceSpecialtyInfo(serviceSpecialty, doctors.length);
+                }
+            } else {
+                doctorSelect.html('<option value="">-- Không có bác sĩ phù hợp --</option>');
+                doctorSelect.prop('disabled', true);
+                
+                if (serviceSpecialty) {
+                    showToast('warning', 'Thông báo', `Hiện tại không có bác sĩ chuyên khoa ${serviceSpecialty} để thực hiện dịch vụ này.`);
+                }
+            }
+        }
+        
+        // Reset doctor dropdown to initial state
+        function resetDoctorDropdown() {
+            $('#doctorId').html('<option value="">-- Vui lòng chọn dịch vụ trước --</option>').prop('disabled', true);
+            $('#doctorInfo').hide();
+            hideServiceSpecialtyInfo();
+        }
+        
+        // Show service specialty information
+        function showServiceSpecialtyInfo(specialty, doctorCount) {
+            let infoDiv = $('#serviceSpecialtyInfo');
+            if (infoDiv.length === 0) {
+                infoDiv = $('<div id="serviceSpecialtyInfo" class="alert alert-info mt-2" style="display: none;"></div>');
+                $('#serviceId').parent().append(infoDiv);
+            }
+            
+            const message = `<i class="fas fa-info-circle me-2"></i>Dịch vụ này yêu cầu bác sĩ chuyên khoa <strong>${specialty}</strong>. Có ${doctorCount} bác sĩ phù hợp.`;
+            infoDiv.html(message).show();
+        }
+        
+        // Hide service specialty information
+        function hideServiceSpecialtyInfo() {
+            $('#serviceSpecialtyInfo').hide();
+        }
+    </script>
+}
+
+@section Styles {
+    <style>
+        /* Custom styles for toast notifications */
+        .toast {
+            min-width: 300px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border: none;
+        }
+        
+        .toast-header {
+            border-bottom: none;
+            padding: 0.75rem 1rem;
+        }
+        
+        .toast-body {
+            padding: 0.75rem 1rem;
+        }
+        
+        /* Booking form styles */
+        .booking-form {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
+        .form-label {
+            font-weight: 500;
+        }
+          /* Date picker styling */
+        input[type="date"] {
+            line-height: 1.5;
+        }
+        
+        /* Custom alert styling */
+        .alert {
+            border-radius: 8px;
+            border: none;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        /* Form text styling */
+        .form-text small {
+            font-size: 0.875rem;
+        }
+        
+        /* Disabled state for form elements */
+        .form-control:disabled,
+        .form-select:disabled {
+            background-color: #e9ecef;
+            opacity: 0.65;
+        }
+        
+        /* Loading button state */
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+        
+        /* Section title styling */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h2 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+    </style>
+}

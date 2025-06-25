@@ -1,0 +1,92 @@
+@model QLPhongKham.Models.Medicine
+
+@{
+    ViewData["Title"] = "Thêm Thuốc mới";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Thêm Thuốc mới</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Tên thuốc</label>
+                            <input asp-for="Name" class="form-control" placeholder="Nhập tên thuốc" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Mô tả chi tiết về thuốc, công dụng, cách dùng..."></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="UnitPrice" class="control-label">Giá đơn vị (VNĐ)</label>
+                                    <input asp-for="UnitPrice" class="form-control" type="number" min="0" step="100" placeholder="5000" />
+                                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Unit" class="control-label">Đơn vị tính</label>
+                                    <select asp-for="Unit" class="form-control">
+                                        <option value="Viên">Viên</option>
+                                        <option value="Vỉ">Vỉ</option>
+                                        <option value="Hộp">Hộp</option>
+                                        <option value="Chai">Chai</option>
+                                        <option value="Lọ">Lọ</option>
+                                        <option value="Ống">Ống</option>
+                                        <option value="Túi">Túi</option>
+                                        <option value="ml">ml</option>
+                                        <option value="mg">mg</option>
+                                        <option value="g">g</option>
+                                    </select>
+                                    <span asp-validation-for="Unit" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Manufacturer" class="control-label">Nhà sản xuất</label>
+                                    <input asp-for="Manufacturer" class="form-control" placeholder="Tên nhà sản xuất" />
+                                    <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" type="checkbox" checked />
+                                <label asp-for="IsActive" class="form-check-label">
+                                    Thuốc đang được kinh doanh
+                                </label>
+                            </div>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Lưu thông tin
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

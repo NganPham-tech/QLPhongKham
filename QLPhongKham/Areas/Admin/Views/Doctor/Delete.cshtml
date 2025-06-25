@@ -1,0 +1,57 @@
+@model QLPhongKham.Models.Doctor
+
+@{
+    ViewData["Title"] = "Xóa Bác sĩ";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-exclamation-triangle"></i> Xác nhận xóa Bác sĩ
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <strong>Cảnh báo!</strong> Bạn có chắc chắn muốn xóa bác sĩ này không?
+                        <br><strong>Lưu ý:</strong> 
+                        <ul class="mb-0 mt-2">
+                            <li>Việc này cũng sẽ xóa tài khoản đăng nhập của bác sĩ.</li>
+                            <li>Không thể xóa nếu bác sĩ đã có cuộc hẹn được đặt.</li>
+                        </ul>
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Họ và tên:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</dd>
+
+                        <dt class="col-sm-3">Email:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+                        <dt class="col-sm-3">Chuyên khoa:</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge badge-info">@Html.DisplayFor(model => model.Specialty)</span>
+                        </dd>
+
+                        <dt class="col-sm-3">Trình độ:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Qualification)</dd>
+                    </dl>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="DoctorId" />
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Xác nhận xóa
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Hủy bỏ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

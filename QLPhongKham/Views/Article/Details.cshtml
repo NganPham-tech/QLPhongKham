@@ -1,0 +1,250 @@
+@model QLPhongKham.Models.Article
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+@section Styles {
+    <style>
+        .article-header {
+            background: linear-gradient(135deg, var(--primary-color), #1976D2);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-content h1, .article-content h2, .article-content h3,
+        .article-content h4, .article-content h5, .article-content h6 {
+            color: var(--primary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .article-tags .badge {
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .related-article {
+            transition: transform 0.3s ease;
+        }
+
+        .related-article:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-share {
+            position: sticky;
+            top: 100px;
+        }
+
+        .share-btn {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        .share-facebook { background: #3b5998; }
+        .share-twitter { background: #1da1f2; }
+        .share-linkedin { background: #0077b5; }
+        .share-whatsapp { background: #25d366; }
+    </style>
+}
+
+<section class="article-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <span class="badge bg-light text-dark mb-3">@Model.Category</span>
+                <h1 class="display-5 fw-bold mb-3">@Model.Title</h1>
+                <p class="lead">@Model.Summary</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-4">
+    <div class="container">
+        <div class="row">
+            <!-- Social Share Sidebar -->
+            <div class="col-lg-1 d-none d-lg-block">
+                <div class="social-share">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=@(Context.Request.Scheme)://@(Context.Request.Host)@Context.Request.Path" 
+                       target="_blank" class="share-btn share-facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=@(Context.Request.Scheme)://@(Context.Request.Host)@Context.Request.Path&text=@Model.Title" 
+                       target="_blank" class="share-btn share-twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=@(Context.Request.Scheme)://@(Context.Request.Host)@Context.Request.Path" 
+                       target="_blank" class="share-btn share-linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text=@Model.Title @(Context.Request.Scheme)://@(Context.Request.Host)@Context.Request.Path" 
+                       target="_blank" class="share-btn share-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <!-- Article Meta -->
+                <div class="article-meta mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-user-edit me-2 text-primary"></i>
+                                <span><strong>Tác giả:</strong> @Model.Author</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-calendar me-2 text-primary"></i>
+                                <span>@Model.CreatedAt.ToString("dd/MM/yyyy")</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-eye me-2 text-primary"></i>
+                                <span>@Model.ViewCount lượt xem</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Image -->
+                @if (!string.IsNullOrEmpty(Model.FeaturedImage))
+                {
+                    <div class="text-center mb-4">
+                        <img src="@Model.FeaturedImage" class="img-fluid rounded shadow" alt="@Model.Title" style="max-height: 400px;">
+                    </div>
+                }
+
+                <!-- Article Content -->
+                <div class="article-content">
+                    @Html.Raw(Model.Content.Replace("\n", "<br>"))
+                </div>
+
+                <!-- Tags -->
+                @if (!string.IsNullOrEmpty(Model.Tags))
+                {
+                    <div class="article-tags mt-4 pt-4 border-top">
+                        <h6 class="mb-3">
+                            <i class="fas fa-tags me-2"></i>Tags:
+                        </h6>
+                        @foreach (var tag in Model.Tags.Split(',').Select(t => t.Trim()).Where(t => !string.IsNullOrEmpty(t)))
+                        {
+                            <span class="badge bg-secondary">@tag</span>
+                        }
+                    </div>
+                }
+
+                <!-- Social Share Mobile -->
+                <div class="d-lg-none mt-4 pt-4 border-top">
+                    <h6 class="mb-3">Chia sẻ bài viết:</h6>
+                    <div class="d-flex gap-2">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=@(Context.Request.Scheme)://@(Context.Request.Host)@Context.Request.Path" 
+                           target="_blank" class="btn btn-primary btn-sm">
+                            <i class="fab fa-facebook-f me-1"></i>Facebook
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url=@(Context.Request.Scheme)://@(Context.Request.Host)@Context.Request.Path&text=@Model.Title" 
+                           target="_blank" class="btn btn-info btn-sm">
+                            <i class="fab fa-twitter me-1"></i>Twitter
+                        </a>
+                        <a href="https://api.whatsapp.com/send?text=@Model.Title @(Context.Request.Scheme)://@(Context.Request.Host)@Context.Request.Path" 
+                           target="_blank" class="btn btn-success btn-sm">
+                            <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <!-- Navigation -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-arrow-left me-2"></i>Điều hướng
+                        </h6>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Index")" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-list me-1"></i>Tất cả bài viết
+                            </a>
+                            <a href="@Url.Action("Index", new { category = Model.Category })" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-folder me-1"></i>@Model.Category
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Articles -->
+                @if (ViewBag.RelatedArticles != null && ((List<QLPhongKham.Models.Article>)ViewBag.RelatedArticles).Any())
+                {
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-newspaper me-2"></i>Bài viết liên quan
+                            </h6>
+                            @foreach (var related in (List<QLPhongKham.Models.Article>)ViewBag.RelatedArticles)
+                            {
+                                <div class="related-article mb-3 p-2 rounded">
+                                    <div class="d-flex">
+                                        @if (!string.IsNullOrEmpty(related.FeaturedImage))
+                                        {
+                                            <img src="@related.FeaturedImage" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;" alt="@related.Title">
+                                        }
+                                        else
+                                        {
+                                            <div class="bg-light rounded me-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                                <i class="fas fa-image text-muted"></i>
+                                            </div>
+                                        }
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">
+                                                <a href="@Url.Action("Details", new { id = related.ArticleId })" 
+                                                   class="text-decoration-none">@related.Title</a>
+                                            </h6>
+                                            <small class="text-muted">@related.CreatedAt.ToString("dd/MM/yyyy")</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

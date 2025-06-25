@@ -1,0 +1,180 @@
+@model QLPhongKham.Models.Invoice
+
+@{
+    ViewData["Title"] = "Tạo hóa đơn mới - TEST";
+    ViewData["BreadcrumbItems"] = "<li class=\"breadcrumb-item\"><a href=\"" + Url.Action("Index") + "\">Hóa đơn</a></li><li class=\"breadcrumb-item active\">Tạo mới</li>";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>🧪 TEST - Tạo hóa đơn mới</h2>
+            
+            <!-- Test ViewBag data -->
+            <div class="alert alert-info">
+                <h5>Debug Information:</h5>
+                <p><strong>ViewBag.CompletedAppointments:</strong> 
+                    @if (ViewBag.CompletedAppointments == null)
+                    {
+                        <span class="badge bg-danger">NULL</span>
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var appointments = (List<QLPhongKham.Models.Appointment>)ViewBag.CompletedAppointments;
+                            <span class="badge bg-success">@appointments.Count appointments found</span>
+                        }
+                        catch (Exception ex)
+                        {
+                            <span class="badge bg-danger">Error: @ex.Message</span>
+                        }
+                    }
+                </p>
+                
+                <p><strong>ViewBag.Patients:</strong> 
+                    @if (ViewBag.Patients == null)
+                    {
+                        <span class="badge bg-danger">NULL</span>
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var patients = (List<QLPhongKham.Models.Patient>)ViewBag.Patients;
+                            <span class="badge bg-success">@patients.Count patients found</span>
+                        }
+                        catch (Exception ex)
+                        {
+                            <span class="badge bg-danger">Error: @ex.Message</span>
+                        }
+                    }
+                </p>
+                
+                <p><strong>User Authentication:</strong> 
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <span class="badge bg-success">Authenticated as @User.Identity.Name</span>
+                        <br>
+                        <strong>Roles:</strong>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <span class="badge bg-primary">Admin</span>
+                        }
+                        @if (User.IsInRole("NhanVien"))
+                        {
+                            <span class="badge bg-secondary">NhanVien</span>
+                        }
+                        @if (User.IsInRole("BacSi"))
+                        {
+                            <span class="badge bg-info">BacSi</span>
+                        }
+                        @if (User.IsInRole("BenhNhan"))
+                        {
+                            <span class="badge bg-warning">BenhNhan</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Not Authenticated</span>
+                    }
+                </p>
+            </div>
+
+            <!-- Simple tabs test -->
+            <div class="card">
+                <div class="card-header">
+                    <h5>📋 Simple Tabs Test</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Navigation tabs -->
+                    <ul class="nav nav-tabs mb-4" id="invoiceCreateTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="appointment-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#appointment-pane" type="button" role="tab" 
+                                    aria-controls="appointment-pane" aria-selected="true">
+                                <i class="bi bi-calendar-check me-2"></i>Từ cuộc hẹn đã hoàn thành
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="manual-tab" data-bs-toggle="tab" 
+                                    data-bs-target="#manual-pane" type="button" role="tab" 
+                                    aria-controls="manual-pane" aria-selected="false">
+                                <i class="bi bi-plus-circle me-2"></i>Tạo hóa đơn mới
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="invoiceCreateTabContent">
+                        <!-- Tab 1: Create from completed appointments -->
+                        <div class="tab-pane fade show active" id="appointment-pane" role="tabpanel" aria-labelledby="appointment-tab">
+                            <div class="alert alert-success">
+                                <h5>✅ Tab 1 - Từ cuộc hẹn đã hoàn thành</h5>
+                                <p>Nếu bạn thấy tab này thì giao diện tabs đã hoạt động!</p>
+                            </div>
+                            
+                            @if (ViewBag.CompletedAppointments != null)
+                            {
+                                try
+                                {
+                                    var appointments = (List<QLPhongKham.Models.Appointment>)ViewBag.CompletedAppointments;
+                                    if (appointments.Any())
+                                    {
+                                        <div class="alert alert-info">
+                                            <h6>Tìm thấy @appointments.Count cuộc hẹn chưa có hóa đơn:</h6>
+                                            <ul>
+                                                @foreach (var apt in appointments.Take(5))
+                                                {
+                                                    <li>ID: @apt.AppointmentId - @apt.AppointmentDate.ToString("dd/MM/yyyy") - @(apt.Patient?.FullName ?? "N/A")</li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-warning">
+                                            Không có cuộc hẹn nào chưa có hóa đơn.
+                                        </div>
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    <div class="alert alert-danger">
+                                        Lỗi khi load appointments: @ex.Message
+                                    </div>
+                                }
+                            }
+                        </div>
+                        
+                        <!-- Tab 2: Manual creation -->
+                        <div class="tab-pane fade" id="manual-pane" role="tabpanel" aria-labelledby="manual-tab">
+                            <div class="alert alert-success">
+                                <h5>✅ Tab 2 - Tạo hóa đơn mới</h5>
+                                <p>Tab manual creation hoạt động!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation links -->
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left me-1"></i>Quay lại danh sách
+                </a>
+                <a href="/Admin/Invoice/TestData" class="btn btn-info">
+                    <i class="bi bi-bug me-1"></i>Test Data JSON
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+console.log('🧪 CREATE VIEW TEST LOADED');
+console.log('ViewBag.CompletedAppointments:', '@(ViewBag.CompletedAppointments != null ? "NOT NULL" : "NULL")');
+console.log('User authenticated:', '@(User.Identity != null && User.Identity.IsAuthenticated ? "YES" : "NO")');
+</script>

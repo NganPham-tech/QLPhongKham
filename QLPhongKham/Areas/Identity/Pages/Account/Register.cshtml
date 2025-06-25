@@ -1,0 +1,325 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 class="mb-0">
+                        <i class="bi bi-person-plus me-2"></i>@ViewData["Title"]
+                    </h2>
+                    <p class="mb-0">Tạo tài khoản mới để sử dụng dịch vụ của chúng tôi</p>
+                </div>
+                <div class="card-body p-4">
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                        <!-- Personal Information Section -->
+                        <div class="mb-4">
+                            <h5 class="text-primary border-bottom pb-2">
+                                <i class="bi bi-person-circle me-2"></i>Thông tin cá nhân
+                            </h5>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.FirstName" class="form-control" placeholder="Họ" />
+                                        <label asp-for="Input.FirstName">Họ <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.LastName" class="form-control" placeholder="Tên" />
+                                        <label asp-for="Input.LastName">Tên <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.DateOfBirth" type="date" class="form-control"
+                                               max="@DateTime.Now.AddYears(-13).ToString("yyyy-MM-dd")" />
+                                        <label asp-for="Input.DateOfBirth">Ngày sinh <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <select asp-for="Input.Gender" class="form-select">
+                                            <option value="">-- Chọn giới tính --</option>
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                        <label asp-for="Input.Gender">Giới tính <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information Section -->
+                        <div class="mb-4">
+                            <h5 class="text-primary border-bottom pb-2">
+                                <i class="bi bi-telephone me-2"></i>Thông tin liên hệ
+                            </h5>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="Input.Phone" class="form-control" placeholder="Số điện thoại" />
+                                <label asp-for="Input.Phone">Số điện thoại <span class="text-danger">*</span></label>
+                                <span asp-validation-for="Input.Phone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="username"
+                                       aria-required="true" placeholder="name@example.com" />
+                                <label asp-for="Input.Email">Email <span class="text-danger">*</span></label>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <textarea asp-for="Input.Address" class="form-control" style="height: 80px"
+                                          placeholder="Địa chỉ"></textarea>
+                                <label asp-for="Input.Address">Địa chỉ</label>
+                                <span asp-validation-for="Input.Address" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Account Security Section -->
+                        <div class="mb-4">
+                            <h5 class="text-primary border-bottom pb-2">
+                                <i class="bi bi-shield-lock me-2"></i>Bảo mật tài khoản
+                            </h5>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password"
+                                               aria-required="true" placeholder="Mật khẩu" />
+                                        <label asp-for="Input.Password">Mật khẩu <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password"
+                                               aria-required="true" placeholder="Xác nhận mật khẩu" />
+                                        <label asp-for="Input.ConfirmPassword">Xác nhận mật khẩu <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Password Requirements -->
+                            <div class="alert alert-info">
+                                <h6><i class="bi bi-info-circle me-2"></i>Yêu cầu mật khẩu:</h6>
+                                <ul class="mb-0 small">
+                                    <li>Ít nhất 6 ký tự</li>
+                                    <li>Tối đa 100 ký tự</li>
+                                    <li>Nên sử dụng kết hợp chữ, số và ký tự đặc biệt</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="agreeTerms" required />
+                                <label class="form-check-label" for="agreeTerms">
+                                    Tôi đồng ý với <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">điều khoản sử dụng</a>
+                                    và <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">chính sách bảo mật</a>
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg py-3">
+                                <i class="bi bi-person-check me-2"></i>Tạo tài khoản
+                            </button>
+                        </div>
+
+                        <!-- Login Link -->
+                        <div class="text-center mt-4 mb-4">
+                            <p class="mb-0">
+                                Đã có tài khoản?
+                                <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Model.ReturnUrl"
+                                   class="text-decoration-none fw-bold">
+                                    Đăng nhập ngay
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- External Logins (if available) -->
+            @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+            {
+                <div class="card mt-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng ký bằng tài khoản khác
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl"
+                              method="post" class="form-horizontal">
+                            <div class="d-grid gap-2">
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-outline-primary" name="provider"
+                                            value="@provider.Name" title="Đăng ký bằng @provider.DisplayName">
+                                        <i class="bi bi-@provider.Name.ToLower() me-2"></i>@provider.DisplayName
+                                    </button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Terms Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Điều khoản sử dụng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Chấp nhận điều khoản</h6>
+                <p>Bằng việc sử dụng dịch vụ của chúng tôi, bạn đồng ý tuân thủ các điều khoản này.</p>
+
+                <h6>2. Thông tin cá nhân</h6>
+                <p>Bạn cam kết cung cấp thông tin chính xác và cập nhật khi cần thiết.</p>
+
+                <h6>3. Sử dụng dịch vụ</h6>
+                <p>Dịch vụ chỉ được sử dụng cho mục đích khám chữa bệnh và chăm sóc sức khỏe.</p>
+
+                <h6>4. Bảo mật</h6>
+                <p>Bạn có trách nhiệm bảo mật thông tin đăng nhập của mình.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chính sách bảo mật</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Thu thập thông tin</h6>
+                <p>Chúng tôi thu thập thông tin cần thiết để cung cấp dịch vụ y tế tốt nhất.</p>
+
+                <h6>Sử dụng thông tin</h6>
+                <p>Thông tin của bạn chỉ được sử dụng cho mục đích khám chữa bệnh và liên hệ cần thiết.</p>
+
+                <h6>Bảo vệ thông tin</h6>
+                <p>Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn bằng các biện pháp bảo mật tiên tiến.</p>
+
+                <h6>Chia sẻ thông tin</h6>
+                <p>Thông tin của bạn sẽ không được chia sẻ với bên thứ ba trừ khi có sự đồng ý hoặc yêu cầu pháp lý.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Age calculation and validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateOfBirthInput = document.querySelector('input[name="Input.DateOfBirth"]');
+
+            if (dateOfBirthInput) {
+                dateOfBirthInput.addEventListener('change', function() {
+                    const birthDate = new Date(this.value);
+                    const today = new Date();
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+
+                    if (age < 13) {
+                        this.setCustomValidity('Tuổi phải từ 13 trở lên');
+                    } else if (age > 120) {
+                        this.setCustomValidity('Ngày sinh không hợp lệ');
+                    } else {
+                        this.setCustomValidity('');
+                    }
+                });
+            }
+
+            // Form submission validation
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    const agreeTerms = document.getElementById('agreeTerms');
+                    if (!agreeTerms.checked) {
+                        e.preventDefault();
+                        alert('Vui lòng đồng ý với điều khoản sử dụng và chính sách bảo mật');
+                        agreeTerms.focus();
+                        return false;
+                    }
+                });
+            }
+
+            // Phone number formatting
+            const phoneInput = document.querySelector('input[name="Input.Phone"]');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    // Remove non-numeric characters
+                    let value = this.value.replace(/\D/g, '');
+
+                    // Format phone number (simple Vietnam format)
+                    if (value.length >= 10) {
+                        value = value.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
+                    }
+
+                    this.value = value;
+                });
+            }
+        });
+    </script>
+}
+
+<style>
+    /* Additional spacing to ensure footer doesn't overlap */
+    .container.my-5 {
+        margin-bottom: 100px !important;
+    }
+    
+    @@media (max-width: 768px) {
+        .container.my-5
+
+    {
+        margin-bottom: 120px !important;
+    }
+
+    }
+</style>

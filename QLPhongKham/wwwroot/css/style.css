@@ -1,0 +1,239 @@
+﻿
+:root {
+    --primary-color: #2196F3;      /* Xanh dương chủ đạo */
+    --secondary-color: #FFB74D;    /* Cam nhạt cho nút & liên kết */
+    --accent-color: #FFB74D;       /* Cam nhạt cho accent */
+    --light-color: #FFFFFF;        /* Nền trắng */
+    --dark-color: #333333;         /* Text đen/xám đậm */
+    --text-color: #444444;         /* Text xám đậm */
+    --footer-color: #1A237E;       /* Footer xanh navy */
+    --footer-alt-color: #37474F;   /* Footer ghi đậm (alternative) */
+    --background-color: #FFFFFF;   /* Nền chính */
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 6rem 0;
+    margin-bottom: 3rem;
+    border-radius: 0 0 30px 30px;
+}
+
+.service-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+    height: 100%;
+    border-top: 4px solid var(--primary-color);
+}
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.doctor-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+    .doctor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+.doctor-img {
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.appointment-form {
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.step-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    height: 100%;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s;
+}
+
+    .step-card:hover {
+        background: #f0f8ff;
+        transform: translateX(5px);
+    }
+
+.testimonial-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    position: relative;
+    border: 1px solid #eee;
+}    .testimonial-card::before {
+        content: "\201C"; /* Left double quotation mark */
+        font-family: Georgia, serif;
+        font-size: 5rem;
+        position: absolute;
+        top: -20px;
+        left: 15px;
+        color: var(--primary-color);
+        opacity: 0.1;
+    }
+
+.contact-info {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.btn-primary-custom {
+    background: var(--secondary-color); /* Cam nhạt cho nút */
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    color: var(--dark-color); /* Text tối trên nền cam nhạt */
+}
+
+    .btn-primary-custom:hover {
+        background: #FF9800; /* Cam đậm hơn khi hover */
+        transform: translateY(-3px);
+        color: white;
+    }
+
+.section-title {
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 70px;
+        height: 3px;
+        background: var(--primary-color);
+    }
+
+.bg-light-custom {
+    background-color: var(--background-color); /* Nền trắng */
+}
+
+/* General body styling */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding-bottom: 0 !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--dark-color);
+}
+
+/* Link colors */
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF9800;
+    text-decoration: underline;
+}
+
+/* Footer styling */
+.footer {
+    background-color: var(--footer-color) !important;
+    color: white !important;
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 60px !important;
+    line-height: normal !important;
+    white-space: normal !important;
+}
+
+/* Make main content grow to push footer down */
+main {
+    flex: 1;
+}
+
+/* Container cho form register */
+.container.my-5 {
+    margin-bottom: 80px !important; /* Tăng margin bottom để tránh footer */
+}
+
+/* Specific fix cho register page */
+#registerForm {
+    margin-bottom: 40px;
+}
+
+/* Card register spacing */
+.card.shadow {
+    margin-bottom: 40px;
+}
+
+/* Button spacing */
+.btn-lg.py-3 {
+    margin-bottom: 20px;
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+    .container.my-5 {
+        margin-bottom: 100px !important;
+    }
+
+    .footer {
+        margin-top: 40px !important;
+        padding: 20px 0 !important;
+    }
+}
+
+/* Additional spacing for small screens */
+@media (max-width: 576px) {
+    .container.my-5 {
+        margin-bottom: 120px !important;
+    }
+}
+
+/* Fix cho external login card nếu có */
+.card.mt-4 {
+    margin-bottom: 40px !important;
+}
+
+/* Ensure proper spacing for all form elements */
+.form-floating.mb-3:last-child {
+    margin-bottom: 30px !important;
+}
+
+/* Terms checkbox spacing */
+.form-check {
+    margin-bottom: 30px !important;
+}
+
+/* Login link spacing */
+.text-center.mt-3 {
+    margin-bottom: 40px !important;
+}

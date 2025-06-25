@@ -1,0 +1,409 @@
+﻿
+@model QLPhongKham.ViewModels.AssignRoleViewModel
+@{
+    ViewData["Title"] = "Phân quyền người dùng";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index">Quản lý người dùng</a>
+                    </li>
+                    <li class="breadcrumb-item active">Phân quyền</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-key me-2"></i>Phân quyền người dùng
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <!-- User Info -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title">Thông tin người dùng</h6>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-circle me-3">
+                                            @Model.User.Email?.Substring(0, 1).ToUpper()
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">@Model.User.Email</div>
+                                            <small class="text-muted">Username: @Model.User.UserName</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title">Quyền hiện tại</h6>
+                                    @if (Model.UserRoles != null && Model.UserRoles.Any())
+                                    {
+                                        @foreach (var role in Model.UserRoles)
+                                        {
+                                            <span class="badge me-1 @GetCurrentRoleBadgeClass(role)">
+                                                @GetRoleDisplayName(role)
+                                            </span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Chưa có quyền</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role Assignment Form -->
+                    <form asp-action="AssignRole" method="post">
+                        <input type="hidden" asp-for="User.Id" />
+                        <input type="hidden" asp-for="User.Email" />
+                        <input type="hidden" asp-for="User.UserName" />
+
+                        <div class="mb-4">
+                            <h5 class="text-primary border-bottom pb-2">
+                                <i class="bi bi-shield-check me-2"></i>Chọn quyền mới
+                            </h5>
+
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                <strong>Lưu ý:</strong> Việc thay đổi quyền sẽ thay thế tất cả quyền hiện tại.
+                                Bạn có thể chọn nhiều quyền cùng lúc.
+                            </div>
+
+                            <div class="row">
+                                @if (Model.AvailableRoles != null)
+                                {
+                                    @foreach (var role in Model.AvailableRoles)
+                                    {
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card role-card @(Model.UserRoles?.Contains(role) == true ? "border-primary" : "")">
+                                                <div class="card-body">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input"
+                                                               type="checkbox"
+                                                               name="SelectedRoles"
+                                                               value="@role"
+                                                               id="role_@role"
+                                                        @(Model.UserRoles?.Contains(role) == true ? "checked" : "")>
+                                                        <label class="form-check-label w-100" for="role_@role">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="role-icon me-3">
+                                                                    @GetRoleIcon(role)
+                                                                </div>
+                                                                <div>
+                                                                    <div class="fw-bold">@GetRoleDisplayName(role)</div>
+                                                                    <small class="text-muted">@GetRoleDescription(role)</small>
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Permission Details -->
+                        <div class="mb-4" id="permissionDetails" style="display: none;">
+                            <h6 class="text-primary">
+                                <i class="bi bi-list-check me-2"></i>Quyền được cấp
+                            </h6>
+                            <div id="permissionList" class="alert alert-secondary">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Quay lại
+                            </a>
+                            <div>
+                                <button type="button" class="btn btn-outline-warning me-2" onclick="resetRoles()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Đặt lại
+                                </button>
+                                <button type="submit" class="btn btn-primary" onclick="return confirmAssign()">
+                                    <i class="bi bi-check-circle me-2"></i>Cập nhật quyền
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Change Log -->
+            <div class="card shadow mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-clock-history me-2"></i>Lịch sử thay đổi quyền
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-primary"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Đăng ký tài khoản</h6>
+                                <p class="text-muted mb-0">Tài khoản được tạo với quyền mặc định</p>
+                                <small class="text-muted">Vài phút trước</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    string GetCurrentRoleBadgeClass(string role)
+    {
+        return role switch
+        {
+            "Admin" => "bg-danger",
+            "BacSi" => "bg-success",
+            "NhanVien" => "bg-info",
+            "BenhNhan" => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+
+    string GetRoleDisplayName(string role)
+    {
+        return role switch
+        {
+            "Admin" => "Quản trị viên",
+            "BacSi" => "Bác sĩ",
+            "NhanVien" => "Nhân viên",
+            "BenhNhan" => "Bệnh nhân",
+            _ => role
+        };
+    }
+
+    string GetRoleIcon(string role)
+    {
+        return role switch
+        {
+            "Admin" => "<i class='bi bi-shield-fill-check text-danger'></i>",
+            "BacSi" => "<i class='bi bi-person-badge text-success'></i>",
+            "NhanVien" => "<i class='bi bi-person-gear text-info'></i>",
+            "BenhNhan" => "<i class='bi bi-person-heart text-warning'></i>",
+            _ => "<i class='bi bi-person text-secondary'></i>"
+        };
+    }
+
+    string GetRoleDescription(string role)
+    {
+        return role switch
+        {
+            "Admin" => "Quản lý toàn bộ hệ thống, tài khoản và phân quyền",
+            "BacSi" => "Khám bệnh, tạo bệnh án, quản lý lịch khám",
+            "NhanVien" => "Đăng ký bệnh nhân, quản lý lịch hẹn",
+            "BenhNhan" => "Đặt lịch khám, xem bệnh án cá nhân",
+            _ => "Quyền tùy chỉnh"
+        };
+    }
+}
+
+<style>
+    .avatar-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #4e73df;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .role-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        height: 100%;
+    }
+
+        .role-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .role-card.border-primary {
+            background-color: #f8f9fc;
+        }
+
+    .role-icon {
+        font-size: 24px;
+    }
+
+    .form-check-input:checked ~ .form-check-label {
+        color: #4e73df;
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: -35px;
+        top: 5px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 0 0 2px #dee2e6;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: -30px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #dee2e6;
+    }
+</style>
+
+<script>
+    // Track original roles for reset functionality
+    const originalRoles = @Html.Raw(Json.Serialize(Model.UserRoles ?? new List<string>()));
+
+    // Role permissions mapping
+    const rolePermissions = {
+        'Admin': [
+            'Quản lý tất cả người dùng và phân quyền',
+            'Xem báo cáo tổng quan hệ thống',
+            'Cấu hình hệ thống',
+            'Quản lý dịch vụ và giá cả'
+        ],
+        'BacSi': [
+            'Xem lịch khám của mình',
+            'Tạo và cập nhật bệnh án',
+            'Xem thông tin bệnh nhân',
+            'Cập nhật trạng thái lịch khám'
+        ],
+        'NhanVien': [
+            'Đăng ký bệnh nhân mới',
+            'Tạo lịch hẹn cho bệnh nhân',
+            'Xem danh sách lịch hẹn',
+            'Cập nhật thông tin bệnh nhân'
+        ],
+        'BenhNhan': [
+            'Đặt lịch khám bệnh',
+            'Xem lịch sử khám bệnh của mình',
+            'Cập nhật thông tin cá nhân',
+            'Xem kết quả xét nghiệm'
+        ]
+    };
+
+    // Handle checkbox changes
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('input[name="SelectedRoles"]');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updatePermissionDisplay);
+
+            // Handle card click
+            checkbox.closest('.role-card').addEventListener('click', function(e) {
+                if (e.target.type !== 'checkbox') {
+                    checkbox.checked = !checkbox.checked;
+                    updatePermissionDisplay();
+                }
+            });
+        });
+
+        updatePermissionDisplay();
+    });
+
+    function updatePermissionDisplay() {
+        const selectedRoles = Array.from(document.querySelectorAll('input[name="SelectedRoles"]:checked'))
+            .map(cb => cb.value);
+
+        const permissionDetails = document.getElementById('permissionDetails');
+        const permissionList = document.getElementById('permissionList');
+
+        if (selectedRoles.length > 0) {
+            let allPermissions = [];
+            selectedRoles.forEach(role => {
+                if (rolePermissions[role]) {
+                    allPermissions = allPermissions.concat(
+                        rolePermissions[role].map(perm => `<strong>${getDisplayName(role)}:</strong> ${perm}`)
+                    );
+                }
+            });
+
+            permissionList.innerHTML = '<ul class="mb-0"><li>' + allPermissions.join('</li><li>') + '</li></ul>';
+            permissionDetails.style.display = 'block';
+        } else {
+            permissionDetails.style.display = 'none';
+        }
+
+        // Update card styling
+        document.querySelectorAll('.role-card').forEach(card => {
+            const checkbox = card.querySelector('input[type="checkbox"]');
+            if (checkbox.checked) {
+                card.classList.add('border-primary');
+            } else {
+                card.classList.remove('border-primary');
+            }
+        });
+    }
+
+    function getDisplayName(role) {
+        const mapping = {
+            'Admin': 'Quản trị viên',
+            'BacSi': 'Bác sĩ',
+            'NhanVien': 'Nhân viên',
+            'BenhNhan': 'Bệnh nhân'
+        };
+        return mapping[role] || role;
+    }
+
+    function resetRoles() {
+        document.querySelectorAll('input[name="SelectedRoles"]').forEach(checkbox => {
+            checkbox.checked = originalRoles.includes(checkbox.value);
+        });
+        updatePermissionDisplay();
+    }
+
+    function confirmAssign() {
+        const selectedRoles = Array.from(document.querySelectorAll('input[name="SelectedRoles"]:checked'))
+            .map(cb => getDisplayName(cb.value));
+
+        if (selectedRoles.length === 0) {
+            return confirm('Bạn có chắc chắn muốn xóa tất cả quyền của người dùng này?');
+        }
+
+        const roleText = selectedRoles.join(', ');
+        return confirm(`Bạn có chắc chắn muốn gán quyền "${roleText}" cho người dùng này?`);
+    }
+</script>

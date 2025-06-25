@@ -1,0 +1,345 @@
+@model QLPhongKham.Models.Payment
+
+@{
+    ViewData["Title"] = "Thanh toán hóa đơn";
+    var invoice = ViewBag.Invoice as QLPhongKham.Models.Invoice;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">
+        <i class="bi bi-credit-card me-2"></i>Thanh toán hóa đơn
+    </h2>
+    <a asp-action="Details" asp-controller="Invoice" asp-route-id="@invoice?.InvoiceId" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Quay lại Hóa đơn
+    </a>
+</div>
+
+@if (invoice != null)
+{
+    <!-- Thông tin hóa đơn -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-file-text me-2"></i>Thông tin hóa đơn
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Số hóa đơn:</strong> @invoice.InvoiceNumber</p>
+                    <p><strong>Ngày tạo:</strong> @invoice.CreatedDate.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Trạng thái:</strong> 
+                        <span class="badge bg-@(invoice.Status == "Paid" ? "success" : invoice.Status == "Pending" ? "warning" : "secondary")">
+                            @invoice.Status
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Bệnh nhân:</strong> @invoice.Patient?.FullName</p>
+                    <p><strong>Email:</strong> @invoice.Patient?.Email</p>
+                    <p><strong>Điện thoại:</strong> @invoice.Patient?.Phone</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <h6 class="text-muted">Tổng tiền</h6>
+                        <h5 class="text-primary">@invoice.TotalAmount.ToString("N0") VNĐ</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <h6 class="text-muted">Đã thanh toán</h6>
+                        <h5 class="text-success">@invoice.PaidAmount.ToString("N0") VNĐ</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <h6 class="text-muted">Còn lại</h6>
+                        <h5 class="text-danger">@invoice.RemainingAmount.ToString("N0") VNĐ</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chi tiết hóa đơn -->
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+            <h6 class="card-title mb-0">
+                <i class="bi bi-list me-2"></i>Chi tiết hóa đơn
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Dịch vụ/Thuốc</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-end">Đơn giá</th>
+                            <th class="text-end">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var detail in invoice.InvoiceDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @if (detail.Service != null)
+                                    {
+                                        <span class="badge bg-primary me-2">DV</span>@detail.Service.Name
+                                    }
+                                    else if (detail.Medicine != null)
+                                    {
+                                        <span class="badge bg-success me-2">TH</span>@detail.Medicine.Name
+                                    }
+                                </td>
+                                <td class="text-center">@detail.Quantity</td>
+                                <td class="text-end">@detail.UnitPrice.ToString("N0") VNĐ</td>
+                                <td class="text-end">@detail.TotalPrice.ToString("N0") VNĐ</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Form thanh toán -->
+<form asp-action="CreateForInvoice" method="post">
+    <input type="hidden" asp-for="InvoiceId" value="@invoice?.InvoiceId" />
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-wallet me-2"></i>Thông tin thanh toán
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="PaymentDate" class="form-label">Ngày thanh toán</label>
+                                <input asp-for="PaymentDate" type="datetime-local" class="form-control" required />
+                                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="AmountPaid" class="form-label">Số tiền thanh toán</label>
+                                <div class="input-group">
+                                    <input asp-for="AmountPaid" type="number" step="1000" min="1000" max="@invoice?.RemainingAmount" class="form-control" required />
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                                <span asp-validation-for="AmountPaid" class="text-danger"></span>
+                                <div class="form-text">
+                                    Số tiền tối đa: @invoice?.RemainingAmount.ToString("N0") VNĐ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="PaymentMethod" class="form-label">Phương thức thanh toán</label>
+                                <select asp-for="PaymentMethod" class="form-select" required>
+                                    @foreach (var method in (ViewBag.PaymentMethods as IEnumerable<string>) ?? new List<string>())
+                                    {
+                                        <option value="@method">
+                                            @(method switch {
+                                                "Cash" => "Tiền mặt",
+                                                "Card" => "Thẻ ngân hàng",
+                                                "Transfer" => "Chuyển khoản",
+                                                "Momo" => "Ví MoMo",
+                                                "ZaloPay" => "ZaloPay",
+                                                "ViettelPay" => "ViettelPay",
+                                                _ => method
+                                            })
+                                        </option>
+                                    }
+                                </select>
+                                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Status" class="form-label">Trạng thái</label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="Completed">Hoàn thành</option>
+                                    <option value="Pending">Đang xử lý</option>
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin bổ sung cho thanh toán không tiền mặt -->
+                    <div id="bankingInfo" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="BankTransactionId" class="form-label">Mã giao dịch ngân hàng</label>
+                                    <input asp-for="BankTransactionId" class="form-control" placeholder="Nhập mã giao dịch..." />
+                                    <span asp-validation-for="BankTransactionId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="BankName" class="form-label">Ngân hàng</label>
+                                    <input asp-for="BankName" class="form-control" placeholder="Tên ngân hàng..." />
+                                    <span asp-validation-for="BankName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="CardLastFourDigits" class="form-label">4 số cuối thẻ</label>
+                                    <input asp-for="CardLastFourDigits" class="form-control" placeholder="1234" maxlength="4" />
+                                    <span asp-validation-for="CardLastFourDigits" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="TransactionFee" class="form-label">Phí giao dịch</label>
+                                    <div class="input-group">
+                                        <input asp-for="TransactionFee" type="number" step="1000" min="0" class="form-control" value="0" />
+                                        <span class="input-group-text">VNĐ</span>
+                                    </div>
+                                    <span asp-validation-for="TransactionFee" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Notes" class="form-label">Ghi chú</label>
+                        <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Ghi chú về thanh toán..."></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Tóm tắt thanh toán -->
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-calculator me-2"></i>Tóm tắt thanh toán
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Tổng hóa đơn:</span>
+                            <span class="fw-bold">@invoice?.TotalAmount.ToString("N0") VNĐ</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Đã thanh toán:</span>
+                            <span class="fw-bold text-success">@invoice?.PaidAmount.ToString("N0") VNĐ</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span>Còn phải trả:</span>
+                            <span class="fw-bold text-danger">@invoice?.RemainingAmount.ToString("N0") VNĐ</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-circle me-2"></i>Xác nhận thanh toán
+                        </button>
+                        <a asp-action="Details" asp-controller="Invoice" asp-route-id="@invoice?.InvoiceId" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-2"></i>Hủy bỏ
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lịch sử thanh toán -->
+            @if (invoice?.Payments.Any() == true)
+            {
+                <div class="card mt-3">
+                    <div class="card-header bg-light">
+                        <h6 class="card-title mb-0">
+                            <i class="bi bi-clock-history me-2"></i>Lịch sử thanh toán
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var payment in invoice.Payments.OrderByDescending(p => p.PaymentDate))
+                        {
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <small class="text-muted">@payment.PaymentDate.ToString("dd/MM/yyyy")</small><br>
+                                    <small>@payment.PaymentMethod</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="fw-bold">@payment.AmountPaid.ToString("N0") VNĐ</span><br>
+                                    <span class="badge bg-@(payment.Status == "Completed" ? "success" : payment.Status == "Pending" ? "warning" : "secondary") badge-sm">
+                                        @payment.Status
+                                    </span>
+                                </div>
+                            </div>
+                            @if (payment != invoice.Payments.OrderByDescending(p => p.PaymentDate).Last())
+                            {
+                                <hr class="my-2">
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        // Hiển thị thông tin banking khi không phải tiền mặt
+        document.getElementById('PaymentMethod').addEventListener('change', function() {
+            const bankingInfo = document.getElementById('bankingInfo');
+            if (this.value !== 'Cash') {
+                bankingInfo.style.display = 'block';
+            } else {
+                bankingInfo.style.display = 'none';
+            }
+        });
+
+        // Trigger the change event on page load
+        document.getElementById('PaymentMethod').dispatchEvent(new Event('change'));
+
+        // Set max amount button
+        function setMaxAmount() {
+            const maxAmount = @(invoice?.RemainingAmount ?? 0);
+            document.getElementById('AmountPaid').value = maxAmount;
+        }
+
+        // Add quick amount buttons
+        const amountInput = document.getElementById('AmountPaid');
+        const maxAmount = @(invoice?.RemainingAmount ?? 0);
+        
+        // Create quick amount buttons
+        const quickAmountContainer = document.createElement('div');
+        quickAmountContainer.className = 'mt-2';
+        
+        const amounts = [maxAmount / 4, maxAmount / 2, maxAmount * 0.75, maxAmount];
+        amounts.forEach(amount => {
+            if (amount > 0) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'btn btn-outline-primary btn-sm me-1';
+                btn.textContent = amount.toLocaleString('vi-VN') + ' VNĐ';
+                btn.onclick = () => amountInput.value = Math.round(amount);
+                quickAmountContainer.appendChild(btn);
+            }
+        });
+        
+        amountInput.parentNode.insertAdjacentElement('afterend', quickAmountContainer);
+    </script>
+}

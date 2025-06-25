@@ -1,0 +1,103 @@
+@model IEnumerable<QLPhongKham.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Quản lý Bác sĩ";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Danh sách Bác sĩ</h3>
+                    <div class="card-tools">
+                        <a asp-action="Create" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Thêm bác sĩ mới
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["Success"]
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @TempData["Error"]
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">                            <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Họ và tên</th>
+                                    <th>Tuổi</th>
+                                    <th>Giới tính</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Chuyên khoa</th>
+                                    <th>Trình độ</th>
+                                    <th>Ngày vào làm</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@(item.PhotoUrl ?? "/images/default-doctor.jpg")" alt="@item.FullName" 
+                                                 class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</td>
+                                        <td>@item.Age</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>                                        <td>
+                                            <span class="badge badge-info">@Html.DisplayFor(modelItem => item.Specialty)</span>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Qualification)</td>
+                                        <td>@item.DateHired.ToString("dd/MM/yyyy")</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a asp-action="Details" asp-route-id="@item.DoctorId" class="btn btn-info btn-sm" title="Xem chi tiết">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a asp-action="Edit" asp-route-id="@item.DoctorId" class="btn btn-warning btn-sm" title="Chỉnh sửa">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@item.DoctorId" class="btn btn-danger btn-sm" title="Xóa" 
+                                                   onclick="return confirm('Bạn có chắc chắn muốn xóa bác sĩ này?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @if (!Model.Any())
+                    {
+                        <div class="text-center py-4">
+                            <p class="text-muted">Chưa có bác sĩ nào được thêm vào hệ thống.</p>
+                            <a asp-action="Create" class="btn btn-primary">Thêm bác sĩ đầu tiên</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

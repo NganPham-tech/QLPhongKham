@@ -1,0 +1,347 @@
+@model QLPhongKham.Models.Invoice
+
+@{
+    ViewData["Title"] = "Chi tiết hóa đơn #" + Model.InvoiceId.ToString("D6");
+    Layout = "~/Areas/BenhNhan/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-file-invoice me-2"></i>Chi tiết hóa đơn #@Model.InvoiceId.ToString("D6")
+        </h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="BenhNhan" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a asp-area="BenhNhan" asp-controller="Invoice" asp-action="Index">Hóa đơn</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        <!-- Invoice Details -->
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-file-invoice-dollar me-2"></i>Thông tin hóa đơn
+                    </h6>
+                    <div>
+                        <a asp-action="Print" asp-route-id="@Model.InvoiceId" 
+                           class="btn btn-success btn-sm" target="_blank">
+                            <i class="fas fa-print me-1"></i>In hóa đơn
+                        </a>
+                        <a asp-action="DownloadPDF" asp-route-id="@Model.InvoiceId" 
+                           class="btn btn-danger btn-sm">
+                            <i class="fas fa-file-pdf me-1"></i>Tải PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Invoice Info -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Thông tin chung</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Số hóa đơn:</strong></td>
+                                    <td>@Model.InvoiceNumber</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ngày lập:</strong></td>
+                                    <td>@Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                </tr>
+                                @if (Model.DueDate.HasValue)
+                                {
+                                    <tr>
+                                        <td><strong>Ngày đáo hạn:</strong></td>
+                                        <td>@Model.DueDate.Value.ToString("dd/MM/yyyy")</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td><strong>Loại hóa đơn:</strong></td>
+                                    <td>
+                                        @switch (Model.InvoiceType)
+                                        {
+                                            case "Service":
+                                                <span class="badge bg-primary">Dịch vụ</span>
+                                                break;
+                                            case "Medicine":
+                                                <span class="badge bg-info">Thuốc</span>
+                                                break;
+                                            case "Mixed":
+                                                <span class="badge bg-warning">Hỗn hợp</span>
+                                                break;
+                                            default:
+                                                <span class="badge bg-secondary">@Model.InvoiceType</span>
+                                                break;
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Trạng thái:</strong></td>
+                                    <td>
+                                        @switch (Model.Status)
+                                        {
+                                            case "Paid":
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-check-circle me-1"></i>Đã thanh toán
+                                                </span>
+                                                break;
+                                            case "Pending":
+                                                <span class="badge bg-warning">
+                                                    <i class="fas fa-clock me-1"></i>Chờ thanh toán
+                                                </span>
+                                                break;
+                                            case "Overdue":
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-exclamation-triangle me-1"></i>Quá hạn
+                                                </span>
+                                                break;
+                                            default:
+                                                <span class="badge bg-secondary">@Model.Status</span>
+                                                break;
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Thông tin bệnh nhân</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Họ tên:</strong></td>
+                                    <td>@Model.Patient.FullName</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ngày sinh:</strong></td>
+                                    <td>@Model.Patient.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                                </tr>                                <tr>
+                                    <td><strong>Số điện thoại:</strong></td>
+                                    <td>@Model.Patient.Phone</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Địa chỉ:</strong></td>
+                                    <td>@Model.Patient.Address</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Invoice Details -->
+                    <h5 class="text-primary mb-3">Chi tiết dịch vụ</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên dịch vụ/thuốc</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                    <th>Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int index = 1;}
+                                @foreach (var detail in Model.InvoiceDetails)
+                                {
+                                    <tr>
+                                        <td>@index</td>                                        <td>
+                                            @if (detail.Service != null)
+                                            {
+                                                <i class="fas fa-stethoscope me-2 text-primary"></i>@detail.Service.Name
+                                            }
+                                            else if (detail.Medicine != null)
+                                            {
+                                                <i class="fas fa-pills me-2 text-info"></i>@detail.Medicine.Name
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">Không xác định</span>
+                                            }
+                                        </td>
+                                        <td>@detail.Quantity</td>
+                                        <td>@detail.UnitPrice.ToString("N0") VNĐ</td>
+                                        <td>@detail.TotalPrice.ToString("N0") VNĐ</td>
+                                    </tr>
+                                    index++;
+                                }
+                            </tbody>
+                            <tfoot class="table-light">
+                                <tr>
+                                    <td colspan="4" class="text-end"><strong>Tổng tiền trước thuế:</strong></td>
+                                    <td><strong>@Model.SubTotal.ToString("N0") VNĐ</strong></td>
+                                </tr>
+                                @if (Model.TaxAmount > 0)
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-end"><strong>Thuế VAT:</strong></td>
+                                        <td><strong>@Model.TaxAmount.ToString("N0") VNĐ</strong></td>
+                                    </tr>
+                                }
+                                @if (Model.DiscountAmount > 0)
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-end"><strong>Giảm giá:</strong></td>
+                                        <td><strong class="text-danger">-@Model.DiscountAmount.ToString("N0") VNĐ</strong></td>
+                                    </tr>
+                                }
+                                <tr class="table-primary">
+                                    <td colspan="4" class="text-end"><strong>TỔNG CỘNG:</strong></td>
+                                    <td><strong class="text-primary fs-5">@Model.TotalAmount.ToString("N0") VNĐ</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Notes))
+                    {
+                        <div class="mt-3">
+                            <h6 class="text-primary">Ghi chú:</h6>
+                            <p class="text-muted">@Model.Notes</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Information -->
+        <div class="col-lg-4">
+            <!-- Payment Status Card -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-credit-card me-2"></i>Tình trạng thanh toán
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Tổng tiền:</span>
+                            <strong>@Model.TotalAmount.ToString("N0") VNĐ</strong>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Đã thanh toán:</span>
+                            <strong class="text-success">@Model.PaidAmount.ToString("N0") VNĐ</strong>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Còn nợ:</span>
+                            <strong class="text-danger">@Model.RemainingAmount.ToString("N0") VNĐ</strong>
+                        </div>
+                    </div>
+
+                    <div class="progress mb-3">
+                        @{
+                            var paymentPercentage = Model.TotalAmount > 0 ? (Model.PaidAmount / Model.TotalAmount) * 100 : 0;
+                        }
+                        <div class="progress-bar bg-success" role="progressbar" 
+                             style="width: @paymentPercentage.ToString("F1")%" 
+                             aria-valuenow="@paymentPercentage" aria-valuemin="0" aria-valuemax="100">
+                            @paymentPercentage.ToString("F1")%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment History -->
+            @if (Model.Payments.Any())
+            {
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <i class="fas fa-history me-2"></i>Lịch sử thanh toán
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var payment in Model.Payments.OrderByDescending(p => p.PaymentDate))
+                        {
+                            <div class="d-flex justify-content-between align-items-center mb-3 p-2 border-left-success">
+                                <div>
+                                    <div class="small text-muted">@payment.PaymentDate.ToString("dd/MM/yyyy HH:mm")</div>
+                                    <div class="font-weight-bold">@payment.AmountPaid.ToString("N0") VNĐ</div>                                    <div class="small">
+                                        @if (payment.PaymentMethod == "Cash")
+                                        {
+                                            <i class="fas fa-money-bill me-1"></i><span>Tiền mặt</span>
+                                        }
+                                        else if (payment.PaymentMethod == "Card")
+                                        {
+                                            <i class="fas fa-credit-card me-1"></i><span>Thẻ</span>
+                                        }
+                                        else if (payment.PaymentMethod == "Transfer")
+                                        {
+                                            <i class="fas fa-university me-1"></i><span>Chuyển khoản</span>
+                                        }
+                                        else
+                                        {
+                                            @payment.PaymentMethod
+                                        }
+                                    </div>
+                                </div>
+                                <div>
+                                    @switch (payment.Status)
+                                    {
+                                        case "Completed":
+                                            <span class="badge bg-success">Hoàn thành</span>
+                                            break;
+                                        case "Pending":
+                                            <span class="badge bg-warning">Đang xử lý</span>
+                                            break;
+                                        case "Failed":
+                                            <span class="badge bg-danger">Thất bại</span>
+                                            break;
+                                        default:
+                                            <span class="badge bg-secondary">@payment.Status</span>
+                                            break;
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="text-center">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
+                </a>
+                <a asp-action="Print" asp-route-id="@Model.InvoiceId" 
+                   class="btn btn-success" target="_blank">
+                    <i class="fas fa-print me-2"></i>In hóa đơn
+                </a>
+                <a asp-action="DownloadPDF" asp-route-id="@Model.InvoiceId" 
+                   class="btn btn-danger">
+                    <i class="fas fa-file-pdf me-2"></i>Tải xuống PDF
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

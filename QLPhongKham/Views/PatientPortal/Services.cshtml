@@ -1,0 +1,169 @@
+@model IEnumerable<QLPhongKham.Models.Service>
+@{
+    ViewData["Title"] = "Dịch Vụ Y Tế";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Dịch Vụ Y Tế</h2>
+            <p>Các dịch vụ y tế chất lượng cao với công nghệ tiên tiến</p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="row">
+            @foreach (var service in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card h-100">
+                        <div class="card-body text-center d-flex flex-column">
+                            <div class="service-icon mx-auto">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            
+                            <h5 class="mb-3">@service.Name</h5>
+                            
+                            @if (!string.IsNullOrEmpty(service.Description))
+                            {
+                                <p class="text-muted flex-grow-1 mb-3">@service.Description</p>
+                            }
+                              <div class="service-details mb-3">
+                                @if (service.Price > 0)
+                                {
+                                    <div class="service-price mb-2">
+                                        @service.Price.ToString("N0") VNĐ
+                                    </div>
+                                }
+                                
+                                @if (service.Duration > 0)
+                                {
+                                    <div class="service-duration">
+                                        <i class="fas fa-clock me-1"></i>
+                                        @service.Duration phút
+                                    </div>
+                                }
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="d-grid gap-2">
+                                    <a href="@Url.Action("ServiceDetail", "PatientPortal", new { id = service.ServiceId })" 
+                                       class="btn btn-outline-primary">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Xem chi tiết
+                                    </a>
+                                    <a href="@Url.Action("BookAppointment", "PatientPortal", new { serviceId = service.ServiceId })" 
+                                       class="btn btn-primary">
+                                        <i class="fas fa-calendar-plus me-1"></i>
+                                        Đặt lịch khám
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-stethoscope fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Không có dịch vụ nào</h4>
+                <p class="text-muted">Hiện tại chưa có dịch vụ nào được cung cấp</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Service Categories -->
+@if (Model.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tại Sao Chọn Chúng Tôi?</h2>
+                <p>Cam kết mang đến dịch vụ y tế chất lượng cao nhất</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon mx-auto mb-3">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h5>Bác Sĩ Chuyên Khoa</h5>
+                        <p class="text-muted">Đội ngũ bác sĩ giàu kinh nghiệm, được đào tạo bài bản</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon mx-auto mb-3">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h5>Trang Thiết Bị Hiện Đại</h5>
+                        <p class="text-muted">Máy móc, thiết bị y tế tiên tiến nhất hiện nay</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon mx-auto mb-3">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h5>Dịch Vụ 24/7</h5>
+                        <p class="text-muted">Hỗ trợ khẩn cấp và tư vấn 24 giờ mỗi ngày</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon mx-auto mb-3">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5>An Toàn & Tin Cậy</h5>
+                        <p class="text-muted">Tuân thủ nghiêm ngặt các tiêu chuẩn y tế quốc tế</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@section Styles {
+    <style>
+        .service-duration {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .feature-card {
+            padding: 30px 20px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-icon i {
+            color: white;
+            font-size: 2rem;
+        }
+    </style>
+}

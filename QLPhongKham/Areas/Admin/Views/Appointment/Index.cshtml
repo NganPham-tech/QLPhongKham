@@ -1,0 +1,485 @@
+@model QLPhongKham.ViewModels.CalendarIndexViewModel
+
+@{
+    ViewData["Title"] = "Quản lý Lịch hẹn";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-calendar-alt"></i> Lịch hẹn
+                    </h3>
+                    <div class="card-tools">
+                        <a asp-action="Create" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Tạo lịch hẹn mới
+                        </a>
+                        <div class="btn-group ml-2">
+                            <button type="button" class="btn btn-outline-secondary" id="prevBtn">
+                                <i class="fas fa-chevron-left"></i> Trước
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" id="todayBtn">
+                                Hôm nay
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" id="nextBtn">
+                                Sau <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="btn-group ml-2">
+                            <button type="button" class="btn btn-outline-info" id="monthBtn">Tháng</button>
+                            <button type="button" class="btn btn-outline-info" id="weekBtn">Tuần</button>
+                            <button type="button" class="btn btn-outline-info" id="dayBtn">Ngày</button>
+                        </div>
+                        <div class="btn-group ml-2">
+                            <button type="button" class="btn btn-outline-success" id="calendarViewBtn">
+                                <i class="fas fa-calendar"></i> Lịch
+                            </button>
+                            <button type="button" class="btn btn-outline-success" id="listViewBtn">
+                                <i class="fas fa-list"></i> Danh sách
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["Success"]
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                    }
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @TempData["Error"]
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                    }                    <!-- Calendar Legend -->
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <h6>Trạng thái:</h6>
+                            <span class="badge mr-2" style="background-color: #ffc107;">Pending</span>
+                            <span class="badge mr-2" style="background-color: #17a2b8;">In Progress</span>
+                            <span class="badge mr-2" style="background-color: #28a745;">Completed</span>
+                            <span class="badge mr-2" style="background-color: #dc3545;">Cancelled</span>
+                            <span class="badge mr-2" style="background-color: #6c757d;">No Show</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="doctorFilter" class="form-label">Lọc theo bác sĩ:</label>
+                            <select id="doctorFilter" class="form-control">
+                                <option value="">Tất cả bác sĩ</option>
+                                @foreach (var doctor in Model.Doctors)
+                                {
+                                    <option value="@doctor.DoctorId">@doctor.FullName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Container -->
+                    <div id="calendar"></div>
+
+                    <!-- List View Container -->
+                    <div id="listView" style="display: none;">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Thời gian</th>
+                                        <th>Bệnh nhân</th>
+                                        <th>Bác sĩ</th>
+                                        <th>Dịch vụ</th>
+                                        <th>Trạng thái</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appointmentsList">
+                                    <!-- Appointment rows will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Appointment Detail Modal -->
+<div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chi tiết Lịch hẹn</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="appointmentDetails"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group mr-auto">
+                    <button type="button" class="btn btn-warning btn-sm" onclick="updateStatus('Pending')">
+                        <i class="fas fa-clock"></i> Pending
+                    </button>
+                    <button type="button" class="btn btn-info btn-sm" onclick="updateStatus('In Progress')">
+                        <i class="fas fa-play"></i> In Progress
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="updateStatus('Completed')">
+                        <i class="fas fa-check"></i> Completed
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="updateStatus('Cancelled')">
+                        <i class="fas fa-times"></i> Cancelled
+                    </button>
+                </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-info" id="viewDetailsBtn">
+                    <i class="fas fa-eye"></i> Xem chi tiết
+                </button>
+                <button type="button" class="btn btn-primary" id="editAppointmentBtn">
+                    <i class="fas fa-edit"></i> Chỉnh sửa
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+    <style>
+        .fc-event {
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .fc-event:hover {
+            opacity: 0.8;
+        }
+        .fc-daygrid-event {
+            white-space: normal;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var currentAppointmentId = null;
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: false, // We'll use custom buttons
+                locale: 'vi',
+                height: 'auto',
+                editable: true,
+                eventResizableFromStart: false,
+                eventDurationEditable: false,                eventDragStop: function(info) {
+                    // Handle drag and drop
+                    var appointmentId = info.event.id;
+                    var newStart = info.event.start;
+                    
+                    // Check working hours before allowing drop
+                    var hour = newStart.getHours();
+                    var day = newStart.getDay();
+                    
+                    if (day === 0 || day === 6) {
+                        alert('Không thể đặt lịch vào cuối tuần!');
+                        info.revert();
+                        return;
+                    }
+                    
+                    if (hour < 8 || hour >= 17) {
+                        alert('Chỉ có thể đặt lịch từ 8:00 AM đến 5:00 PM!');
+                        info.revert();
+                        return;
+                    }
+                    
+                    fetch('@Url.Action("UpdateDateTime", "Appointment")', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        body: JSON.stringify({
+                            id: appointmentId,
+                            newDateTime: newStart.toISOString()
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.success) {
+                            alert(data.message);
+                            info.revert(); // Revert the drag
+                        } else {
+                            showToast('success', data.message);
+                            calendar.refetchEvents(); // Refresh to get updated event
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Có lỗi xảy ra khi cập nhật lịch hẹn!');
+                        info.revert();
+                    });
+                },
+                events: {
+                    url: '@Url.Action("GetCalendarEvents", "Appointment")',
+                    failure: function() {
+                        alert('Không thể tải dữ liệu lịch hẹn!');
+                    }
+                },
+                eventClick: function(info) {
+                    // Show appointment details
+                    currentAppointmentId = info.event.id;
+                    var props = info.event.extendedProps;
+                    
+                    var detailsHtml = `
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Bệnh nhân:</strong><br>
+                                ${props.patientName}<br><br>
+                                <strong>Bác sĩ:</strong><br>
+                                ${props.doctorName}<br><br>
+                                <strong>Dịch vụ:</strong><br>
+                                ${props.serviceName}
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Thời gian:</strong><br>
+                                ${info.event.start.toLocaleString('vi-VN')}<br><br>
+                                <strong>Trạng thái:</strong><br>
+                                <span class="badge" style="background-color: ${info.event.backgroundColor}">${props.status}</span><br><br>
+                                <strong>Ghi chú:</strong><br>
+                                ${props.notes || 'Không có ghi chú'}
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('appointmentDetails').innerHTML = detailsHtml;
+                    
+                    // Set up button handlers
+                    document.getElementById('viewDetailsBtn').onclick = function() {
+                        window.location.href = '@Url.Action("Details", "Appointment")/' + currentAppointmentId;
+                    };
+                    
+                    document.getElementById('editAppointmentBtn').onclick = function() {
+                        window.location.href = '@Url.Action("Edit", "Appointment")/' + currentAppointmentId;
+                    };
+                    
+                    $('#appointmentModal').modal('show');
+                },
+                eventDisplay: 'block',
+                dayMaxEvents: 3
+            });            calendar.render();
+
+            // Custom navigation buttons
+            document.getElementById('prevBtn').addEventListener('click', function() {
+                calendar.prev();
+            });
+
+            document.getElementById('todayBtn').addEventListener('click', function() {
+                calendar.today();
+            });
+
+            document.getElementById('nextBtn').addEventListener('click', function() {
+                calendar.next();
+            });
+
+            // View buttons
+            document.getElementById('monthBtn').addEventListener('click', function() {
+                calendar.changeView('dayGridMonth');
+                updateViewButtons('month');
+            });
+
+            document.getElementById('weekBtn').addEventListener('click', function() {
+                calendar.changeView('timeGridWeek');
+                updateViewButtons('week');
+            });
+
+            document.getElementById('dayBtn').addEventListener('click', function() {
+                calendar.changeView('timeGridDay');
+                updateViewButtons('day');
+            });
+
+            function updateViewButtons(activeView) {
+                document.querySelectorAll('#monthBtn, #weekBtn, #dayBtn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.getElementById(activeView + 'Btn').classList.add('active');
+            }            // Initial active button
+            updateViewButtons('month');
+
+            // View switching functionality
+            document.getElementById('calendarViewBtn').addEventListener('click', function() {
+                document.getElementById('calendar').style.display = 'block';
+                document.getElementById('listView').style.display = 'none';
+                this.classList.add('active');
+                document.getElementById('listViewBtn').classList.remove('active');
+            });
+
+            document.getElementById('listViewBtn').addEventListener('click', function() {
+                document.getElementById('calendar').style.display = 'none';
+                document.getElementById('listView').style.display = 'block';
+                this.classList.add('active');
+                document.getElementById('calendarViewBtn').classList.remove('active');
+                loadListView();
+            });
+
+            // Set initial active view button
+            document.getElementById('calendarViewBtn').classList.add('active');
+
+            // Function to load list view data
+            function loadListView() {
+                var doctorId = $('#doctorFilter').val();
+                var url = '@Url.Action("GetAppointmentsList", "Appointment")';
+                if (doctorId) {
+                    url += '?doctorId=' + doctorId;
+                }
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        var tbody = document.getElementById('appointmentsList');
+                        tbody.innerHTML = '';
+                        
+                        data.forEach(function(appointment) {
+                            var statusClass = getStatusClass(appointment.status);
+                            var statusBadge = `<span class="badge ${statusClass}">${appointment.status}</span>`;
+                            
+                            var createInvoiceBtn = '';
+                            if (appointment.status === 'Completed') {
+                                createInvoiceBtn = `<a href="@Url.Action("CreateFromAppointment", "Invoice")?appointmentId=${appointment.appointmentId}" 
+                                                      class="btn btn-warning btn-sm" title="Tạo hóa đơn">
+                                                      <i class="fas fa-file-invoice"></i>
+                                                   </a>`;
+                            }
+                            
+                            var row = `
+                                <tr>
+                                    <td>${new Date(appointment.appointmentDate).toLocaleString('vi-VN')}</td>
+                                    <td>${appointment.patientName}</td>
+                                    <td>${appointment.doctorName}</td>
+                                    <td>${appointment.serviceName}</td>
+                                    <td>${statusBadge}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="@Url.Action("Details", "Appointment")/${appointment.appointmentId}" 
+                                               class="btn btn-info btn-sm" title="Xem chi tiết">
+                                               <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="@Url.Action("Edit", "Appointment")/${appointment.appointmentId}" 
+                                               class="btn btn-primary btn-sm" title="Chỉnh sửa">
+                                               <i class="fas fa-edit"></i>
+                                            </a>
+                                            ${createInvoiceBtn}
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                            tbody.insertAdjacentHTML('beforeend', row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error loading list view:', error);
+                        document.getElementById('appointmentsList').innerHTML = 
+                            '<tr><td colspan="6" class="text-center text-danger">Lỗi khi tải dữ liệu</td></tr>';
+                    });
+            }
+
+            function getStatusClass(status) {
+                switch(status) {
+                    case 'Pending': return 'badge-warning';
+                    case 'In Progress': return 'badge-info';
+                    case 'Completed': return 'badge-success';
+                    case 'Cancelled': return 'badge-danger';
+                    case 'No Show': return 'badge-secondary';
+                    default: return 'badge-light';
+                }
+            }
+
+            // Update list view when doctor filter changes
+            $('#doctorFilter').change(function() {
+                // ... existing calendar filter code ...
+                
+                // Also update list view if it's currently visible
+                if (document.getElementById('listView').style.display !== 'none') {
+                    loadListView();
+                }
+            });            // Global function for status update
+            window.updateStatus = function(status) {
+                if (!currentAppointmentId) {
+                    alert('Không có lịch hẹn nào được chọn');
+                    return;
+                }
+
+                console.log('Updating appointment:', currentAppointmentId, 'to status:', status);
+
+                // Tạo form data thay vì JSON
+                var formData = new FormData();
+                formData.append('id', currentAppointmentId);
+                formData.append('status', status);
+                
+                // Lấy token để tránh lỗi CSRF
+                var token = $('input[name="__RequestVerificationToken"]').val();
+                if (token) {
+                    formData.append('__RequestVerificationToken', token);
+                }
+
+                fetch('@Url.Action("UpdateStatus", "Appointment")', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+                    if (data.success) {
+                        $('#appointmentModal').modal('hide');
+                        calendar.refetchEvents();
+                        showToast('success', data.message);
+                    } else {
+                        console.error('Update failed:', data);
+                        alert('Lỗi: ' + data.message + (data.debug ? '\nDebug: ' + JSON.stringify(data.debug) : ''));
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert('Có lỗi xảy ra khi cập nhật trạng thái: ' + error.message);
+                });
+            };
+
+            function showToast(type, message) {
+                var toastHtml = `
+                    <div class="toast" role="alert" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+                        <div class="toast-header bg-${type === 'success' ? 'success' : 'danger'} text-white">
+                            <strong class="mr-auto">Thông báo</strong>
+                            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                `;
+                $('body').append(toastHtml);
+                $('.toast').toast({delay: 3000}).toast('show');
+                setTimeout(() => $('.toast').remove(), 4000);
+            }
+        });
+    </script>
+}

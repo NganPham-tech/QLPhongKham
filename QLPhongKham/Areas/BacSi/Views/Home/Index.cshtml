@@ -1,0 +1,366 @@
+﻿<!-- Areas/BacSi/Views/Home/Index.cshtml -->
+@model List<QLPhongKham.Models.Appointment>
+@{
+    ViewData["Title"] = "Dashboard Bác Sĩ";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Dashboard Bác Sĩ</h1>
+                <div class="text-muted">
+                    <i class="bi bi-calendar-date"></i> @DateTime.Now.ToString("dd/MM/yyyy")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Lịch hẹn hôm nay
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TodayAppointmentsCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-calendar-check fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Lịch hẹn chờ xử lý
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.PendingAppointments</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-clock fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Bệnh án đã tạo
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-file-medical fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Bệnh nhân tuần này
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-people fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Appointments -->
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Lịch khám hôm nay</h6>
+                    <a asp-area="BacSi" asp-controller="Appointment" asp-action="Index" class="btn btn-primary btn-sm">
+                        <i class="bi bi-calendar"></i> Xem tất cả
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Model != null && Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Giờ hẹn</th>
+                                        <th>Bệnh nhân</th>
+                                        <th>Dịch vụ</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var appointment in Model)
+                                    {
+                                        <tr>
+                                            <td>@appointment.AppointmentDate.ToString("HH:mm")</td>
+                                            <td>@appointment.Patient?.FirstName @appointment.Patient?.LastName</td>
+                                            <td>@appointment.Service?.Name</td>
+                                            <td>
+                                                @if (appointment.Status == "Scheduled")
+                                                {
+                                                    <span class="badge bg-warning">Đã lên lịch</span>
+                                                }
+                                                else if (appointment.Status == "Completed")
+                                                {
+                                                    <span class="badge bg-success">Đã hoàn thành</span>
+                                                }
+                                                else if (appointment.Status == "Cancelled")
+                                                {
+                                                    <span class="badge bg-danger">Đã hủy</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-area="BacSi" asp-controller="Appointment" asp-action="Details" 
+                                                   asp-route-id="@appointment.AppointmentId" class="btn btn-sm btn-primary">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="bi bi-calendar-x fa-3x text-gray-300 mb-3"></i>
+                            <p class="text-muted">Không có lịch hẹn nào hôm nay</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Thao tác nhanh</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-area="BacSi" asp-controller="Appointment" asp-action="Index" class="btn btn-primary">
+                            <i class="bi bi-calendar-week me-2"></i>Xem lịch khám
+                        </a>
+                        <a asp-area="BacSi" asp-controller="MedicalRecord" asp-action="Index" class="btn btn-success">
+                            <i class="bi bi-file-medical me-2"></i>Quản lý bệnh án
+                        </a>
+                        <a href="#" class="btn btn-info">
+                            <i class="bi bi-person-lines-fill me-2"></i>Danh sách bệnh nhân
+                        </a>
+                        <a href="#" class="btn btn-warning">
+                            <i class="bi bi-graph-up me-2"></i>Báo cáo thống kê
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Widget -->
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Lịch</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="h4 text-primary">@DateTime.Now.ToString("MMMM yyyy")</div>
+                        <div class="h1 text-gray-800">@DateTime.Now.Day</div>
+                        <div class="text-muted">@DateTime.Now.ToString("dddd")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.border-left-primary {
+    border-left: 0.25rem solid #4e73df !important;
+}
+.border-left-success {
+    border-left: 0.25rem solid #1cc88a !important;
+}
+.border-left-info {
+    border-left: 0.25rem solid #36b9cc !important;
+}
+.border-left-warning {
+    border-left: 0.25rem solid #f6c23e !important;
+}
+.text-gray-800 {
+    color: #5a5c69 !important;
+}
+.text-gray-300 {
+    color: #dddfeb !important;
+}
+</style>
+
+
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Quản lý lịch khám</h1>
+        <div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+                <i class="bi bi-funnel"></i> Lọc
+            </button>
+        </div>
+    </div>
+
+    <!-- Appointments Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách lịch khám</h6>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Ngày giờ</th>
+                                <th>Bệnh nhân</th>
+                                <th>Số điện thoại</th>
+                                <th>Dịch vụ</th>
+                                <th>Trạng thái</th>
+                                <th>Ghi chú</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var appointment in Model)
+                            {
+                                <tr>
+                                    <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>@appointment.Patient?.FirstName @appointment.Patient?.LastName</td>
+                                    <td>@appointment.Patient?.Phone</td>
+                                    <td>@appointment.Service?.Name</td>
+                                    <td>
+                                        @if (appointment.Status == "Scheduled")
+                                        {
+                                            <span class="badge bg-warning">Đã lên lịch</span>
+                                        }
+                                        else if (appointment.Status == "Completed")
+                                        {
+                                            <span class="badge bg-success">Đã hoàn thành</span>
+                                        }
+                                        else if (appointment.Status == "Cancelled")
+                                        {
+                                            <span class="badge bg-danger">Đã hủy</span>
+                                        }
+                                    </td>
+                                    <td>@appointment.Notes</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a asp-action="Details" asp-route-id="@appointment.AppointmentId" 
+                                               class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            @if (appointment.Status == "Scheduled")
+                                            {
+                                                <button class="btn btn-sm btn-outline-success" 
+                                                        onclick="updateStatus(@appointment.AppointmentId, 'Completed')">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </button>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-calendar-x fa-3x text-gray-300 mb-3"></i>
+                    <p class="text-muted">Không có lịch khám nào</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Filter Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lọc lịch khám</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Từ ngày</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Đến ngày</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Trạng thái</label>
+                        <select class="form-select">
+                            <option value="">Tất cả</option>
+                            <option value="Scheduled">Đã lên lịch</option>
+                            <option value="Completed">Đã hoàn thành</option>
+                            <option value="Cancelled">Đã hủy</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Áp dụng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function updateStatus(appointmentId, status) {
+    if (confirm('Bạn có chắc chắn muốn cập nhật trạng thái?')) {
+        fetch(`/BacSi/Appointment/UpdateStatus`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id=${appointmentId}&status=${status}`
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            }
+        });
+    }
+}
+</script>

@@ -1,0 +1,128 @@
+@{
+    ViewData["Title"] = "Seed Data Management";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>Quản lý Seed Data</h2>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Seed Data cho FAQ</h5>
+                </div>
+                <div class="card-body">
+                    <p>Tạo dữ liệu mẫu cho FAQ với các chủ đề:</p>
+                    <ul>
+                        <li>Quy trình đặt lịch khám</li>
+                        <li>Cách thanh toán</li>
+                        <li>Chính sách hủy lịch</li>
+                        <li>Thời gian chờ kết quả</li>
+                        <li>Bảo hiểm y tế</li>
+                        <li>Chuẩn bị trước khi khám</li>
+                    </ul>
+                    <button id="seedFAQBtn" class="btn btn-primary">Seed FAQ Data</button>
+                    <div id="faqResult" class="mt-3"></div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Seed Data cho Services & Doctors</h5>
+                </div>
+                <div class="card-body">
+                    <p>Tạo dữ liệu mẫu cho Services và Doctors</p>
+                    <button id="seedServiceBtn" class="btn btn-warning">Seed Service Data</button>
+                    <div id="serviceResult" class="mt-3"></div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Seed Data cho Articles</h5>
+                </div>
+                <div class="card-body">
+                    <p>Tạo dữ liệu mẫu cho Articles (Tin tức - Bài viết y tế)</p>
+                    <button id="seedArticleBtn" class="btn btn-success">Seed Article Data</button>
+                    <div id="articleResult" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Seed FAQ Data
+            $('#seedFAQBtn').click(function() {
+                $.ajax({
+                    url: '@Url.Action("SeedFAQData", "SeedData")',
+                    type: 'POST',
+                    beforeSend: function() {
+                        $('#seedFAQBtn').prop('disabled', true).text('Đang thực hiện...');
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#faqResult').html('<div class="alert alert-success">' + response.message + '</div>');
+                        } else {
+                            $('#faqResult').html('<div class="alert alert-warning">' + response.message + '</div>');
+                        }
+                    },
+                    error: function() {
+                        $('#faqResult').html('<div class="alert alert-danger">Có lỗi xảy ra khi seed FAQ data</div>');
+                    },
+                    complete: function() {
+                        $('#seedFAQBtn').prop('disabled', false).text('Seed FAQ Data');
+                    }
+                });
+            });
+
+            // Seed Service Data
+            $('#seedServiceBtn').click(function() {
+                $.ajax({
+                    url: '@Url.Action("SeedServiceData", "SeedData")',
+                    type: 'POST',
+                    beforeSend: function() {
+                        $('#seedServiceBtn').prop('disabled', true).text('Đang thực hiện...');
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#serviceResult').html('<div class="alert alert-success">' + response.message + '</div>');
+                        } else {
+                            $('#serviceResult').html('<div class="alert alert-warning">' + response.message + '</div>');
+                        }
+                    },
+                    error: function() {
+                        $('#serviceResult').html('<div class="alert alert-danger">Có lỗi xảy ra khi seed Service data</div>');
+                    },
+                    complete: function() {
+                        $('#seedServiceBtn').prop('disabled', false).text('Seed Service Data');
+                    }
+                });
+            });            // Seed Article Data
+            $('#seedArticleBtn').click(function() {
+                $.ajax({
+                    url: '@Url.Action("SeedArticleData", "SeedData")',
+                    type: 'POST',
+                    beforeSend: function() {
+                        $('#seedArticleBtn').prop('disabled', true).text('Đang thực hiện...');
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#articleResult').html('<div class="alert alert-success">' + response.message + '</div>');
+                        } else {
+                            $('#articleResult').html('<div class="alert alert-warning">' + response.message + '</div>');
+                        }
+                    },
+                    error: function() {
+                        $('#articleResult').html('<div class="alert alert-danger">Có lỗi xảy ra khi seed Article data</div>');
+                    },
+                    complete: function() {
+                        $('#seedArticleBtn').prop('disabled', false).text('Seed Article Data');
+                    }
+                });
+            });
+        });
+    </script>
+}

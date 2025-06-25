@@ -1,0 +1,20 @@
+@model QLPhongKham.Models.Payment
+@{
+    ViewData["Title"] = "In phiếu thu";
+}
+<div class="receipt-print">
+    <h2>PHIẾU THU THANH TOÁN</h2>
+    <hr />
+    <p><strong>Mã giao dịch:</strong> @Model.PaymentNumber</p>
+    <p><strong>Số hóa đơn:</strong> @Model.Invoice?.InvoiceNumber</p>
+    <p><strong>Khách hàng:</strong> @Model.Invoice?.Patient?.FullName</p>
+    <p><strong>Ngày thanh toán:</strong> @Model.PaymentDate.ToString("dd/MM/yyyy HH:mm")</p>
+    <p><strong>Phương thức:</strong> @Model.PaymentMethod</p>
+    <p><strong>Số tiền:</strong> <span style="font-size:1.2em;font-weight:bold">@Model.AmountPaid.ToString("N0") VNĐ</span></p>
+    <p><strong>Ngân hàng:</strong> @Model.BankName</p>
+    <p><strong>Ghi chú:</strong> @Model.Notes</p>
+    <hr />
+    <p>Cảm ơn Quý khách đã sử dụng dịch vụ!</p>
+    <button class="btn btn-primary" onclick="window.print()">In phiếu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

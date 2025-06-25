@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Test Minimal";
+}
+
+<h1>🧪 TEST MINIMAL VIEW</h1>
+<div class="alert alert-success">
+    <strong>✅ View engine hoạt động!</strong>
+</div>
+
+<p><strong>ViewBag.TestMessage:</strong> @ViewBag.TestMessage</p>
+<p><strong>ViewBag.CompletedAppointments:</strong> 
+    @if (ViewBag.CompletedAppointments == null)
+    {
+        <span style="color: red;">NULL</span>
+    }
+    else
+    {
+        <span style="color: green;">@((ViewBag.CompletedAppointments as List<object>)?.Count ?? 0) items</span>
+    }
+</p>
+
+<hr>
+<h3>Test Basic HTML</h3>
+<div style="background-color: yellow; padding: 10px;">
+    <p>Nếu thấy vùng màu vàng này thì HTML render bình thường.</p>
+</div>
+
+<script>
+    console.log('✅ JavaScript hoạt động');
+    alert('View đã load thành công!');
+</script>

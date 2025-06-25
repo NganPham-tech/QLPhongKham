@@ -1,0 +1,202 @@
+@model IEnumerable<QLPhongKham.Models.Invoice>
+
+@{
+    ViewData["Title"] = "Quản lý hóa đơn";
+    ViewData["BreadcrumbItems"] = "<li class=\"breadcrumb-item active\">Hóa đơn</li>";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">
+        <i class="bi bi-receipt me-2"></i>Quản lý hóa đơn
+    </h2>
+    <div class="btn-group">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i>Tạo hóa đơn mới
+        </a>
+        <a asp-action="OverdueInvoices" class="btn btn-warning">
+            <i class="bi bi-exclamation-triangle me-1"></i>Hóa đơn quá hạn
+        </a>
+    </div>
+</div>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Tìm kiếm</label>
+                <input type="text" name="search" class="form-control" placeholder="Số hóa đơn, tên bệnh nhân..." value="@ViewBag.SearchQuery">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Trạng thái</label>
+                <select name="status" class="form-select">
+                    <option value="">Tất cả</option>
+                    <option value="unpaid" selected="@(ViewBag.Status == "unpaid")">Chưa thanh toán</option>
+                    <option value="partial" selected="@(ViewBag.Status == "partial")">Thanh toán một phần</option>
+                    <option value="paid" selected="@(ViewBag.Status == "paid")">Đã thanh toán</option>
+                    <option value="overdue" selected="@(ViewBag.Status == "overdue")">Quá hạn</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Từ ngày</label>
+                <input type="date" name="fromDate" class="form-control" value="@ViewBag.FromDate">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Đến ngày</label>
+                <input type="date" name="toDate" class="form-control" value="@ViewBag.ToDate">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-search me-1"></i>Tìm kiếm
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-clockwise me-1"></i>Làm mới
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Invoice List -->
+<div class="card">
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Số hóa đơn</th>
+                            <th>Bệnh nhân</th>
+                            <th>Ngày tạo</th>
+                            <th>Hạn thanh toán</th>
+                            <th>Tổng tiền</th>
+                            <th>Đã thanh toán</th>
+                            <th>Còn nợ</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var invoice in Model)
+                        {
+                            <tr class="@(invoice.IsOverdue ? "table-danger" : "")">
+                                <td>
+                                    <strong>@invoice.InvoiceNumber</strong>
+                                    @if (invoice.IsElectronic)
+                                    {
+                                        <span class="badge bg-info ms-1">
+                                            <i class="bi bi-lightning"></i>
+                                        </span>
+                                    }
+                                </td>                                <td>
+                                    @if (invoice.Patient != null)
+                                    {
+                                        <span>@invoice.Patient.FullName</span>
+                                        <br><small class="text-muted">@invoice.Patient.Phone</small>
+                                    }
+                                </td>
+                                <td>
+                                    @invoice.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+                                <td>
+                                    @if (invoice.DueDate.HasValue)
+                                    {
+                                        @invoice.DueDate.Value.ToString("dd/MM/yyyy")
+                                        @if (invoice.IsOverdue)
+                                        {
+                                            <br><small class="text-danger">Quá hạn @((DateTime.Now - invoice.DueDate.Value).Days) ngày</small>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Không có</span>
+                                    }
+                                </td>
+                                <td>
+                                    <strong>@invoice.TotalAmount.ToString("N0") VNĐ</strong>
+                                </td>
+                                <td>
+                                    @invoice.PaidAmount.ToString("N0") VNĐ
+                                </td>
+                                <td>
+                                    @if (invoice.RemainingAmount > 0)
+                                    {
+                                        <span class="text-danger">@invoice.RemainingAmount.ToString("N0") VNĐ</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-success">0 VNĐ</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (invoice.IsPaid)
+                                    {
+                                        <span class="badge bg-success">Đã thanh toán</span>
+                                    }
+                                    else if (invoice.IsPartiallyPaid)
+                                    {
+                                        <span class="badge bg-warning">Thanh toán một phần</span>
+                                    }
+                                    else if (invoice.IsOverdue)
+                                    {
+                                        <span class="badge bg-danger">Quá hạn</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Chưa thanh toán</span>
+                                    }
+                                </td>
+                                <td>                                    <div class="btn-group btn-group-sm">
+                                        <a asp-action="Details" asp-route-id="@invoice.InvoiceId" class="btn btn-outline-info" title="Xem chi tiết">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        @if (!invoice.IsPaid)
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@invoice.InvoiceId" class="btn btn-outline-primary" title="Chỉnh sửa">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-area="Admin" asp-controller="Payment" asp-action="Create" asp-route-invoiceId="@invoice.InvoiceId" class="btn btn-outline-success" title="Thanh toán">
+                                                <i class="bi bi-credit-card"></i>
+                                            </a>
+                                        }
+                                        <a asp-action="Print" asp-route-id="@invoice.InvoiceId" class="btn btn-outline-secondary" title="In hóa đơn" target="_blank">
+                                            <i class="bi bi-printer"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-receipt display-1 text-muted"></i>
+                <h4 class="mt-3">Không có hóa đơn nào</h4>
+                <p class="text-muted">Hãy tạo hóa đơn đầu tiên của bạn</p>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Tạo hóa đơn mới
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-submit form when status changes
+        document.querySelector('select[name="status"]').addEventListener('change', function() {
+            this.form.submit();
+        });
+
+        // Confirm delete
+        function confirmDelete(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa hóa đơn này?')) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        }
+    </script>
+}

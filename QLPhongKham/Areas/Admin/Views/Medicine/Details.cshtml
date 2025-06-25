@@ -1,0 +1,65 @@
+@model QLPhongKham.Models.Medicine
+
+@{
+    ViewData["Title"] = "Chi tiết Thuốc";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Chi tiết Thuốc</h3>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Tên thuốc:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+
+                        <dt class="col-sm-3">Mô tả:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
+
+                        <dt class="col-sm-3">Giá đơn vị:</dt>
+                        <dd class="col-sm-9">@string.Format("{0:N0} VNĐ", Model.UnitPrice)</dd>
+
+                        <dt class="col-sm-3">Đơn vị tính:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Unit)</dd>
+
+                        <dt class="col-sm-3">Nhà sản xuất:</dt>
+                        <dd class="col-sm-9">
+                            @if (!string.IsNullOrEmpty(Model.Manufacturer))
+                            {
+                                @Html.DisplayFor(model => model.Manufacturer)
+                            }
+                            else
+                            {
+                                <em>Chưa cập nhật</em>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-3">Trạng thái:</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.IsActive)
+                            {
+                                <span class="badge badge-success">Đang kinh doanh</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-secondary">Ngừng kinh doanh</span>
+                            }
+                        </dd>
+                    </dl>
+
+                    <div class="form-group">
+                        <a asp-action="Edit" asp-route-id="@Model?.MedicineId" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Chỉnh sửa
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

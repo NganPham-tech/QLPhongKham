@@ -1,0 +1,18 @@
+@model QLPhongKham.Models.Payment
+@{
+    ViewData["Title"] = "Hoàn tiền";
+}
+<h2>Hoàn tiền thanh toán</h2>
+<form asp-action="Refund">
+    <input type="hidden" asp-for="PaymentId" />
+    <div class="form-group">
+        <label>Số tiền hoàn</label>
+        <input asp-for="AmountPaid" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Lý do hoàn tiền</label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-danger">Xác nhận hoàn tiền</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

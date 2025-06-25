@@ -1,0 +1,58 @@
+@model QLPhongKham.Models.Staff
+
+@{
+    ViewData["Title"] = "Chi tiết Nhân viên";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Chi tiết thông tin Nhân viên</h3>
+                </div>
+                <div class="card-body">                    <dl class="row">
+                        <dt class="col-sm-3">Họ và tên:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</dd>
+
+                        <dt class="col-sm-3">Ngày sinh:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.DateOfBirth) (Tuổi: @Model.Age)</dd>
+
+                        <dt class="col-sm-3">Giới tính:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Gender)</dd>
+
+                        <dt class="col-sm-3">Email:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+                        <dt class="col-sm-3">Số điện thoại:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Phone)</dd>
+
+                        <dt class="col-sm-3">Chức vụ:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Position)</dd>
+
+                        <dt class="col-sm-3">Phòng ban:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Department)</dd>
+
+                        <dt class="col-sm-3">Lương:</dt>
+                        <dd class="col-sm-9">@string.Format("{0:N0} VNĐ", Model.Salary)</dd>
+
+                        <dt class="col-sm-3">Ngày vào làm:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.DateHired) (Thâm niên: @Model.YearsOfService năm)</dd>
+
+                        <dt class="col-sm-3">Địa chỉ:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Address)</dd>
+                    </dl>
+
+                    <div class="form-group">
+                        <a asp-action="Edit" asp-route-id="@Model?.StaffId" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Chỉnh sửa
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,244 @@
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1>Chăm Sóc Sức Khỏe Toàn Diện</h1>
+                    <p>Phòng khám đa khoa với đội ngũ bác sĩ giàu kinh nghiệm, trang thiết bị hiện đại, cam kết mang đến dịch vụ y tế chất lượng cao cho bạn và gia đình.</p>
+                    <a href="@Url.Action("BookAppointment", "PatientPortal")" class="btn btn-book-appointment btn-lg">
+                        <i class="fas fa-calendar-plus me-2"></i>Đặt lịch khám ngay
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="text-center">
+                    <img src="~/images/hero-doctor.png" alt="Doctor" class="img-fluid" style="max-height: 400px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Info Cards -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="info-card">
+                    <i class="fas fa-phone"></i>
+                    <h5>Hotline 24/7</h5>
+                    <h4 class="text-primary">0123.456.789</h4>
+                    <p>Hỗ trợ khẩn cấp và tư vấn miễn phí</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h5>Giờ làm việc</h5>
+                    <p><strong>T2-T6:</strong> 7:00 - 17:00</p>
+                    <p><strong>T7:</strong> 7:00 - 12:00</p>
+                    <p><strong>CN:</strong> Nghỉ</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h5>Địa chỉ</h5>
+                    <p>123 Đường ABC<br>Quận XYZ, TP.HCM</p>
+                    <a href="#map" class="btn btn-outline-primary btn-sm">Xem bản đồ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="10000">0</span>
+                    <span class="stat-label">Bệnh nhân đã khám</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span>
+                    <span class="stat-label">Bác sĩ chuyên khoa</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="20">0</span>
+                    <span class="stat-label">Năm kinh nghiệm</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="100">0</span>
+                    <span class="stat-label">Dịch vụ y tế</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Services -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Dịch Vụ Nổi Bật</h2>
+            <p>Các dịch vụ y tế chất lượng cao với công nghệ tiên tiến</p>
+        </div>
+        <div class="row">
+            @if (ViewBag.FeaturedServices != null)
+            {
+                @foreach (var service in ViewBag.FeaturedServices)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="card-body text-center">
+                                <div class="service-icon mx-auto">
+                                    <i class="fas fa-stethoscope"></i>
+                                </div>
+                                <h5>@service.Name</h5>
+                                <p class="text-muted">@(service.Description ?? "Dịch vụ y tế chất lượng cao")</p>                                @if (service.Price > 0)
+                                {
+                                    <div class="service-price">@service.Price.ToString("N0") VNĐ</div>
+                                }
+                                <a href="@Url.Action("ServiceDetail", "PatientPortal", new { id = service.ServiceId })" class="btn btn-outline-primary btn-sm mt-3">
+                                    Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Services", "PatientPortal")" class="btn btn-primary btn-lg">
+                Xem tất cả dịch vụ <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Doctors -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Đội Ngũ Bác Sĩ</h2>
+            <p>Bác sĩ giàu kinh nghiệm, tận tâm với nghề</p>
+        </div>
+        <div class="row">
+            @if (ViewBag.FeaturedDoctors != null)
+            {
+                @foreach (var doctor in ViewBag.FeaturedDoctors)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="doctor-card">
+                            <div class="card-body text-center">
+                                <img src="@(doctor.PhotoUrl ?? "/images/default-doctor.jpg")" alt="@doctor.FullName" class="doctor-avatar">
+                                <h5>@doctor.FullName</h5>
+                                @if (!string.IsNullOrEmpty(doctor.Specialty))
+                                {
+                                    <span class="doctor-specialty">@doctor.Specialty</span>                                }
+                                <p class="text-muted mt-3">@(doctor.Description ?? "Bác sĩ giàu kinh nghiệm")</p>
+                                <a href="@Url.Action("DoctorDetail", "PatientPortal", new { id = doctor.DoctorId })" class="btn btn-outline-primary btn-sm">
+                                    Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Doctors", "PatientPortal")" class="btn btn-primary btn-lg">
+                Xem tất cả bác sĩ <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section id="map" class="map-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Vị Trí Phòng Khám</h2>
+            <p>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM</p>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="map-container">
+                    <!-- Google Maps Embed -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4609536698853!2d106.69312931533549!3d10.775431692318705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ec3c161a3fb%3A0xef77cd47a1cc691e!2sBen%20Thanh%20Market!5e0!3m2!1sen!2s!4v1577981265763!5m2!1sen!2s" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-info">
+                    <h5>Thông tin liên hệ</h5>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-map-marker-alt text-primary me-3"></i>
+                        <span>123 Đường ABC, Quận XYZ, TP.HCM</span>
+                    </div>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-phone text-primary me-3"></i>
+                        <span>0123.456.789</span>
+                    </div>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-envelope text-primary me-3"></i>
+                        <span>info@phongkham.com</span>
+                    </div>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-clock text-primary me-3"></i>
+                        <span>T2-T6: 7:00-17:00, T7: 7:00-12:00</span>
+                    </div>
+                    <a href="@Url.Action("BookAppointment", "PatientPortal")" class="btn btn-primary btn-lg w-100 mt-3">
+                        <i class="fas fa-calendar-plus me-2"></i>Đặt lịch ngay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Counter animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const animate = () => {
+                    const value = +counter.getAttribute('data-count');
+                    const data = +counter.innerText;
+
+                    const time = value / speed;
+                    if (data < value) {
+                        counter.innerText = Math.ceil(data + time);
+                        setTimeout(animate, 1);
+                    } else {
+                        counter.innerText = value;
+                    }
+                }
+                animate();
+            });
+        });
+    </script>
+}

@@ -1,0 +1,136 @@
+@model QLPhongKham.Models.Invoice
+
+@{
+    ViewData["Title"] = "Tạo hóa đơn mới - Test Simplified";
+}
+
+<div class="container mt-4">
+    <h2>🧪 Tạo hóa đơn mới - Simplified Version</h2>
+    
+    <!-- Test ViewBag -->
+    <div class="alert alert-info">
+        <h5>🔍 DEBUG INFO:</h5>
+        <p><strong>ViewBag.CompletedAppointments:</strong> 
+            @if (ViewBag.CompletedAppointments == null)
+            {
+                <span class="badge bg-danger">NULL</span>
+            }
+            else
+            {
+                var appointments = (List<QLPhongKham.Models.Appointment>)ViewBag.CompletedAppointments;
+                <span class="badge bg-success">@appointments.Count items</span>
+                
+                @if (appointments.Any())
+                {
+                    <div class="mt-2">
+                        <strong>Cuộc hẹn tìm thấy:</strong>
+                        <ul>
+                            @foreach (var app in appointments)
+                            {
+                                <li>@app.AppointmentDate.ToString("dd/MM/yyyy") - @app.Patient?.FullName - @app.Status</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            }
+        </p>
+        
+        @if (ViewBag.TestMessage != null)
+        {
+            <p><strong>Test Message:</strong> @ViewBag.TestMessage</p>
+        }
+    </div>
+
+    <!-- Simple Tabs (no Bootstrap JS dependency) -->
+    <div class="card">
+        <div class="card-header">
+            <h5>Chọn cách tạo hóa đơn</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h6 class="mb-0">📅 Từ cuộc hẹn đã hoàn thành</h6>
+                        </div>
+                        <div class="card-body">
+                            @if (ViewBag.CompletedAppointments != null)
+                            {
+                                var appointments = (List<QLPhongKham.Models.Appointment>)ViewBag.CompletedAppointments;
+                                if (appointments.Any())
+                                {
+                                    <div class="alert alert-success">
+                                        <strong>✅ Tìm thấy @appointments.Count cuộc hẹn đã hoàn thành chưa có hóa đơn</strong>
+                                    </div>
+                                    
+                                    @foreach (var appointment in appointments)
+                                    {
+                                        <div class="card mb-2 @(appointment.AppointmentDate.Date == new DateTime(2025, 6, 23) ? "border-warning" : "")">
+                                            <div class="card-body py-2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <strong>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</strong>
+                                                        @if (appointment.AppointmentDate.Date == new DateTime(2025, 6, 23))
+                                                        {
+                                                            <span class="badge bg-warning text-dark">Mei Chan 23/6</span>
+                                                        }
+                                                        <br>
+                                                        <small>👤 @appointment.Patient?.FullName</small>
+                                                        <br>
+                                                        <small>🏥 @appointment.Service?.Name - @appointment.Service?.Price.ToString("N0") VNĐ</small>
+                                                    </div>
+                                                    <div>
+                                                        <form asp-action="Create" method="post" class="d-inline">
+                                                            <input type="hidden" name="AppointmentId" value="@appointment.AppointmentId" />
+                                                            <button type="submit" class="btn btn-success btn-sm">
+                                                                💰 Tạo hóa đơn
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="alert alert-warning">
+                                        <strong>⚠️ Không có cuộc hẹn nào đã hoàn thành chưa có hóa đơn</strong>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>❌ Lỗi: ViewBag.CompletedAppointments is NULL</strong>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card border-secondary">
+                        <div class="card-header bg-secondary text-white">
+                            <h6 class="mb-0">📝 Tạo hóa đơn mới</h6>
+                        </div>
+                        <div class="card-body">
+                            <p>Form tạo hóa đơn thủ công sẽ ở đây...</p>
+                            <a href="#" class="btn btn-outline-secondary" onclick="alert('Chức năng này sẽ được phát triển sau!')">
+                                ➕ Tạo hóa đơn mới
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    console.log('✅ CreateSimplified view loaded successfully');
+    console.log('ViewBag data:', @Html.Raw(Json.Serialize(new { 
+        CompletedAppointments = ViewBag.CompletedAppointments,
+        TestMessage = ViewBag.TestMessage 
+    })));
+</script>

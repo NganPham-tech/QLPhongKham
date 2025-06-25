@@ -1,0 +1,192 @@
+@model QLPhongKham.ViewModels.MedicalRecordSearchViewModel
+@{
+    ViewData["Title"] = "Danh sách hồ sơ bệnh án";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 fw-bold text-primary">
+                        <i class="bi bi-file-medical me-2"></i>Danh sách hồ sơ bệnh án
+                    </h6>
+                    <a asp-action="Create" class="btn btn-primary btn-sm">
+                        <i class="bi bi-plus-lg me-1"></i>Tạo hồ sơ mới
+                    </a>
+                </div>
+                <div class="card-body">
+                    <!-- Search Form -->
+                    <form method="get" asp-action="Index" class="mb-4">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label asp-for="PatientName" class="form-label small"></label>
+                                <input asp-for="PatientName" class="form-control form-control-sm" placeholder="Nhập tên bệnh nhân" />
+                            </div>
+                            <div class="col-md-3">
+                                <label asp-for="PatientPhone" class="form-label small"></label>
+                                <input asp-for="PatientPhone" class="form-control form-control-sm" placeholder="Nhập số điện thoại" />
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="FromDate" class="form-label small"></label>
+                                <input asp-for="FromDate" type="date" class="form-control form-control-sm" />
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="ToDate" class="form-label small"></label>
+                                <input asp-for="ToDate" type="date" class="form-control form-control-sm" />
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="DoctorId" class="form-label small"></label>
+                                <select asp-for="DoctorId" class="form-select form-select-sm" asp-items="@(new SelectList(Model.AvailableDoctors, "DoctorId", "FullName"))">
+                                    <option value="">Tất cả bác sĩ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-4">
+                                <label asp-for="Diagnosis" class="form-label small"></label>
+                                <input asp-for="Diagnosis" class="form-control form-control-sm" placeholder="Nhập chẩn đoán" />
+                            </div>
+                            <div class="col-md-8 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary btn-sm me-2">
+                                    <i class="bi bi-search me-1"></i>Tìm kiếm
+                                </button>
+                                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                                    <i class="bi bi-arrow-clockwise me-1"></i>Làm mới
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Results -->
+                    @if (Model.Results.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Ngày khám</th>
+                                        <th>Bệnh nhân</th>
+                                        <th>Bác sĩ</th>
+                                        <th>Dịch vụ</th>
+                                        <th>Chẩn đoán</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var record in Model.Results)
+                                    {
+                                        <tr>
+                                            <td class="small">
+                                                @record.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                                            </td>
+                                            <td class="small">
+                                                <!-- Patient name will be loaded from navigation property -->
+                                                <span class="fw-bold">Bệnh nhân #@record.MedicalRecordId</span>
+                                            </td>
+                                            <td class="small">@record.DoctorName</td>
+                                            <td class="small">
+                                                <span class="badge bg-info">@record.ServiceName</span>
+                                            </td>
+                                            <td class="small">
+                                                @if (record.Diagnosis.Length > 50)
+                                                {
+                                                    <span title="@record.Diagnosis">@(record.Diagnosis.Substring(0, 50))...</span>
+                                                }
+                                                else
+                                                {
+                                                    @record.Diagnosis
+                                                }
+                                            </td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a asp-action="Details" asp-route-id="@record.MedicalRecordId" 
+                                                       class="btn btn-outline-primary btn-sm" title="Xem chi tiết">
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                    <a asp-action="Edit" asp-route-id="@record.MedicalRecordId" 
+                                                       class="btn btn-outline-warning btn-sm" title="Chỉnh sửa">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a asp-action="Print" asp-route-id="@record.MedicalRecordId" 
+                                                       class="btn btn-outline-success btn-sm" title="In hồ sơ" target="_blank">
+                                                        <i class="bi bi-printer"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        @if (Model.TotalPages > 1)
+                        {
+                            <nav aria-label="Phân trang">
+                                <ul class="pagination pagination-sm justify-content-center">
+                                    @if (Model.CurrentPage > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" asp-action="Index" 
+                                               asp-route-currentPage="@(Model.CurrentPage - 1)"
+                                               asp-route-patientName="@Model.PatientName"
+                                               asp-route-patientPhone="@Model.PatientPhone"
+                                               asp-route-fromDate="@Model.FromDate?.ToString("yyyy-MM-dd")"
+                                               asp-route-toDate="@Model.ToDate?.ToString("yyyy-MM-dd")"
+                                               asp-route-doctorId="@Model.DoctorId"
+                                               asp-route-diagnosis="@Model.Diagnosis">Trước</a>
+                                        </li>
+                                    }
+
+                                    @for (int i = Math.Max(1, Model.CurrentPage - 2); i <= Math.Min(Model.TotalPages, Model.CurrentPage + 2); i++)
+                                    {
+                                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                            <a class="page-link" asp-action="Index" 
+                                               asp-route-currentPage="@i"
+                                               asp-route-patientName="@Model.PatientName"
+                                               asp-route-patientPhone="@Model.PatientPhone"
+                                               asp-route-fromDate="@Model.FromDate?.ToString("yyyy-MM-dd")"
+                                               asp-route-toDate="@Model.ToDate?.ToString("yyyy-MM-dd")"
+                                               asp-route-doctorId="@Model.DoctorId"
+                                               asp-route-diagnosis="@Model.Diagnosis">@i</a>
+                                        </li>
+                                    }
+
+                                    @if (Model.CurrentPage < Model.TotalPages)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" asp-action="Index" 
+                                               asp-route-currentPage="@(Model.CurrentPage + 1)"
+                                               asp-route-patientName="@Model.PatientName"
+                                               asp-route-patientPhone="@Model.PatientPhone"
+                                               asp-route-fromDate="@Model.FromDate?.ToString("yyyy-MM-dd")"
+                                               asp-route-toDate="@Model.ToDate?.ToString("yyyy-MM-dd")"
+                                               asp-route-doctorId="@Model.DoctorId"
+                                               asp-route-diagnosis="@Model.Diagnosis">Sau</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        }
+
+                        <div class="text-muted small text-center mt-3">
+                            Hiển thị @((Model.CurrentPage - 1) * Model.PageSize + 1) - @(Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalRecords)) 
+                            trong tổng số @Model.TotalRecords bản ghi
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+                            <p class="text-muted mt-3">Không tìm thấy hồ sơ bệnh án nào.</p>
+                            <a asp-action="Create" class="btn btn-primary">
+                                <i class="bi bi-plus-lg me-1"></i>Tạo hồ sơ đầu tiên
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

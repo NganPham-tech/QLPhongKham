@@ -1,0 +1,331 @@
+@model IEnumerable<QLPhongKham.Models.Invoice>
+
+@{
+    ViewData["Title"] = "Hóa đơn quá hạn";
+    ViewData["BreadcrumbItems"] = "<li class=\"breadcrumb-item\"><a href=\"" + Url.Action("Index") + "\">Hóa đơn</a></li><li class=\"breadcrumb-item active\">Quá hạn</li>";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0 text-danger">
+        <i class="bi bi-exclamation-triangle me-2"></i>Hóa đơn quá hạn
+    </h2>
+    <div class="btn-group">
+        <a asp-action="Index" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left me-1"></i>Quay lại danh sách
+        </a>
+        <button type="button" class="btn btn-warning" onclick="markAllOverdue()">
+            <i class="bi bi-exclamation-circle me-1"></i>Đánh dấu tất cả quá hạn
+        </button>
+    </div>
+</div>
+
+<!-- Statistics -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-exclamation-triangle display-4"></i>
+                <h4 class="mt-2">@Model.Count()</h4>
+                <p class="mb-0">Hóa đơn quá hạn</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark">
+            <div class="card-body text-center">
+                <i class="bi bi-cash-stack display-4"></i>
+                <h4 class="mt-2">@Model.Sum(i => i.RemainingAmount).ToString("N0")</h4>
+                <p class="mb-0">Tổng công nợ (VNĐ)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-calendar-x display-4"></i>
+                <h4 class="mt-2">@(Model.Any() ? Math.Round(Model.Average(i => (DateTime.Now - i.DueDate!.Value).Days)) : 0)</h4>
+                <p class="mb-0">Trung bình quá hạn (ngày)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-person-exclamation display-4"></i>
+                <h4 class="mt-2">@Model.Select(i => i.PatientId).Distinct().Count()</h4>
+                <p class="mb-0">Bệnh nhân nợ</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Tìm kiếm</label>
+                <input type="text" name="search" class="form-control" placeholder="Số hóa đơn, tên bệnh nhân..." value="@ViewBag.SearchQuery">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Quá hạn từ</label>
+                <select name="overdueDays" class="form-select">
+                    <option value="">Tất cả</option>
+                    <option value="7" selected="@(ViewBag.OverdueDays == "7")">7 ngày</option>
+                    <option value="15" selected="@(ViewBag.OverdueDays == "15")">15 ngày</option>
+                    <option value="30" selected="@(ViewBag.OverdueDays == "30")">30 ngày</option>
+                    <option value="60" selected="@(ViewBag.OverdueDays == "60")">60 ngày</option>
+                    <option value="90" selected="@(ViewBag.OverdueDays == "90")">90 ngày</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Số tiền từ</label>
+                <input type="number" name="minAmount" class="form-control" placeholder="0" value="@ViewBag.MinAmount">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Số tiền đến</label>
+                <input type="number" name="maxAmount" class="form-control" value="@ViewBag.MaxAmount">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-search me-1"></i>Tìm kiếm
+                </button>
+                <a asp-action="OverdueInvoices" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-clockwise me-1"></i>Làm mới
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Overdue Invoices List -->
+<div class="card">
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-danger">
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+                            </th>
+                            <th>Số hóa đơn</th>
+                            <th>Bệnh nhân</th>
+                            <th>Ngày tạo</th>
+                            <th>Hạn thanh toán</th>
+                            <th>Quá hạn</th>
+                            <th>Tổng tiền</th>
+                            <th>Còn nợ</th>
+                            <th>Mức độ</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var invoice in Model.OrderByDescending(i => (DateTime.Now - i.DueDate!.Value).Days))
+                        {
+                            var overdueDays = (DateTime.Now - invoice.DueDate!.Value).Days;
+                            var severityClass = overdueDays <= 7 ? "warning" : overdueDays <= 30 ? "danger" : "dark";
+                            var severityText = overdueDays <= 7 ? "Nhẹ" : overdueDays <= 30 ? "Nghiêm trọng" : "Rất nghiêm trọng";
+                            
+                            <tr class="table-danger">
+                                <td>
+                                    <input type="checkbox" class="invoice-checkbox" value="@invoice.InvoiceId">
+                                </td>
+                                <td>
+                                    <strong>@invoice.InvoiceNumber</strong>
+                                    @if (invoice.IsElectronic)
+                                    {
+                                        <span class="badge bg-info ms-1">
+                                            <i class="bi bi-lightning"></i>
+                                        </span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (invoice.Patient != null)
+                                    {
+                                        <div>
+                                            <strong>@invoice.Patient.FullName</strong>
+                                            <br><small class="text-muted">@invoice.Patient.Phone</small>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @invoice.CreatedDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @invoice.DueDate!.Value.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    <span class="badge bg-danger">
+                                        @overdueDays ngày
+                                    </span>
+                                </td>
+                                <td>
+                                    <strong>@invoice.TotalAmount.ToString("N0") VNĐ</strong>
+                                </td>
+                                <td>
+                                    <span class="text-danger fw-bold">
+                                        @invoice.RemainingAmount.ToString("N0") VNĐ
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-@severityClass">@severityText</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a asp-action="Details" asp-route-id="@invoice.InvoiceId" class="btn btn-outline-info" title="Xem chi tiết">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a asp-area="Admin" asp-controller="Payment" asp-action="Create" asp-route-invoiceId="@invoice.InvoiceId" class="btn btn-outline-success" title="Thanh toán">
+                                            <i class="bi bi-credit-card"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-outline-warning" onclick="sendReminder(@invoice.InvoiceId)" title="Gửi nhắc nhở">
+                                            <i class="bi bi-bell"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Bulk Actions -->
+            <div class="mt-3 pt-3 border-top">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong id="selectedCount">0</strong> hóa đơn được chọn
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-warning" onclick="sendBulkReminders()" disabled id="bulkReminderBtn">
+                            <i class="bi bi-bell me-1"></i>Gửi nhắc nhở hàng loạt
+                        </button>
+                        <button type="button" class="btn btn-outline-info" onclick="exportOverdueReport()" disabled id="exportBtn">
+                            <i class="bi bi-download me-1"></i>Xuất báo cáo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-check-circle display-1 text-success"></i>
+                <h4 class="mt-3 text-success">Tuyệt vời! Không có hóa đơn quá hạn</h4>
+                <p class="text-muted">Tất cả hóa đơn đều được thanh toán đúng hạn</p>
+                <a asp-action="Index" class="btn btn-primary">
+                    <i class="bi bi-arrow-left me-1"></i>Quay lại danh sách hóa đơn
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Toggle select all checkboxes
+        function toggleSelectAll(selectAllCheckbox) {
+            const checkboxes = document.querySelectorAll('.invoice-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateBulkActions();
+        }
+
+        // Update bulk action buttons based on selection
+        function updateBulkActions() {
+            const selectedCheckboxes = document.querySelectorAll('.invoice-checkbox:checked');
+            const count = selectedCheckboxes.length;
+            
+            document.getElementById('selectedCount').textContent = count;
+            document.getElementById('bulkReminderBtn').disabled = count === 0;
+            document.getElementById('exportBtn').disabled = count === 0;
+        }
+
+        // Add event listeners to individual checkboxes
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.invoice-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', updateBulkActions);
+            });
+        });
+
+        // Send reminder for single invoice
+        function sendReminder(invoiceId) {
+            if (confirm('Bạn có muốn gửi nhắc nhở thanh toán cho hóa đơn này?')) {
+                // TODO: Implement reminder functionality
+                fetch(`/Admin/Invoice/SendReminder/${invoiceId}`, {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Đã gửi nhắc nhở thành công!');
+                    } else {
+                        alert('Có lỗi xảy ra: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Có lỗi xảy ra khi gửi nhắc nhở');
+                });
+            }
+        }
+
+        // Send bulk reminders
+        function sendBulkReminders() {
+            const selectedIds = Array.from(document.querySelectorAll('.invoice-checkbox:checked'))
+                .map(checkbox => checkbox.value);
+            
+            if (selectedIds.length === 0) {
+                alert('Vui lòng chọn ít nhất một hóa đơn');
+                return;
+            }
+
+            if (confirm(`Bạn có muốn gửi nhắc nhở cho ${selectedIds.length} hóa đơn đã chọn?`)) {
+                // TODO: Implement bulk reminder functionality
+                alert('Chức năng gửi nhắc nhở hàng loạt sẽ được phát triển trong phiên bản tiếp theo');
+            }
+        }
+
+        // Export overdue report
+        function exportOverdueReport() {
+            const selectedIds = Array.from(document.querySelectorAll('.invoice-checkbox:checked'))
+                .map(checkbox => checkbox.value);
+            
+            if (selectedIds.length === 0) {
+                alert('Vui lòng chọn ít nhất một hóa đơn');
+                return;
+            }
+
+            // TODO: Implement export functionality
+            alert('Chức năng xuất báo cáo sẽ được phát triển trong phiên bản tiếp theo');
+        }
+
+        // Mark all as overdue (admin function)
+        function markAllOverdue() {
+            if (confirm('Bạn có chắc chắn muốn đánh dấu tất cả hóa đơn chưa thanh toán quá hạn làm "Quá hạn"?')) {
+                fetch('/Admin/Invoice/MarkAsOverdue', {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`Đã đánh dấu ${data.count} hóa đơn là quá hạn!`);
+                        location.reload();
+                    } else {
+                        alert('Có lỗi xảy ra: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Có lỗi xảy ra khi đánh dấu hóa đơn quá hạn');
+                });
+            }
+        }
+    </script>
+}

@@ -1,0 +1,428 @@
+@model QLPhongKham.Models.Invoice
+
+@{
+    ViewData["Title"] = "In hóa đơn #" + Model.InvoiceId.ToString("D6");
+    Layout = null; // No layout for printing
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hóa đơn #@Model.InvoiceId.ToString("D6")</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .invoice-header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .clinic-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 5px;
+        }
+
+        .clinic-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .invoice-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .invoice-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .invoice-info, .patient-info {
+            width: 48%;
+        }
+
+        .info-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #2c5aa0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .info-item {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .services-table th,
+        .services-table td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .services-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .services-table .text-center {
+            text-align: center;
+        }
+
+        .services-table .text-right {
+            text-align: right;
+        }
+
+        .total-section {
+            width: 300px;
+            margin-left: auto;
+            border: 1px solid #333;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total-row:last-child {
+            border-bottom: none;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .signature-box {
+            text-align: center;
+            width: 200px;
+        }
+
+        .signature-title {
+            font-weight: bold;
+            margin-bottom: 60px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .status-badge {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-paid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-overdue {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .notes {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #2c5aa0;
+        }        @@media print {
+            body {
+                margin: 0;
+                padding: 15px;
+            }
+            
+            .invoice-header {
+                page-break-inside: avoid;
+            }
+            
+            .services-table {
+                page-break-inside: auto;
+            }
+            
+            .signature-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Invoice Header -->
+    <div class="invoice-header">
+        <div class="clinic-name">PHÒNG KHÁM ĐA KHOA ABC</div>
+        <div class="clinic-info">
+            Địa chỉ: 123 Đường ABC, Quận XYZ, TP. Hồ Chí Minh<br>
+            Điện thoại: (028) 1234-5678 | Email: contact@phongkhamabc.vn<br>
+            Website: www.phongkhamabc.vn
+        </div>
+        <div class="invoice-title">HÓA ĐƠN THANH TOÁN</div>
+        <div style="margin-top: 10px; font-size: 16px;">
+            <strong>Số: @Model.InvoiceNumber</strong>
+        </div>
+    </div>
+
+    <!-- Invoice Details -->
+    <div class="invoice-details">
+        <div class="invoice-info">
+            <div class="info-title">THÔNG TIN HÓA ĐƠN</div>
+            <div class="info-item">
+                <span class="info-label">Mã hóa đơn:</span>
+                <strong>#@Model.InvoiceId.ToString("D6")</strong>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Ngày lập:</span>
+                @Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+            </div>
+            @if (Model.DueDate.HasValue)
+            {
+                <div class="info-item">
+                    <span class="info-label">Ngày đáo hạn:</span>
+                    @Model.DueDate.Value.ToString("dd/MM/yyyy")
+                </div>
+            }
+            <div class="info-item">
+                <span class="info-label">Loại hóa đơn:</span>
+                @switch (Model.InvoiceType)
+                {
+                    case "Service":
+                        <span>Dịch vụ</span>
+                        break;
+                    case "Medicine":
+                        <span>Thuốc</span>
+                        break;
+                    case "Mixed":
+                        <span>Hỗn hợp</span>
+                        break;
+                    default:
+                        @Model.InvoiceType
+                        break;
+                }
+            </div>
+            <div class="info-item">
+                <span class="info-label">Trạng thái:</span>
+                @switch (Model.Status)
+                {
+                    case "Paid":
+                        <span class="status-badge status-paid">Đã thanh toán</span>
+                        break;
+                    case "Pending":
+                        <span class="status-badge status-pending">Chờ thanh toán</span>
+                        break;
+                    case "Overdue":
+                        <span class="status-badge status-overdue">Quá hạn</span>
+                        break;
+                    default:
+                        <span class="status-badge">@Model.Status</span>
+                        break;
+                }
+            </div>
+        </div>
+
+        <div class="patient-info">
+            <div class="info-title">THÔNG TIN BỆNH NHÂN</div>
+            <div class="info-item">
+                <span class="info-label">Họ tên:</span>
+                <strong>@Model.Patient.FullName</strong>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Ngày sinh:</span>
+                @Model.Patient.DateOfBirth.ToString("dd/MM/yyyy") (@Model.Patient.Age tuổi)
+            </div>
+            <div class="info-item">
+                <span class="info-label">Giới tính:</span>
+                @Model.Patient.Gender
+            </div>
+            <div class="info-item">
+                <span class="info-label">Số điện thoại:</span>
+                @Model.Patient.Phone
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email:</span>
+                @Model.Patient.Email
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Patient.Address))
+            {
+                <div class="info-item">
+                    <span class="info-label">Địa chỉ:</span>
+                    @Model.Patient.Address
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Services Table -->
+    <table class="services-table">
+        <thead>
+            <tr>
+                <th style="width: 50px;">STT</th>
+                <th>Tên dịch vụ/thuốc</th>
+                <th style="width: 80px;">Số lượng</th>
+                <th style="width: 120px;">Đơn giá</th>
+                <th style="width: 120px;">Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int index = 1;}
+            @foreach (var detail in Model.InvoiceDetails)
+            {
+                <tr>
+                    <td class="text-center">@index</td>
+                    <td>
+                        @if (detail.Service != null)
+                        {
+                            @detail.Service.Name
+                        }
+                        else if (detail.Medicine != null)
+                        {
+                            @detail.Medicine.Name
+                        }
+                        else
+                        {
+                            <span style="color: #999;">Không xác định</span>
+                        }
+                    </td>
+                    <td class="text-center">@detail.Quantity</td>
+                    <td class="text-right">@detail.UnitPrice.ToString("N0") VNĐ</td>
+                    <td class="text-right">@detail.TotalPrice.ToString("N0") VNĐ</td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+
+    <!-- Total Section -->
+    <div class="total-section">
+        <div class="total-row">
+            <span>Tổng tiền trước thuế:</span>
+            <span>@Model.SubTotal.ToString("N0") VNĐ</span>
+        </div>
+        @if (Model.TaxAmount > 0)
+        {
+            <div class="total-row">
+                <span>Thuế VAT:</span>
+                <span>@Model.TaxAmount.ToString("N0") VNĐ</span>
+            </div>
+        }
+        @if (Model.DiscountAmount > 0)
+        {
+            <div class="total-row">
+                <span>Giảm giá:</span>
+                <span style="color: red;">-@Model.DiscountAmount.ToString("N0") VNĐ</span>
+            </div>
+        }
+        <div class="total-row">
+            <span>TỔNG CỘNG:</span>
+            <span>@Model.TotalAmount.ToString("N0") VNĐ</span>
+        </div>
+    </div>
+
+    <!-- Payment Information -->
+    @if (Model.Payments.Any())
+    {
+        <div style="margin-top: 20px;">
+            <div class="info-title">THÔNG TIN THANH TOÁN</div>
+            <div style="margin-bottom: 10px;">
+                <span class="info-label">Đã thanh toán:</span>
+                <strong style="color: green;">@Model.PaidAmount.ToString("N0") VNĐ</strong>
+            </div>
+            <div style="margin-bottom: 10px;">
+                <span class="info-label">Còn nợ:</span>
+                <strong style="color: red;">@Model.RemainingAmount.ToString("N0") VNĐ</strong>
+            </div>
+        </div>
+    }
+
+    <!-- Notes -->
+    @if (!string.IsNullOrEmpty(Model.Notes))
+    {
+        <div class="notes">
+            <strong>Ghi chú:</strong> @Model.Notes
+        </div>
+    }
+
+    <!-- Signature Section -->
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-title">BỆNH NHÂN</div>
+            <div class="signature-line"></div>
+            <div>@Model.Patient.FullName</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-title">THU NGÂN</div>
+            <div class="signature-line"></div>
+            <div>@(Model.Staff?.FullName ?? "_______________")</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!</p>
+        <p style="margin-top: 5px;">
+            Hóa đơn được in vào: @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
+        </p>
+    </div>
+
+    <script>
+        // Auto print when page loads
+        window.onload = function () {
+            window.print();
+        }
+    </script>
+</body>
+</html>

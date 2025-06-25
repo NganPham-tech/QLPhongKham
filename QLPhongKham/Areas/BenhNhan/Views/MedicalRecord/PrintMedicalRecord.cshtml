@@ -1,0 +1,402 @@
+@model QLPhongKham.Models.MedicalRecord
+
+@{
+    ViewData["Title"] = "In hồ sơ bệnh án #" + Model.MedicalRecordId.ToString("D6");
+    Layout = null; // No layout for printing
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ bệnh án #@Model.MedicalRecordId.ToString("D6")</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .clinic-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 5px;
+        }
+
+        .clinic-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .record-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .patient-doctor-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .patient-info, .doctor-info {
+            width: 48%;
+        }
+
+        .info-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #2c5aa0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .info-item {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 120px;
+        }
+
+        .medical-content {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #2c5aa0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .content-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            min-height: 60px;
+        }
+
+        .prescription-box {
+            border: 2px solid #28a745;
+            background-color: #f8fff9;
+        }
+
+        .advice-box {
+            border: 2px solid #ffc107;
+            background-color: #fffdf5;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            page-break-inside: avoid;
+        }
+
+        .signature-box {
+            text-align: center;
+            width: 200px;
+        }
+
+        .signature-title {
+            font-weight: bold;
+            margin-bottom: 60px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .record-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .confidential {
+            text-align: center;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        @@media print {
+            body {
+                margin: 0;
+                padding: 15px;
+            }
+            
+            .header {
+                page-break-inside: avoid;
+            }
+            
+            .medical-content {
+                page-break-inside: auto;
+            }
+            
+            .signature-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="clinic-name">PHÒNG KHÁM ĐA KHOA ABC</div>
+        <div class="clinic-info">
+            Địa chỉ: 123 Đường ABC, Quận XYZ, TP. Hồ Chí Minh<br>
+            Điện thoại: (028) 1234-5678 | Email: contact@phongkhamabc.vn<br>
+            Giấy phép hoạt động số: 123/GP-SYT
+        </div>
+        <div class="record-title">HỒ SƠ BỆNH ÁN</div>
+        <div style="margin-top: 10px; font-size: 16px;">
+            <strong>Mã hồ sơ: #@Model.MedicalRecordId.ToString("D6")</strong>
+        </div>
+    </div>
+
+    <!-- Confidential Notice -->
+    <div class="confidential">
+        *** THÔNG TIN Y TẾ BÍ MẬT - CHỈ DÀNH CHO MỤC ĐÍCH Y TẾ ***
+    </div>
+
+    <!-- Record Metadata -->
+    <div class="record-meta">
+        <div>
+            <strong>Ngày khám:</strong> @Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+        </div>
+        <div>
+            <strong>Mã lịch hẹn:</strong> #@Model.AppointmentId
+        </div>
+    </div>
+
+    <!-- Patient and Doctor Information -->
+    <div class="patient-doctor-info">
+        <div class="patient-info">
+            <div class="info-title">THÔNG TIN BỆNH NHÂN</div>
+            <div class="info-item">
+                <span class="info-label">Họ tên:</span>
+                <strong>@Model.Patient.FullName</strong>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Ngày sinh:</span>
+                @Model.Patient.DateOfBirth.ToString("dd/MM/yyyy") (@Model.Patient.Age tuổi)
+            </div>
+            <div class="info-item">
+                <span class="info-label">Giới tính:</span>
+                @Model.Patient.Gender
+            </div>
+            <div class="info-item">
+                <span class="info-label">Số điện thoại:</span>
+                @Model.Patient.Phone
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email:</span>
+                @Model.Patient.Email
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Patient.Address))
+            {
+                <div class="info-item">
+                    <span class="info-label">Địa chỉ:</span>
+                    @Model.Patient.Address
+                </div>
+            }
+        </div>
+
+        <div class="doctor-info">
+            <div class="info-title">THÔNG TIN BÁC SĨ KHÁM</div>
+            @if (Model.Doctor != null)
+            {
+                <div class="info-item">
+                    <span class="info-label">Bác sĩ:</span>
+                    <strong>@Model.Doctor.FullName</strong>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Chuyên khoa:</span>
+                    @Model.Doctor.Specialty
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Trình độ:</span>
+                    @Model.Doctor.Qualification
+                </div>
+            }
+            else if (Model.Appointment?.Doctor != null)
+            {
+                <div class="info-item">
+                    <span class="info-label">Bác sĩ:</span>
+                    <strong>@Model.Appointment.Doctor.FullName</strong>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Chuyên khoa:</span>
+                    @Model.Appointment.Doctor.Specialty
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Trình độ:</span>
+                    @Model.Appointment.Doctor.Qualification
+                </div>
+            }
+            else
+            {
+                <div class="info-item">
+                    <span class="info-label">Bác sĩ:</span>
+                    <span style="color: #999;">Không có thông tin</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Medical Content -->
+    <div class="medical-content">
+        <!-- Diagnosis -->
+        <div class="section-title">1. CHẨN ĐOÁN</div>
+        <div class="content-box">
+            @if (!string.IsNullOrEmpty(Model.Diagnosis))
+            {
+                @Html.Raw(Model.Diagnosis.Replace("\n", "<br/>"))
+            }
+            else
+            {
+                <em style="color: #999;">Chưa có thông tin chẩn đoán.</em>
+            }
+        </div>
+
+        <!-- Treatment -->
+        <div class="section-title">2. PHƯƠNG PHÁP ĐIỀU TRỊ</div>
+        <div class="content-box">
+            @if (!string.IsNullOrEmpty(Model.Treatment))
+            {
+                @Html.Raw(Model.Treatment.Replace("\n", "<br/>"))
+            }
+            else
+            {
+                <em style="color: #999;">Chưa có thông tin điều trị.</em>
+            }
+        </div>
+
+        <!-- Prescription -->
+        @if (!string.IsNullOrEmpty(Model.Prescription))
+        {
+            <div class="section-title">3. ĐƠN THUỐC</div>
+            <div class="content-box prescription-box">
+                @Html.Raw(Model.Prescription.Replace("\n", "<br/>"))
+            </div>
+        }
+
+        <!-- Advice -->
+        @if (!string.IsNullOrEmpty(Model.Advice))
+        {
+            <div class="section-title">4. LỜI KHUYÊN CỦA BÁC SĨ</div>
+            <div class="content-box advice-box">
+                @Html.Raw(Model.Advice.Replace("\n", "<br/>"))
+            </div>
+        }
+
+        <!-- Notes -->
+        <div class="section-title">5. GHI CHÚ</div>
+        <div class="content-box">
+            @if (!string.IsNullOrEmpty(Model.Notes))
+            {
+                @Html.Raw(Model.Notes.Replace("\n", "<br/>"))
+            }
+            else
+            {
+                <em style="color: #999;">Không có ghi chú bổ sung.</em>
+            }
+        </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div style="margin-top: 30px; padding: 10px; border: 1px solid #dc3545; background-color: #f8d7da;">
+        <strong style="color: #721c24;">Lưu ý quan trọng:</strong>
+        <ul style="margin: 10px 0; color: #721c24;">
+            <li>Hồ sơ này chỉ có giá trị cho mục đích khám chữa bệnh tại phòng khám.</li>
+            <li>Bệnh nhân cần tuân thủ đúng hướng dẫn điều trị của bác sĩ.</li>
+            <li>Khi có biến chứng hoặc tình trạng xấu đi, cần liên hệ ngay với bác sĩ.</li>
+            <li>Thông tin trong hồ sơ này được bảo mật theo quy định của pháp luật.</li>
+        </ul>
+    </div>
+
+    <!-- Signature Section -->
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-title">BỆNH NHÂN</div>
+            <div class="signature-line"></div>
+            <div>@Model.Patient.FullName</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-title">BÁC SĨ KHÁM</div>
+            <div class="signature-line"></div>
+            <div>
+                @if (Model.Doctor != null)
+                {
+                    @Model.Doctor.FullName
+                }
+                else if (Model.Appointment?.Doctor != null)
+                {
+                    @Model.Appointment.Doctor.FullName
+                }
+                else
+                {
+                    <span>_______________</span>
+                }
+            </div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-title">PHÒNG KHÁM</div>
+            <div class="signature-line"></div>
+            <div style="font-style: italic;">Dấu và ký</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>PHÒNG KHÁM ĐA KHOA ABC</strong></p>
+        <p>Hồ sơ được in vào: @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")</p>
+        <p style="margin-top: 5px; font-style: italic;">
+            "Sức khỏe của bạn là ưu tiên hàng đầu của chúng tôi"
+        </p>
+    </div>
+
+    <script>
+        // Auto print when page loads
+        window.onload = function () {
+            window.print();
+        }
+    </script>
+</body>
+</html>

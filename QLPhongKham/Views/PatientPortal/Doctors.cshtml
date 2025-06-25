@@ -1,0 +1,121 @@
+@model IEnumerable<QLPhongKham.Models.Doctor>
+@{
+    ViewData["Title"] = "Đội Ngũ Bác Sĩ";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Đội Ngũ Bác Sĩ</h2>
+            <p>Bác sĩ chuyên khoa giàu kinh nghiệm, tận tâm với nghề</p>
+        </div>
+
+        <!-- Filter by Specialty -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="specialty-filter">
+                    <label for="specialtyFilter" class="form-label fw-bold">Lọc theo chuyên khoa:</label>
+                    <select id="specialtyFilter" class="form-select" onchange="filterBySpecialty()">
+                        <option value="">Tất cả chuyên khoa</option>
+                        @if (ViewBag.Specialties != null)
+                        {
+                            @foreach (var specialty in ViewBag.Specialties)
+                            {                                <option value="@specialty" selected="@(specialty == ViewBag.CurrentSpecialty)">
+                                    @specialty
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 text-end">
+                <span class="text-muted">Tìm thấy @Model.Count() bác sĩ</span>
+            </div>
+        </div>
+
+        <!-- Doctors Grid -->
+        <div class="row">
+            @foreach (var doctor in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="doctor-card h-100">
+                        <div class="card-body text-center d-flex flex-column">
+                            <img src="@(doctor.PhotoUrl ?? "/images/default-doctor.jpg")" 
+                                 alt="@doctor.FullName" 
+                                 class="doctor-avatar">
+                            
+                            <h5 class="mb-2">@doctor.FullName</h5>
+                            
+                            @if (!string.IsNullOrEmpty(doctor.Specialty))
+                            {
+                                <span class="doctor-specialty mb-3">@doctor.Specialty</span>
+                            }
+                            
+                            @if (!string.IsNullOrEmpty(doctor.Qualification))
+                            {
+                                <p class="text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i>
+                                    @doctor.Qualification                                </p>
+                            }
+                            
+                            @if (!string.IsNullOrEmpty(doctor.Phone))
+                            {
+                                <p class="text-muted mb-2">
+                                    <i class="fas fa-phone me-1"></i>
+                                    @doctor.Phone
+                                </p>
+                            }
+                            
+                            @if (!string.IsNullOrEmpty(doctor.Description))
+                            {
+                                <p class="text-muted flex-grow-1">@doctor.Description</p>
+                            }
+                            
+                            <div class="mt-auto">
+                                <div class="d-grid gap-2">
+                                    <a href="@Url.Action("DoctorDetail", "PatientPortal", new { id = doctor.DoctorId })" 
+                                       class="btn btn-outline-primary">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Xem chi tiết
+                                    </a>
+                                    <a href="@Url.Action("BookAppointment", "PatientPortal", new { doctorId = doctor.DoctorId })" 
+                                       class="btn btn-primary">
+                                        <i class="fas fa-calendar-plus me-1"></i>
+                                        Đặt lịch khám
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-user-md fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Không tìm thấy bác sĩ</h4>
+                <p class="text-muted">Vui lòng thử lại với tiêu chí khác</p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        function filterBySpecialty() {
+            const specialty = document.getElementById('specialtyFilter').value;
+            const url = new URL(window.location);
+            
+            if (specialty) {
+                url.searchParams.set('specialty', specialty);
+            } else {
+                url.searchParams.delete('specialty');
+            }
+            
+            window.location.href = url.toString();
+        }
+    </script>
+}

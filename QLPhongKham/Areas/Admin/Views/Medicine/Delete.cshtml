@@ -1,0 +1,66 @@
+@model QLPhongKham.Models.Medicine
+
+@{
+    ViewData["Title"] = "Xóa Thuốc";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-exclamation-triangle"></i> Xác nhận xóa Thuốc
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <strong>Cảnh báo!</strong> Bạn có chắc chắn muốn xóa thuốc này không?
+                        <br><strong>Lưu ý:</strong> Không thể xóa nếu thuốc đã có trong kho hoặc đã được sử dụng.
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Tên thuốc:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+
+                        <dt class="col-sm-3">Mô tả:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
+
+                        <dt class="col-sm-3">Giá đơn vị:</dt>
+                        <dd class="col-sm-9">@string.Format("{0:N0} VNĐ", Model.UnitPrice)</dd>
+
+                        <dt class="col-sm-3">Đơn vị tính:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Unit)</dd>
+
+                        <dt class="col-sm-3">Nhà sản xuất:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Manufacturer)</dd>
+
+                        <dt class="col-sm-3">Trạng thái:</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.IsActive)
+                            {
+                                <span class="badge badge-success">Đang kinh doanh</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-secondary">Ngừng kinh doanh</span>
+                            }
+                        </dd>
+                    </dl>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="MedicineId" />
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Xác nhận xóa
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Hủy bỏ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

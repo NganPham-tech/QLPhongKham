@@ -1,0 +1,289 @@
+﻿@model QLPhongKham.ViewModels.CreateStaffAccountViewModel
+@{
+    ViewData["Title"] = "Tạo tài khoản nhân viên";
+    ViewData["ShowBreadcrumb"] = false; // We have our own breadcrumb
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index">Quản lý người dùng</a>
+                    </li>
+                    <li class="breadcrumb-item active">Tạo tài khoản nhân viên</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-plus me-2"></i>Tạo tài khoản nhân viên mới
+                    </h4>
+                    <p class="mb-0 mt-2">Tạo tài khoản trực tiếp cho bác sĩ hoặc nhân viên không cần đăng ký</p>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="CreateStaffAccount" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                        <!-- Role Selection -->
+                        <div class="mb-4">
+                            <h5 class="text-primary border-bottom pb-2">
+                                <i class="bi bi-shield-check me-2"></i>Chọn vai trò
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" asp-for="Role" value="BacSi" id="roleBacSi">
+                                                <label class="form-check-label fw-bold" for="roleBacSi">
+                                                    <i class="bi bi-person-badge text-success me-2"></i>Bác sĩ
+                                                </label>
+                                            </div>
+                                            <small class="text-muted">Khám bệnh, tạo bệnh án</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" asp-for="Role" value="NhanVien" id="roleNhanVien">
+                                                <label class="form-check-label fw-bold" for="roleNhanVien">
+                                                    <i class="bi bi-person-gear text-info me-2"></i>Nhân viên
+                                                </label>
+                                            </div>
+                                            <small class="text-muted">Tiếp đón, quản lý lịch hẹn</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <div class="mb-4">
+                            <h5 class="text-primary border-bottom pb-2">
+                                <i class="bi bi-person-circle me-2"></i>Thông tin cá nhân
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="FirstName" class="form-control" placeholder="Họ" />
+                                        <label asp-for="FirstName">Họ <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="LastName" class="form-control" placeholder="Tên" />
+                                        <label asp-for="LastName">Tên <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <select asp-for="Gender" class="form-select">
+                                            <option value="">-- Chọn giới tính --</option>
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                        <label asp-for="Gender">Giới tính <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Phone" class="form-control" placeholder="Số điện thoại" />
+                                        <label asp-for="Phone">Số điện thoại</label>
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>                            <div class="form-floating mb-3">
+                                <textarea asp-for="Address" class="form-control" style="height: 80px" placeholder="Địa chỉ"></textarea>
+                                <label asp-for="Address">Địa chỉ</label>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="DateOfBirth" class="form-control" type="date" />
+                                        <label asp-for="DateOfBirth">Ngày sinh <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="DateHired" class="form-control" type="date" />
+                                        <label asp-for="DateHired">Ngày vào làm</label>
+                                        <span asp-validation-for="DateHired" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Information -->
+                        <div class="mb-4">
+                            <h5 class="text-primary border-bottom pb-2">
+                                <i class="bi bi-shield-lock me-2"></i>Thông tin tài khoản
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Email" class="form-control" placeholder="Email đăng nhập" />
+                                        <label asp-for="Email">Email đăng nhập <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Password" type="password" class="form-control" placeholder="Mật khẩu" />
+                                        <label asp-for="Password">Mật khẩu <span class="text-danger">*</span></label>
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert-info">
+                                <h6><i class="bi bi-info-circle me-2"></i>Yêu cầu mật khẩu:</h6>
+                                <ul class="mb-0 small">
+                                    <li>Ít nhất 6 ký tự</li>
+                                    <li>Nên sử dụng kết hợp chữ, số và ký tự đặc biệt</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Doctor Fields -->
+                        <div id="doctorFields" class="mb-4" style="display: none;">
+                            <h5 class="text-success border-bottom pb-2">
+                                <i class="bi bi-person-badge me-2"></i>Thông tin bác sĩ
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Specialty" class="form-control" placeholder="Chuyên khoa" />
+                                        <label asp-for="Specialty">Chuyên khoa</label>
+                                        <span asp-validation-for="Specialty" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Qualification" class="form-control" placeholder="Trình độ" />
+                                        <label asp-for="Qualification">Trình độ</label>
+                                        <span asp-validation-for="Qualification" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea asp-for="Description" class="form-control" style="height: 100px" placeholder="Mô tả"></textarea>
+                                <label asp-for="Description">Mô tả / Kinh nghiệm</label>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Staff Fields -->
+                        <div id="staffFields" class="mb-4" style="display: none;">
+                            <h5 class="text-info border-bottom pb-2">
+                                <i class="bi bi-person-gear me-2"></i>Thông tin nhân viên
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Position" class="form-control" placeholder="Chức vụ" />
+                                        <label asp-for="Position">Chức vụ</label>
+                                        <span asp-validation-for="Position" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Department" class="form-control" placeholder="Phòng ban" />
+                                        <label asp-for="Department">Phòng ban</label>
+                                        <span asp-validation-for="Department" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Salary" type="number" class="form-control" placeholder="Lương" />
+                                        <label asp-for="Salary">Lương (VNĐ)</label>
+                                        <span asp-validation-for="Salary" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Quay lại
+                            </a>
+                            <div>
+                                <button type="button" class="btn btn-outline-warning me-2" onclick="resetForm()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Đặt lại
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-check-circle me-2"></i>Tạo tài khoản
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Handle role selection and show/hide fields
+        document.addEventListener('DOMContentLoaded', function() {
+            const roleRadios = document.querySelectorAll('input[name="Role"]');
+            const doctorFields = document.getElementById('doctorFields');
+            const staffFields = document.getElementById('staffFields');
+
+            roleRadios.forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'BacSi') {
+                        doctorFields.style.display = 'block';
+                        staffFields.style.display = 'none';
+                    } else if (this.value === 'NhanVien') {
+                        doctorFields.style.display = 'none';
+                        staffFields.style.display = 'block';
+                    } else {
+                        doctorFields.style.display = 'none';
+                        staffFields.style.display = 'none';
+                    }
+                });
+            });
+
+            // Initialize based on selected value
+            const selectedRole = document.querySelector('input[name="Role"]:checked');
+            if (selectedRole) {
+                selectedRole.dispatchEvent(new Event('change'));
+            }
+        });
+
+        // Reset form function
+        function resetForm() {
+            if (confirm('Bạn có chắc chắn muốn đặt lại form?')) {
+                document.querySelector('form').reset();
+                document.getElementById('doctorFields').style.display = 'none';
+                document.getElementById('staffFields').style.display = 'none';
+            }
+        }
+    </script>
+}

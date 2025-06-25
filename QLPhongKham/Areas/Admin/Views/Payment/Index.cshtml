@@ -1,0 +1,314 @@
+@model IEnumerable<QLPhongKham.Models.Payment>
+
+@{
+    ViewData["Title"] = "Quản lý thanh toán";
+    ViewData["BreadcrumbItems"] = "<li class=\"breadcrumb-item active\">Thanh toán</li>";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">
+        <i class="bi bi-credit-card me-2"></i>Quản lý thanh toán
+    </h2>
+    <div class="btn-group">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i>Tạo thanh toán mới
+        </a>
+        <a asp-action="DailyReport" class="btn btn-info">
+            <i class="bi bi-calendar-day me-1"></i>Báo cáo ngày
+        </a>
+        <a asp-action="MonthlyReport" class="btn btn-success">
+            <i class="bi bi-calendar-month me-1"></i>Báo cáo tháng
+        </a>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-credit-card display-4"></i>
+                <h4 class="mt-2">@Model.Count()</h4>
+                <p class="mb-0">Tổng giao dịch</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-check-circle display-4"></i>
+                <h4 class="mt-2">@Model.Count(p => p.Status == "Completed")</h4>
+                <p class="mb-0">Thành công</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark">
+            <div class="card-body text-center">
+                <i class="bi bi-clock display-4"></i>
+                <h4 class="mt-2">@Model.Count(p => p.Status == "Pending")</h4>
+                <p class="mb-0">Đang xử lý</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-cash-stack display-4"></i>
+                <h4 class="mt-2">@Model.Where(p => p.Status == "Completed").Sum(p => p.AmountPaid).ToString("N0")</h4>
+                <p class="mb-0">Tổng thu (VNĐ)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Section -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Tìm kiếm</label>
+                <input type="text" name="search" class="form-control" placeholder="Số giao dịch, tên bệnh nhân..." value="@ViewBag.SearchQuery">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Phương thức</label>
+                <select name="paymentMethod" class="form-select">
+                    <option value="">Tất cả</option>
+                    <option value="Cash" selected="@(ViewBag.PaymentMethod == "Cash")">Tiền mặt</option>
+                    <option value="BankTransfer" selected="@(ViewBag.PaymentMethod == "BankTransfer")">Chuyển khoản</option>
+                    <option value="CreditCard" selected="@(ViewBag.PaymentMethod == "CreditCard")">Thẻ tín dụng</option>
+                    <option value="DebitCard" selected="@(ViewBag.PaymentMethod == "DebitCard")">Thẻ ghi nợ</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Trạng thái</label>
+                <select name="status" class="form-select">
+                    <option value="">Tất cả</option>
+                    <option value="Completed" selected="@(ViewBag.Status == "Completed")">Thành công</option>
+                    <option value="Pending" selected="@(ViewBag.Status == "Pending")">Đang xử lý</option>
+                    <option value="Failed" selected="@(ViewBag.Status == "Failed")">Thất bại</option>
+                    <option value="Refunded" selected="@(ViewBag.Status == "Refunded")">Đã hoàn tiền</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Từ ngày</label>
+                <input type="date" name="fromDate" class="form-control" value="@ViewBag.FromDate">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-search me-1"></i>Tìm kiếm
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-clockwise me-1"></i>Làm mới
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Payment List -->
+<div class="card">
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Số giao dịch</th>
+                            <th>Hóa đơn</th>
+                            <th>Bệnh nhân</th>
+                            <th>Ngày thanh toán</th>
+                            <th>Phương thức</th>
+                            <th>Số tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Nhân viên thu</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var payment in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@payment.PaymentNumber</strong>
+                                    @if (!string.IsNullOrEmpty(payment.BankTransactionId))
+                                    {
+                                        <br><small class="text-muted">@payment.BankTransactionId</small>
+                                    }
+                                </td>
+                                <td>
+                                    @if (payment.Invoice != null)
+                                    {
+                                        <a asp-area="Admin" asp-controller="Invoice" asp-action="Details" asp-route-id="@payment.Invoice.InvoiceId" class="text-decoration-none">
+                                            @payment.Invoice.InvoiceNumber
+                                        </a>
+                                    }
+                                </td>
+                                <td>
+                                    @if (payment.Invoice?.Patient != null)
+                                    {
+                                        <span>@payment.Invoice.Patient.FullName</span>
+                                        <br><small class="text-muted">@payment.Invoice.Patient.Phone</small>
+                                    }
+                                </td>
+                                <td>
+                                    @payment.PaymentDate.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+                                <td>
+                                    <span class="badge bg-@GetPaymentMethodBadgeClass(payment.PaymentMethod)">
+                                        @GetPaymentMethodText(payment.PaymentMethod)
+                                    </span>
+                                    @if (payment.PaymentMethod == "BankTransfer" && !string.IsNullOrEmpty(payment.BankName))
+                                    {
+                                        <br><small class="text-muted">@payment.BankName</small>
+                                    }
+                                    @if ((payment.PaymentMethod == "CreditCard" || payment.PaymentMethod == "DebitCard") && !string.IsNullOrEmpty(payment.CardLastFourDigits))
+                                    {
+                                        <br><small class="text-muted">****@payment.CardLastFourDigits</small>
+                                    }
+                                </td>
+                                <td>
+                                    <strong>@payment.AmountPaid.ToString("N0") VNĐ</strong>
+                                    @if (payment.TransactionFee > 0)
+                                    {
+                                        <br><small class="text-muted">Phí: @payment.TransactionFee.ToString("N0") VNĐ</small>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge bg-@GetStatusBadgeClass(payment.Status) fs-6">
+                                        <i class="bi bi-@GetStatusIcon(payment.Status) me-1"></i>
+                                        @GetStatusText(payment.Status)
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (payment.CollectedByStaff != null)
+                                    {
+                                        <span>@payment.CollectedByStaff.FullName</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Hệ thống</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a asp-action="Details" asp-route-id="@payment.PaymentId" class="btn btn-outline-info" title="Xem chi tiết">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        @if (payment.Status == "Completed")
+                                        {
+                                            <a asp-action="Refund" asp-route-id="@payment.PaymentId" class="btn btn-outline-warning" title="Hoàn tiền">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </a>
+                                        }
+                                        @if (payment.Status == "Pending")
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@payment.PaymentId" class="btn btn-outline-primary" title="Chỉnh sửa">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                        }
+                                        <button type="button" class="btn btn-outline-secondary" onclick="printReceipt(@payment.PaymentId)" title="In biên lai">
+                                            <i class="bi bi-printer"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-credit-card display-1 text-muted"></i>
+                <h4 class="mt-3">Không có giao dịch nào</h4>
+                <p class="text-muted">Chưa có giao dịch thanh toán nào được thực hiện</p>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Tạo thanh toán mới
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Print receipt
+        function printReceipt(paymentId) {
+            window.open(`/Admin/Payment/PrintReceipt/${paymentId}`, '_blank');
+        }
+
+        // Auto-submit form when status or method changes
+        document.querySelector('select[name="status"]').addEventListener('change', function() {
+            this.form.submit();
+        });
+        
+        document.querySelector('select[name="paymentMethod"]').addEventListener('change', function() {
+            this.form.submit();
+        });
+    </script>
+}
+
+@functions {
+    private string GetPaymentMethodBadgeClass(string method)
+    {
+        return method switch
+        {
+            "Cash" => "success",
+            "BankTransfer" => "primary",
+            "CreditCard" => "warning",
+            "DebitCard" => "info",
+            _ => "secondary"
+        };
+    }
+
+    private string GetPaymentMethodText(string method)
+    {
+        return method switch
+        {
+            "Cash" => "Tiền mặt",
+            "BankTransfer" => "Chuyển khoản",
+            "CreditCard" => "Thẻ tín dụng",
+            "DebitCard" => "Thẻ ghi nợ",
+            _ => method
+        };
+    }
+
+    private string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Completed" => "success",
+            "Pending" => "warning",
+            "Failed" => "danger",
+            "Refunded" => "secondary",
+            _ => "secondary"
+        };
+    }
+
+    private string GetStatusIcon(string status)
+    {
+        return status switch
+        {
+            "Completed" => "check-circle",
+            "Pending" => "clock",
+            "Failed" => "x-circle",
+            "Refunded" => "arrow-counterclockwise",
+            _ => "question-circle"
+        };
+    }
+
+    private string GetStatusText(string status)
+    {
+        return status switch
+        {
+            "Completed" => "Thành công",
+            "Pending" => "Đang xử lý",
+            "Failed" => "Thất bại",
+            "Refunded" => "Đã hoàn tiền",
+            _ => status
+        };
+    }
+}

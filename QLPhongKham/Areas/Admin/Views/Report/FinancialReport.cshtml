@@ -1,0 +1,577 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Báo cáo tài chính chi tiết";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-chart-line"></i> Báo cáo tài chính chi tiết</h3>
+                    <div class="card-tools">
+                        <a href="@Url.Action("Index", "Report")" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Date Range Form -->
+                    <form id="financial-report-form" class="mb-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="fromDate">Từ ngày:</label>
+                                <input type="date" id="fromDate" name="fromDate" class="form-control" 
+                                       value="@Model.FromDate" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="toDate">Đến ngày:</label>
+                                <input type="date" id="toDate" name="toDate" class="form-control" 
+                                       value="@Model.ToDate" />
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="button" id="load-report" class="btn btn-primary">
+                                    <i class="fas fa-sync-alt"></i> Tải báo cáo
+                                </button>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success" onclick="exportFinancialReport('excel')">
+                                        <i class="fas fa-file-excel"></i> Excel
+                                    </button>
+                                    <button type="button" class="btn btn-danger" onclick="exportFinancialReport('pdf')">
+                                        <i class="fas fa-file-pdf"></i> PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Financial Summary Cards -->
+                    <div id="financial-summary" class="row mb-4">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Doanh thu theo phương thức thanh toán</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="revenue-by-method-chart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Phân tích trạng thái hóa đơn</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="invoice-status-chart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Revenue Chart -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Biểu đồ doanh thu theo ngày</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="daily-revenue-chart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Customers -->
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Top 10 khách hàng theo doanh thu</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="top-customers-table">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Top dịch vụ/thuốc theo doanh thu</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="top-services-table">
+                                        <!-- Will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Tables -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Chi tiết báo cáo tài chính</h4>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="detailed-financial-data">
+                                        <p class="text-muted">Vui lòng chọn khoảng thời gian và tải báo cáo để xem chi tiết.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let revenueByMethodChart, invoiceStatusChart, dailyRevenueChart;
+
+        $(document).ready(function() {
+            initializeCharts();
+            loadFinancialReport();
+            
+            $('#load-report').click(function() {
+                loadFinancialReport();
+            });
+        });
+
+        function initializeCharts() {
+            // Revenue by Method Chart
+            const ctx1 = document.getElementById('revenue-by-method-chart').getContext('2d');
+            revenueByMethodChart = new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + formatCurrency(context.raw) + ' (' + context.parsed + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Invoice Status Chart
+            const ctx2 = document.getElementById('invoice-status-chart').getContext('2d');
+            invoiceStatusChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Số lượng',
+                        data: [],
+                        backgroundColor: '#36A2EB'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Daily Revenue Chart
+            const ctx3 = document.getElementById('daily-revenue-chart').getContext('2d');
+            dailyRevenueChart = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Doanh thu (VND)',
+                        data: [],
+                        borderColor: '#4BC0C0',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function loadFinancialReport() {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            
+            if (!fromDate || !toDate) {
+                alert('Vui lòng chọn khoảng thời gian');
+                return;
+            }
+
+            // Show loading
+            $('#load-report').html('<i class="fas fa-spinner fa-spin"></i> Đang tải...');
+
+            // Load financial summary
+            $.get('@Url.Action("FinancialReportData", "Report")', { fromDate, toDate })
+                .done(function(response) {
+                    if (response.success) {
+                        displayFinancialSummary(response.data);
+                        updateCharts(response.data);
+                    } else {
+                        alert('Lỗi tải báo cáo: ' + response.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Lỗi kết nối server');
+                })
+                .always(function() {
+                    $('#load-report').html('<i class="fas fa-sync-alt"></i> Tải báo cáo');
+                });
+
+            // Load additional data for charts and tables
+            loadAdditionalData(fromDate, toDate);
+        }
+
+        function loadAdditionalData(fromDate, toDate) {
+            // Load top customers
+            $.get('@Url.Action("GetTopPatients", "Report")', { fromDate, toDate, topCount: 10 })
+                .done(function(response) {
+                    if (response.success) {
+                        displayTopCustomers(response.data);
+                    }
+                });
+
+            // Load service revenue
+            $.get('@Url.Action("GetServiceRevenue", "Report")', { fromDate, toDate })
+                .done(function(response) {
+                    if (response.success) {
+                        displayTopServices(response.data);
+                    }
+                });
+        }
+
+        function displayFinancialSummary(data) {
+            const summaryHtml = `
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>${data.TotalInvoices || 0}</h3>
+                            <p>Tổng hóa đơn</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>${formatCurrency(data.TotalInvoiceAmount || 0)}</h3>
+                            <p>Tổng giá trị hóa đơn</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>${formatCurrency(data.TotalPaidAmount || 0)}</h3>
+                            <p>Tổng đã thu</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>${formatCurrency(data.TotalRemainingAmount || 0)}</h3>
+                            <p>Tổng còn nợ</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            $('#financial-summary').html(summaryHtml);
+
+            // Display detailed data
+            displayDetailedData(data);
+        }
+
+        function displayDetailedData(data) {
+            let detailedHtml = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Phân tích theo trạng thái hóa đơn</h5>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Trạng thái</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá trị</th>
+                                    <th>Tỷ lệ %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+            if (data.InvoicesByStatus) {
+                const totalInvoices = data.TotalInvoices || 1;
+                data.InvoicesByStatus.forEach(status => {
+                    const percentage = ((status.count / totalInvoices) * 100).toFixed(1);
+                    detailedHtml += `
+                        <tr>
+                            <td>${status.status}</td>
+                            <td>${status.count}</td>
+                            <td>${formatCurrency(status.total)}</td>
+                            <td>${percentage}%</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            detailedHtml += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Phân tích theo phương thức thanh toán</h5>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Phương thức</th>
+                                    <th>Số GD</th>
+                                    <th>Giá trị</th>
+                                    <th>Tỷ lệ %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+            if (data.PaymentsByMethod) {
+                const totalPayments = data.TotalPaidAmount || 1;
+                data.PaymentsByMethod.forEach(method => {
+                    const percentage = ((method.total / totalPayments) * 100).toFixed(1);
+                    detailedHtml += `
+                        <tr>
+                            <td>${method.method}</td>
+                            <td>${method.count}</td>
+                            <td>${formatCurrency(method.total)}</td>
+                            <td>${percentage}%</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            detailedHtml += `
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+
+            $('#detailed-financial-data').html(detailedHtml);
+        }
+
+        function updateCharts(data) {
+            // Update revenue by method chart
+            if (data.PaymentsByMethod) {
+                revenueByMethodChart.data.labels = data.PaymentsByMethod.map(item => item.method);
+                revenueByMethodChart.data.datasets[0].data = data.PaymentsByMethod.map(item => item.total);
+                revenueByMethodChart.update();
+            }
+
+            // Update invoice status chart
+            if (data.InvoicesByStatus) {
+                invoiceStatusChart.data.labels = data.InvoicesByStatus.map(item => item.status);
+                invoiceStatusChart.data.datasets[0].data = data.InvoicesByStatus.map(item => item.count);
+                invoiceStatusChart.update();
+            }
+        }
+
+        function displayTopCustomers(data) {
+            let html = `
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên khách hàng</th>
+                            <th>SĐT</th>
+                            <th>Số HĐ</th>
+                            <th>Doanh thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.forEach((customer, index) => {
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${customer.patientName}</td>
+                        <td>${customer.phoneNumber}</td>
+                        <td>${customer.totalInvoices}</td>
+                        <td>${formatCurrency(customer.totalAmount)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            $('#top-customers-table').html(html);
+        }
+
+        function displayTopServices(data) {
+            let html = `
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Loại</th>
+                            <th>Tên</th>
+                            <th>SL</th>
+                            <th>Doanh thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.slice(0, 10).forEach((service, index) => {
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><span class="badge badge-${service.type === 'Service' ? 'primary' : 'success'}">${service.type}</span></td>
+                        <td>${service.name}</td>
+                        <td>${service.quantity}</td>
+                        <td>${formatCurrency(service.revenue)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            $('#top-services-table').html(html);
+        }
+
+        function exportFinancialReport(format) {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            
+            if (!fromDate || !toDate) {
+                alert('Vui lòng chọn khoảng thời gian');
+                return;
+            }
+
+            const url = format === 'excel' 
+                ? '@Url.Action("ExportFinancialSummaryExcel", "Report")'
+                : '@Url.Action("ExportFinancialSummaryPdf", "Report")';
+
+            $('<form method="post" action="' + url + '">' +
+              '<input name="fromDate" value="' + fromDate + '">' +
+              '<input name="toDate" value="' + toDate + '">' +
+              '</form>').appendTo('body').submit().remove();
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { 
+                style: 'currency', 
+                currency: 'VND',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount || 0);
+        }
+    </script>
+}
+
+@section Styles {
+    <style>
+        .small-box {
+            border-radius: 10px;
+            position: relative;
+            display: block;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+        
+        .small-box > .inner {
+            padding: 10px;
+        }
+        
+        .small-box h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+            padding: 0;
+            color: #fff;
+        }
+        
+        .small-box p {
+            font-size: 1rem;
+            color: #fff;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .small-box .icon {
+            transition: all .3s linear;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            z-index: 0;
+            font-size: 70px;
+            color: rgba(0,0,0,0.15);
+        }
+        
+        .bg-info { background-color: #17a2b8!important; }
+        .bg-success { background-color: #28a745!important; }
+        .bg-warning { background-color: #ffc107!important; }
+        .bg-danger { background-color: #dc3545!important; }
+    </style>
+}

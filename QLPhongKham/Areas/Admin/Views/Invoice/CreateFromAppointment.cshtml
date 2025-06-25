@@ -1,0 +1,264 @@
+@model QLPhongKham.Models.Invoice
+
+@{
+    ViewData["Title"] = "Tạo hóa đơn từ cuộc hẹn";
+    var appointment = ViewBag.Appointment as QLPhongKham.Models.Appointment;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">
+        <i class="bi bi-receipt me-2"></i>Tạo hóa đơn từ cuộc hẹn
+    </h2>
+    <a asp-action="Index" asp-controller="Appointment" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Quay lại Quản lý lịch hẹn
+    </a>
+</div>
+
+@if (appointment != null)
+{
+    <!-- Thông tin cuộc hẹn -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-calendar-check me-2"></i>Thông tin cuộc hẹn
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Mã cuộc hẹn:</strong> #@appointment.AppointmentId</p>
+                    <p><strong>Ngày khám:</strong> @appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Trạng thái:</strong> <span class="badge bg-success">@appointment.Status</span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Bệnh nhân:</strong> @appointment.Patient?.FullName</p>
+                    <p><strong>Email:</strong> @appointment.Patient?.Email</p>
+                    <p><strong>Bác sĩ:</strong> @appointment.Doctor?.FullName</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p><strong>Dịch vụ chính:</strong> @appointment.Service?.Name</p>
+                    <p><strong>Giá dịch vụ:</strong> <span class="text-success fw-bold">@appointment.Service?.Price.ToString("N0") VNĐ</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Form tạo hóa đơn -->
+<form asp-action="CreateFromAppointment" method="post">
+    <input type="hidden" asp-for="AppointmentId" value="@appointment?.AppointmentId" />
+    <input type="hidden" asp-for="PatientId" value="@appointment?.PatientId" />
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Dịch vụ phát sinh -->
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-plus-circle me-2"></i>Dịch vụ phát sinh (tùy chọn)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="additionalServices">
+                        <div class="row additional-service-row">
+                            <div class="col-md-6">
+                                <label class="form-label">Dịch vụ</label>
+                                <select name="additionalServiceIds" class="form-select">
+                                    <option value="">-- Chọn dịch vụ --</option>
+                                    @foreach (var service in (ViewBag.Services as IEnumerable<dynamic>) ?? new List<dynamic>())
+                                    {
+                                        <option value="@service.ServiceId" data-price="@service.Price">@service.Name - @service.Price.ToString("N0") VNĐ</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Số lượng</label>
+                                <input type="number" name="additionalServiceQuantities" class="form-control" min="0" value="0" />
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-success btn-sm" onclick="addServiceRow()">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thuốc -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-capsule me-2"></i>Thuốc (tùy chọn)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="medicines">
+                        <div class="row medicine-row">
+                            <div class="col-md-6">
+                                <label class="form-label">Thuốc</label>
+                                <select name="medicineIds" class="form-select">
+                                    <option value="">-- Chọn thuốc --</option>
+                                    @foreach (var medicine in (ViewBag.Medicines as IEnumerable<dynamic>) ?? new List<dynamic>())
+                                    {
+                                        <option value="@medicine.MedicineId" data-price="@medicine.Price">@medicine.Name - @medicine.Price.ToString("N0") VNĐ</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Số lượng</label>
+                                <input type="number" name="medicineQuantities" class="form-control" min="0" value="0" />
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-success btn-sm" onclick="addMedicineRow()">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Thông tin hóa đơn -->
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-file-text me-2"></i>Thông tin hóa đơn
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Notes" class="form-label">Ghi chú</label>
+                        <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Ghi chú về hóa đơn..."></textarea>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-3">
+                        <h6>Tổng cộng dự kiến:</h6>
+                        <div class="d-flex justify-content-between">
+                            <span>Dịch vụ chính:</span>
+                            <span class="fw-bold" id="mainServiceAmount">@appointment?.Service?.Price.ToString("N0") VNĐ</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Dịch vụ phát sinh:</span>
+                            <span class="fw-bold" id="additionalServiceAmount">0 VNĐ</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Thuốc:</span>
+                            <span class="fw-bold" id="medicineAmount">0 VNĐ</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between text-success">
+                            <span class="h6">Tổng cộng:</span>
+                            <span class="h6 fw-bold" id="totalAmount">@appointment?.Service?.Price.ToString("N0") VNĐ</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-circle me-2"></i>Tạo hóa đơn
+                        </button>
+                        <a asp-action="Index" asp-controller="Appointment" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-2"></i>Hủy bỏ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        let serviceRowCount = 1;
+        let medicineRowCount = 1;
+        const mainServicePrice = @(appointment?.Service?.Price ?? 0);
+
+        function addServiceRow() {
+            const serviceContainer = document.getElementById('additionalServices');
+            const newRow = document.querySelector('.additional-service-row').cloneNode(true);
+            
+            // Clear values
+            newRow.querySelector('select').value = '';
+            newRow.querySelector('input').value = '0';
+            
+            // Change add button to remove button
+            const button = newRow.querySelector('button');
+            button.className = 'btn btn-danger btn-sm';
+            button.innerHTML = '<i class="bi bi-trash"></i>';
+            button.onclick = function() { removeRow(this); };
+            
+            serviceContainer.appendChild(newRow);
+            serviceRowCount++;
+        }
+
+        function addMedicineRow() {
+            const medicineContainer = document.getElementById('medicines');
+            const newRow = document.querySelector('.medicine-row').cloneNode(true);
+            
+            // Clear values
+            newRow.querySelector('select').value = '';
+            newRow.querySelector('input').value = '0';
+            
+            // Change add button to remove button
+            const button = newRow.querySelector('button');
+            button.className = 'btn btn-danger btn-sm';
+            button.innerHTML = '<i class="bi bi-trash"></i>';
+            button.onclick = function() { removeRow(this); };
+            
+            medicineContainer.appendChild(newRow);
+            medicineRowCount++;
+        }
+
+        function removeRow(button) {
+            button.closest('.row').remove();
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let additionalServiceTotal = 0;
+            let medicineTotal = 0;
+
+            // Calculate additional services
+            document.querySelectorAll('#additionalServices .row').forEach(row => {
+                const select = row.querySelector('select');
+                const input = row.querySelector('input');
+                if (select.value && input.value > 0) {
+                    const price = parseFloat(select.selectedOptions[0].dataset.price || 0);
+                    const quantity = parseInt(input.value || 0);
+                    additionalServiceTotal += price * quantity;
+                }
+            });
+
+            // Calculate medicines
+            document.querySelectorAll('#medicines .row').forEach(row => {
+                const select = row.querySelector('select');
+                const input = row.querySelector('input');
+                if (select.value && input.value > 0) {
+                    const price = parseFloat(select.selectedOptions[0].dataset.price || 0);
+                    const quantity = parseInt(input.value || 0);
+                    medicineTotal += price * quantity;
+                }
+            });
+
+            // Update display
+            document.getElementById('additionalServiceAmount').textContent = additionalServiceTotal.toLocaleString('vi-VN') + ' VNĐ';
+            document.getElementById('medicineAmount').textContent = medicineTotal.toLocaleString('vi-VN') + ' VNĐ';
+            
+            const total = mainServicePrice + additionalServiceTotal + medicineTotal;
+            document.getElementById('totalAmount').textContent = total.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        // Add event listeners for real-time calculation
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('select[name="additionalServiceIds"], input[name="additionalServiceQuantities"], select[name="medicineIds"], input[name="medicineQuantities"]')) {
+                calculateTotal();
+            }
+        });
+    </script>
+}

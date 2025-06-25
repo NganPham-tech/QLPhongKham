@@ -1,0 +1,113 @@
+@model List<QLPhongKham.Models.Notification>
+@{
+    ViewData["Title"] = "Thông báo";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-bell me-2"></i>Thông báo của bạn</h2>
+                <small class="text-muted">@Model.Count thông báo</small>
+            </div>
+
+            @if (Model.Any())
+            {
+                <div class="list-group">
+                    @foreach (var notification in Model)
+                    {
+                        <div class="list-group-item @(notification.IsRead ? "" : "list-group-item-light border-start border-primary border-4")" 
+                             data-notification-id="@notification.Id">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas @GetNotificationIcon(notification.Type) me-2 @GetNotificationColor(notification.Type)"></i>
+                                        <h6 class="mb-0">@notification.Title</h6>
+                                        @if (!notification.IsRead)
+                                        {
+                                            <span class="badge bg-primary ms-2">Mới</span>
+                                        }
+                                    </div>
+                                    <p class="mb-2">@notification.Message</p>
+                                    @if (!string.IsNullOrEmpty(notification.RelatedUrl))
+                                    {
+                                        <a href="@notification.RelatedUrl" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-external-link-alt me-1"></i>Xem chi tiết
+                                        </a>
+                                    }
+                                </div>
+                                <div class="text-end">
+                                    <small class="text-muted">@notification.CreatedAt.ToString("dd/MM/yyyy HH:mm")</small>
+                                    @if (!notification.IsRead)
+                                    {
+                                        <br>
+                                        <button class="btn btn-sm btn-link text-decoration-none mark-read-btn" 
+                                                data-id="@notification.Id">
+                                            <i class="fas fa-check me-1"></i>Đánh dấu đã đọc
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-bell-slash fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Không có thông báo nào</h5>
+                    <p class="text-muted">Bạn sẽ nhận được thông báo khi có cập nhật về lịch hẹn của mình.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@{
+    string GetNotificationIcon(string type)
+    {
+        return type switch
+        {
+            "Success" => "fa-check-circle",
+            "Warning" => "fa-exclamation-triangle",
+            "Error" => "fa-times-circle",
+            _ => "fa-info-circle"
+        };
+    }
+
+    string GetNotificationColor(string type)
+    {
+        return type switch
+        {
+            "Success" => "text-success",
+            "Warning" => "text-warning",
+            "Error" => "text-danger",
+            _ => "text-info"
+        };
+    }
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.mark-read-btn').click(function() {
+                var notificationId = $(this).data('id');
+                var $notification = $('[data-notification-id="' + notificationId + '"]');
+                
+                $.post('@Url.Action("MarkAsRead", "Notification")', { id: notificationId })
+                .done(function(data) {
+                    if (data.success) {
+                        $notification.removeClass('list-group-item-light border-start border-primary border-4');
+                        $notification.find('.badge').remove();
+                        $notification.find('.mark-read-btn').remove();
+                    }
+                })
+                .fail(function() {
+                    alert('Có lỗi xảy ra khi đánh dấu đã đọc');
+                });
+            });
+        });
+    </script>
+}

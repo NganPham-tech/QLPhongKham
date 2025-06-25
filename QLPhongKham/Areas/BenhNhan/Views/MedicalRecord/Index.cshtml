@@ -1,0 +1,322 @@
+@model IEnumerable<QLPhongKham.Models.MedicalRecord>
+
+@{
+    ViewData["Title"] = "Hồ sơ bệnh án";
+    Layout = "~/Areas/BenhNhan/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-file-medical me-2"></i>Hồ sơ bệnh án
+        </h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="BenhNhan" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Hồ sơ bệnh án</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Info"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info-circle me-2"></i>@TempData["Info"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Medical Records List Card -->
+    <div class="card shadow">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-list me-2"></i>Lịch sử khám bệnh của bạn
+            </h6>
+            <div>
+                <a asp-action="History" class="btn btn-info btn-sm">
+                    <i class="fas fa-history me-1"></i>Xem lịch sử đầy đủ
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="medicalRecordTable">
+                        <thead class="table-primary">                            <tr>
+                                <th>Mã hồ sơ</th>
+                                <th>Ngày khám</th>
+                                <th>Bác sĩ khám</th>
+                                <th>Chẩn đoán</th>
+                                <th>Điều trị</th>
+                                <th>Đơn thuốc</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var record in Model)
+                            {                                <tr>
+                                    <td>
+                                        <strong class="text-primary">#@record.MedicalRecordId.ToString("D6")</strong>
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        @record.CreatedDate.ToString("dd/MM/yyyy")
+                                        <br>
+                                        <small class="text-muted">@record.CreatedDate.ToString("HH:mm")</small>
+                                    </td>
+                                    <td>
+                                        @if (record.Appointment?.Doctor != null)
+                                        {
+                                            <div>
+                                                <strong>@record.Appointment.Doctor.FullName</strong>
+                                                <br>
+                                                <small class="text-muted">@record.Appointment.Doctor.Specialty</small>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Không có thông tin</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(record.Diagnosis))
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                @(record.Diagnosis.Length > 30 ? record.Diagnosis.Substring(0, 30) + "..." : record.Diagnosis)
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Chưa có chẩn đoán</span>
+                                        }
+                                    </td>                                    <td>
+                                        @if (!string.IsNullOrEmpty(record.Treatment))
+                                        {
+                                            <span class="text-info">
+                                                @(record.Treatment.Length > 30 ? record.Treatment.Substring(0, 30) + "..." : record.Treatment)
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Không ghi nhận</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(record.Prescription))
+                                        {
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-prescription-bottle me-1"></i>
+                                                Có đơn thuốc
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Không có đơn thuốc</span>
+                                        }
+                                    </td>
+                                    <td>                                        <div class="btn-group" role="group">
+                                            <a asp-action="Details" asp-route-id="@record.MedicalRecordId" 
+                                               class="btn btn-outline-primary btn-sm" 
+                                               title="Xem chi tiết">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Print" asp-route-id="@record.MedicalRecordId" 
+                                               class="btn btn-outline-success btn-sm" 
+                                               target="_blank" 
+                                               title="In hồ sơ">
+                                                <i class="fas fa-print"></i>
+                                            </a>
+                                            <a asp-action="DownloadPDF" asp-route-id="@record.MedicalRecordId" 
+                                               class="btn btn-outline-danger btn-sm" 
+                                               title="Tải PDF">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Summary Statistics -->
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="card border-left-primary">
+                            <div class="card-body">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Tổng lượt khám
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    @Model.Count()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-left-success">
+                            <div class="card-body">                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Đơn thuốc
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    @Model.Count(m => !string.IsNullOrEmpty(m.Prescription))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-left-info">
+                            <div class="card-body">                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Lần khám gần nhất
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    @(Model.OrderByDescending(m => m.CreatedDate).FirstOrDefault()?.CreatedDate.ToString("dd/MM/yyyy") ?? "Chưa có")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-left-warning">
+                            <div class="card-body">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Bác sĩ khám nhiều nhất
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    @{
+                                        var mostFrequentDoctor = Model
+                                            .Where(m => m.Appointment?.Doctor != null)
+                                            .GroupBy(m => m.Appointment.Doctor.FullName)
+                                            .OrderByDescending(g => g.Count())
+                                            .FirstOrDefault();
+                                    }
+                                    @(mostFrequentDoctor?.Key ?? "Không có")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Symptoms and Diagnoses -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">
+                                    <i class="fas fa-stethoscope me-2"></i>Chẩn đoán gần đây
+                                </h6>
+                            </div>
+                            <div class="card-body">                                @{
+                                    var recentDiagnoses = Model
+                                        .Where(m => !string.IsNullOrEmpty(m.Diagnosis))
+                                        .OrderByDescending(m => m.CreatedDate)
+                                        .Take(5)
+                                        .Select(m => m.Diagnosis)
+                                        .Distinct();
+                                }
+                                @if (recentDiagnoses.Any())
+                                {
+                                    @foreach (var diagnosis in recentDiagnoses)
+                                    {
+                                        <span class="badge bg-warning text-dark me-2 mb-2">@diagnosis</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="text-muted">Chưa có chẩn đoán nào được ghi nhận.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <i class="fas fa-thermometer-half me-2"></i>Điều trị thường gặp
+                                    </h6>
+                            </div>
+                            <div class="card-body">                                @{
+                                    var commonTreatments = Model
+                                        .Where(m => !string.IsNullOrEmpty(m.Treatment))
+                                        .SelectMany(m => m.Treatment.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                                        .Select(s => s.Trim())
+                                        .Where(s => !string.IsNullOrEmpty(s))
+                                        .GroupBy(s => s, StringComparer.OrdinalIgnoreCase)
+                                        .OrderByDescending(g => g.Count())
+                                        .Take(10)
+                                        .Select(g => g.Key);
+                                }
+                                @if (commonTreatments.Any())
+                                {
+                                    @foreach (var treatment in commonTreatments)
+                                    {
+                                        <span class="badge bg-info me-2 mb-2">@treatment</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="text-muted">Chưa có thông tin điều trị nào được ghi nhận.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-file-medical fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Chưa có hồ sơ bệnh án</h4>
+                    <p class="text-muted">Bạn chưa có hồ sơ bệnh án nào trong hệ thống.</p>
+                    <a asp-area="BenhNhan" asp-controller="Appointment" asp-action="Index" 
+                       class="btn btn-primary">
+                        <i class="fas fa-calendar-plus me-2"></i>Đặt lịch hẹn khám
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable if there are records
+            @if (Model.Any())
+            {
+                <text>
+                $('#medicalRecordTable').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json"
+                    },
+                    "order": [[1, "desc"]], // Sort by date descending
+                    "pageLength": 10,
+                    "responsive": true,
+                    "columnDefs": [
+                        { "orderable": false, "targets": [6] } // Disable sorting on action column
+                    ]
+                });
+                </text>
+            }
+        });
+    </script>
+}

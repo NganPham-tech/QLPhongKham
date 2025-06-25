@@ -1,0 +1,202 @@
+@model QLPhongKham.Models.Appointment
+
+@{
+    ViewData["Title"] = "Chi tiết Lịch hẹn";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-calendar-check"></i> Chi tiết Lịch hẹn
+                    </h3>
+                    <div class="card-tools">
+                        <span class="badge badge-lg" style="background-color: @GetStatusColor(Model.Status)">
+                            @Model.Status
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">ID:</dt>
+                                <dd class="col-sm-8">#@Model.AppointmentId</dd>
+
+                                <dt class="col-sm-4">Bệnh nhân:</dt>
+                                <dd class="col-sm-8">
+                                    <strong>@Model.Patient.FullName</strong><br>
+                                    <small class="text-muted">
+                                        <i class="fas fa-envelope"></i> @Model.Patient.Email<br>
+                                        <i class="fas fa-phone"></i> @Model.Patient.Phone
+                                    </small>
+                                </dd>
+
+                                <dt class="col-sm-4">Bác sĩ:</dt>
+                                <dd class="col-sm-8">
+                                    <strong>@Model.Doctor.FullName</strong><br>
+                                    <small class="text-muted">
+                                        <i class="fas fa-stethoscope"></i> @Model.Doctor.Specialty<br>
+                                        <i class="fas fa-graduation-cap"></i> @Model.Doctor.Qualification
+                                    </small>
+                                </dd>
+
+                                <dt class="col-sm-4">Dịch vụ:</dt>
+                                <dd class="col-sm-8">
+                                    <strong>@Model.Service.Name</strong><br>
+                                    <small class="text-muted">
+                                        <i class="fas fa-money-bill-wave"></i> @string.Format("{0:N0} VNĐ", Model.Service.Price)<br>
+                                        @if (Model.Service.Duration.HasValue)
+                                        {
+                                            <i class="fas fa-clock"></i> <text>@Model.Service.Duration phút</text>
+                                        }
+                                    </small>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">Ngày giờ hẹn:</dt>
+                                <dd class="col-sm-8">
+                                    <strong>@Model.AppointmentDate.ToString("dd/MM/yyyy")</strong><br>
+                                    <i class="fas fa-clock"></i> @Model.AppointmentDate.ToString("HH:mm")
+                                </dd>
+
+                                <dt class="col-sm-4">Trạng thái:</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge badge-lg" style="background-color: @GetStatusColor(Model.Status)">
+                                        @Model.Status
+                                    </span>
+                                </dd>
+
+                                <dt class="col-sm-4">Ngày tạo:</dt>
+                                <dd class="col-sm-8">
+                                    @Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                                </dd>
+
+                                <dt class="col-sm-4">Ghi chú:</dt>
+                                <dd class="col-sm-8">
+                                    @if (!string.IsNullOrEmpty(Model.Notes))
+                                    {
+                                        @Model.Notes
+                                    }
+                                    else
+                                    {
+                                        <em class="text-muted">Không có ghi chú</em>
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Service.Description))
+                    {
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <h6>Mô tả dịch vụ:</h6>
+                                <div class="alert alert-light">
+                                    @Model.Service.Description
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Action Buttons -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group mr-2" role="group">
+                                    <a asp-action="Edit" asp-route-id="@Model.AppointmentId" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i> Chỉnh sửa
+                                    </a>
+                                    <a asp-action="Index" class="btn btn-secondary">
+                                        <i class="fas fa-arrow-left"></i> Quay lại
+                                    </a>
+                                </div>
+
+                                @if (Model.Status == "Completed" && Model.Status != "Cancelled")
+                                {
+                                    <div class="btn-group mr-2" role="group">
+                                        <a asp-action="CreateFromAppointment" asp-controller="Invoice" asp-route-appointmentId="@Model.AppointmentId" class="btn btn-success">
+                                            <i class="fas fa-receipt"></i> Tạo hóa đơn
+                                        </a>
+                                    </div>
+                                }
+
+                                @if (Model.Status != "Completed" && Model.Status != "Cancelled")
+                                {
+                                    <div class="btn-group mr-2" role="group">
+                                        <button type="button" class="btn btn-success" onclick="updateStatus('Completed')">
+                                            <i class="fas fa-check"></i> Hoàn thành
+                                        </button>
+                                        <button type="button" class="btn btn-danger" onclick="updateStatus('Cancelled')">
+                                            <i class="fas fa-times"></i> Hủy bỏ
+                                        </button>
+                                    </div>
+                                }
+
+                                @if (Model.Status == "Pending")
+                                {
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-info" onclick="updateStatus('In Progress')">
+                                            <i class="fas fa-play"></i> Bắt đầu
+                                        </button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    private string GetStatusColor(string status)
+    {
+        return status switch
+        {
+            "Pending" => "#ffc107",
+            "In Progress" => "#17a2b8", 
+            "Completed" => "#28a745",
+            "Cancelled" => "#dc3545",
+            "No Show" => "#6c757d",
+            _ => "#007bff"
+        };
+    }
+}
+
+@section Scripts {
+    <script>
+        function updateStatus(status) {
+            if (confirm('Bạn có chắc chắn muốn cập nhật trạng thái thành "' + status + '"?')) {
+                fetch('@Url.Action("UpdateStatus", "Appointment")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    body: JSON.stringify({
+                        id: @Model.AppointmentId,
+                        status: status
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); // Reload to show updated status
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi cập nhật trạng thái');
+                });
+            }
+        }
+    </script>
+}

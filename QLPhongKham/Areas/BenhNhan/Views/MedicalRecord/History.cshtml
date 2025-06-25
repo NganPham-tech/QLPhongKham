@@ -1,0 +1,361 @@
+@model IEnumerable<QLPhongKham.Models.MedicalRecord>
+
+@{
+    ViewData["Title"] = "Lịch sử khám bệnh";
+    Layout = "~/Areas/BenhNhan/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-history me-2"></i>Lịch sử khám bệnh đầy đủ
+        </h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="BenhNhan" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a asp-area="BenhNhan" asp-controller="MedicalRecord" asp-action="Index">Hồ sơ bệnh án</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Lịch sử</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="fas fa-filter me-2"></i>Bộ lọc
+            </h6>
+        </div>
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label for="fromDate" class="form-label">Từ ngày:</label>
+                    <input type="date" class="form-control" id="fromDate" name="fromDate" 
+                           value="@ViewBag.FromDate">
+                </div>
+                <div class="col-md-3">
+                    <label for="toDate" class="form-label">Đến ngày:</label>
+                    <input type="date" class="form-control" id="toDate" name="toDate" 
+                           value="@ViewBag.ToDate">
+                </div>
+                <div class="col-md-3">
+                    <label for="doctorFilter" class="form-label">Bác sĩ:</label>
+                    <select class="form-select" id="doctorFilter" name="doctorFilter">
+                        <option value="">Tất cả bác sĩ</option>
+                        @{
+                            var doctors = Model
+                                .Where(m => m.Appointment?.Doctor != null || m.Doctor != null)
+                                .Select(m => m.Doctor?.FullName ?? m.Appointment?.Doctor?.FullName)
+                                .Where(name => !string.IsNullOrEmpty(name))
+                                .Distinct()
+                                .OrderBy(name => name);
+                        }
+                        @foreach (var doctor in doctors)
+                        {
+                            <option value="@doctor" selected="@(ViewBag.DoctorFilter == doctor)">@doctor</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-search me-1"></i>Lọc
+                    </button>
+                    <a asp-action="History" class="btn btn-secondary">
+                        <i class="fas fa-times me-1"></i>Xóa bộ lọc
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- History Timeline -->
+    @if (Model.Any())
+    {
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-timeline me-2"></i>Dòng thời gian khám bệnh
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    @foreach (var record in Model.OrderByDescending(m => m.CreatedDate))
+                    {
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-primary">
+                                <i class="fas fa-stethoscope text-white"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <h6 class="mb-1">
+                                        <strong>Khám ngày @record.CreatedDate.ToString("dd/MM/yyyy")</strong>
+                                        <span class="badge bg-primary ms-2">#@record.MedicalRecordId.ToString("D6")</span>
+                                    </h6>
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>@record.CreatedDate.ToString("HH:mm")                                        @if (record.Doctor != null || record.Appointment?.Doctor != null)
+                                        {
+                                            var doctor = record.Doctor ?? record.Appointment!.Doctor;
+                                            <span class="ms-3">
+                                                <i class="fas fa-user-md me-1"></i>Bác sĩ @doctor!.FullName
+                                            </span>
+                                        }
+                                    </small>
+                                </div>
+                                
+                                <div class="timeline-body mt-2">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-2">
+                                                <strong class="text-primary">Chẩn đoán:</strong>
+                                                <p class="mb-1">
+                                                    @if (!string.IsNullOrEmpty(record.Diagnosis))
+                                                    {
+                                                        @(record.Diagnosis.Length > 100 ? record.Diagnosis.Substring(0, 100) + "..." : record.Diagnosis)
+                                                    }
+                                                    else
+                                                    {
+                                                        <em class="text-muted">Chưa có thông tin</em>
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-2">
+                                                <strong class="text-success">Điều trị:</strong>
+                                                <p class="mb-1">
+                                                    @if (!string.IsNullOrEmpty(record.Treatment))
+                                                    {
+                                                        @(record.Treatment.Length > 100 ? record.Treatment.Substring(0, 100) + "..." : record.Treatment)
+                                                    }
+                                                    else
+                                                    {
+                                                        <em class="text-muted">Chưa có thông tin</em>
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if (!string.IsNullOrEmpty(record.Prescription))
+                                    {
+                                        <div class="mb-2">
+                                            <strong class="text-info">Đơn thuốc:</strong>
+                                            <div class="bg-light p-2 rounded">
+                                                @(record.Prescription.Length > 150 ? record.Prescription.Substring(0, 150) + "..." : record.Prescription)
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(record.Advice))
+                                    {
+                                        <div class="mb-2">
+                                            <strong class="text-warning">Lời khuyên:</strong>
+                                            <div class="bg-warning bg-opacity-10 p-2 rounded">
+                                                @(record.Advice.Length > 150 ? record.Advice.Substring(0, 150) + "..." : record.Advice)
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="timeline-footer mt-3">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@record.MedicalRecordId" 
+                                           class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-eye me-1"></i>Chi tiết
+                                        </a>
+                                        <a asp-action="Print" asp-route-id="@record.MedicalRecordId" 
+                                           class="btn btn-outline-success btn-sm" target="_blank">
+                                            <i class="fas fa-print me-1"></i>In
+                                        </a>
+                                        <a asp-action="DownloadPDF" asp-route-id="@record.MedicalRecordId" 
+                                           class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-file-pdf me-1"></i>PDF
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Statistics -->
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card border-left-primary h-100">
+                    <div class="card-body">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Tổng lượt khám
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            @Model.Count()
+                        </div>
+                        <div class="mt-2 mb-0 text-muted text-xs">
+                            <span class="text-success mr-2">
+                                <i class="fas fa-arrow-up"></i>
+                            </span>
+                            Lịch sử đầy đủ
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-left-success h-100">
+                    <div class="card-body">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Thời gian khám
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            @{
+                                var timeSpan = Model.Any() ? 
+                                    Model.OrderByDescending(m => m.CreatedDate).First().CreatedDate - 
+                                    Model.OrderBy(m => m.CreatedDate).First().CreatedDate : 
+                                    TimeSpan.Zero;
+                            }
+                            @(timeSpan.Days > 365 ? $"{timeSpan.Days / 365} năm" : 
+                              timeSpan.Days > 30 ? $"{timeSpan.Days / 30} tháng" : 
+                              $"{timeSpan.Days} ngày")
+                        </div>
+                        <div class="mt-2 mb-0 text-muted text-xs">
+                            <span class="text-success mr-2">
+                                <i class="fas fa-calendar"></i>
+                            </span>
+                            Từ @Model.OrderBy(m => m.CreatedDate).First().CreatedDate.ToString("MM/yyyy")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-left-info h-100">
+                    <div class="card-body">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Bác sĩ đã khám
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            @{
+                                var doctorCount = Model
+                                    .Where(m => m.Appointment?.Doctor != null || m.Doctor != null)
+                                    .Select(m => m.Doctor?.FullName ?? m.Appointment?.Doctor?.FullName)
+                                    .Where(name => !string.IsNullOrEmpty(name))
+                                    .Distinct()
+                                    .Count();
+                            }
+                            @doctorCount
+                        </div>
+                        <div class="mt-2 mb-0 text-muted text-xs">
+                            <span class="text-info mr-2">
+                                <i class="fas fa-user-md"></i>
+                            </span>
+                            Bác sĩ khác nhau
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-left-warning h-100">
+                    <div class="card-body">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Đơn thuốc
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            @Model.Count(m => !string.IsNullOrEmpty(m.Prescription))
+                        </div>
+                        <div class="mt-2 mb-0 text-muted text-xs">
+                            <span class="text-warning mr-2">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </span>
+                            Lần có kê đơn
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Không tìm thấy hồ sơ nào</h4>
+                    <p class="text-muted">Không có hồ sơ bệnh án nào phù hợp với tiêu chí tìm kiếm.</p>
+                    <a asp-action="Index" class="btn btn-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .timeline {
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 15px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e9ecef;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: -22px;
+        top: 5px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 0 4px #fff, 0 0 0 6px #e9ecef;
+    }
+
+    .timeline-content {
+        background: #fff;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 20px;
+        margin-left: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .timeline-header h6 {
+        color: #2c5aa0;
+    }
+
+    .border-left-primary {
+        border-left: 4px solid #007bff !important;
+    }
+
+    .border-left-success {
+        border-left: 4px solid #28a745 !important;
+    }
+
+    .border-left-info {
+        border-left: 4px solid #17a2b8 !important;
+    }
+
+    .border-left-warning {
+        border-left: 4px solid #ffc107 !important;
+    }
+</style>

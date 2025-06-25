@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hướng dẫn đăng nhập Admin - QLPhongKham</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { color: #2c5aa0; border-bottom: 3px solid #2c5aa0; padding-bottom: 10px; margin-bottom: 20px; }
+        .section { margin: 20px 0; padding: 15px; border-left: 4px solid #28a745; background-color: #f8f9fa; }
+        .credentials { background-color: #e7f3ff; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .step { margin: 10px 0; padding: 10px; background: #fff3cd; border-radius: 5px; }
+        .link { color: #007bff; text-decoration: none; font-weight: bold; }
+        .link:hover { text-decoration: underline; }
+        .success { color: #28a745; font-weight: bold; }
+        .info { color: #17a2b8; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">🏥 Hướng dẫn đăng nhập Admin - Hệ thống Quản lý Phòng khám</h1>
+        
+        <div class="section">
+            <h2>📋 Thông tin đăng nhập Admin</h2>
+            <div class="credentials">
+                <p><strong>Email:</strong> admin@phongkham.com</p>
+                <p><strong>Mật khẩu:</strong> Admin@123456</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔐 Cách đăng nhập và được điều hướng tự động</h2>
+            
+            <div class="step">
+                <strong>Bước 1:</strong> Truy cập trang đăng nhập: 
+                <a href="http://localhost:5205/Identity/Account/Login" class="link">http://localhost:5205/Identity/Account/Login</a>
+            </div>
+            
+            <div class="step">
+                <strong>Bước 2:</strong> Nhập thông tin đăng nhập admin (như trên)
+            </div>
+            
+            <div class="step">
+                <strong>Bước 3:</strong> Click "Đăng nhập"
+                <br><span class="success">→ Hệ thống sẽ tự động điều hướng bạn đến giao diện Admin!</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Liên kết nhanh</h2>
+            <p><a href="http://localhost:5205/TestLogout" class="link">Đăng xuất</a> (nếu đã đăng nhập)</p>
+            <p><a href="http://localhost:5205/TestAdminLogin" class="link">Đăng nhập Admin tự động</a> (test nhanh)</p>
+            <p><a href="http://localhost:5205/TestCurrentUser" class="link">Kiểm tra user hiện tại</a></p>
+            <p><a href="http://localhost:5205/Admin" class="link">Truy cập trực tiếp Admin area</a></p>
+            <p><a href="http://localhost:5205" class="link">Trang chủ</a> (tự động điều hướng theo role)</p>
+        </div>
+
+        <div class="section">
+            <h2>✅ Xác nhận hoạt động</h2>
+            <p class="info">Sau khi đăng nhập với tài khoản admin, bạn sẽ thấy:</p>
+            <ul>
+                <li>URL chuyển thành: <code>http://localhost:5205/Admin/Home</code></li>
+                <li>Giao diện Dashboard admin với thống kê</li>
+                <li>Menu điều hướng admin (Lịch hẹn, Bác sĩ, Người dùng, v.v.)</li>
+                <li>Nếu truy cập <code>/</code> cũng sẽ tự động chuyển đến admin area</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Các tính năng đã cài đặt</h2>
+            <ul>
+                <li><strong>Điều hướng tự động theo role:</strong> Admin → Admin area</li>
+                <li><strong>Kiểm tra quyền truy cập:</strong> Chỉ Admin mới vào được /Admin</li>
+                <li><strong>Trang chủ thông minh:</strong> Tự động điều hướng dựa trên role người dùng</li>
+                <li><strong>Bảo mật:</strong> Cần đăng nhập và có role Admin để truy cập</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Kết luận</h2>
+            <p class="success">
+                ✓ Hệ thống đã được cấu hình để tự động điều hướng admin đến giao diện quản trị<br>
+                ✓ Khi đăng nhập với tài khoản admin, bạn sẽ được chuyển thẳng đến trang admin<br>
+                ✓ Truy cập trang chủ khi đã đăng nhập admin cũng sẽ được điều hướng đến admin area
+            </p>
+        </div>
+    </div>
+</body>
+</html>

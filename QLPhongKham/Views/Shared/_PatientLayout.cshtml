@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Phòng Khám Đa Khoa</title>    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/patient-portal.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/theme-override.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: var(--background-color);">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" asp-controller="PatientPortal" asp-action="Index">
+                    <i class="fas fa-hospital-alt me-2" style="color: var(--primary-color);"></i>
+                    <span class="fw-bold" style="color: var(--primary-color);">Phòng Khám Đa Khoa</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: var(--text-color);" asp-controller="PatientPortal" asp-action="Index">
+                                <i class="fas fa-home me-1"></i>Trang chủ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: var(--text-color);" asp-controller="PatientPortal" asp-action="Doctors">
+                                <i class="fas fa-user-md me-1"></i>Bác sĩ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: var(--text-color);" asp-controller="PatientPortal" asp-action="Services">
+                                <i class="fas fa-stethoscope me-1"></i>Dịch vụ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" style="color: var(--secondary-color);" asp-controller="PatientPortal" asp-action="BookAppointment">
+                                <i class="fas fa-calendar-plus me-1"></i>Đặt lịch khám
+                            </a>
+                        </li>
+                    </ul><ul class="navbar-nav">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item dropdown me-3">
+                                <a class="nav-link position-relative" href="@Url.Action("Index", "Notification")" id="notificationBell">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
+                                          id="notificationCount" style="display: none;">
+                                        0
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i>@User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Hồ sơ</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Notification")"><i class="fas fa-bell me-2"></i>Thông báo</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>Lịch sử khám</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "PatientPortal")" method="post" class="d-inline">
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
+                                    <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
+                                    <i class="fas fa-user-plus me-1"></i>Đăng ký
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hotline floating -->
+    <div class="hotline-float">
+        <a href="tel:0123456789" class="btn btn-danger rounded-circle">
+            <i class="fas fa-phone"></i>
+        </a>
+        <div class="hotline-text">
+            <small>Hotline</small><br>
+            <strong>0123.456.789</strong>
+        </div>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            <!-- Toast Notification System -->
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i id="toastIcon" class="fas fa-check-circle me-2 text-success"></i>
+                        <strong class="me-auto" id="toastTitle">Thông báo</strong>
+                        <small>Bây giờ</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body" id="toastMessage">
+                        Thông báo sẽ hiển thị ở đây.
+                    </div>
+                </div>
+            </div>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                    <i class="fas fa-check-circle me-2"></i> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @RenderBody()
+        </main>
+    </div>    <footer class="border-top footer mt-5" style="background-color: var(--footer-color); color: white;">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 style="color: var(--secondary-color);">
+                        <i class="fas fa-hospital-alt me-2"></i>Phòng Khám Đa Khoa
+                    </h5>
+                    <p class="mb-1">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        123 Đường ABC, Quận XYZ, TP.HCM
+                    </p>
+                    <p class="mb-1">
+                        <i class="fas fa-phone me-2"></i>
+                        Hotline: 0123.456.789
+                    </p>
+                    <p class="mb-1">
+                        <i class="fas fa-envelope me-2"></i>
+                        Email: info@phongkham.com
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h6 style="color: var(--secondary-color);">Giờ làm việc</h6>
+                    <p class="mb-1">
+                        <i class="fas fa-clock me-2"></i>
+                        Thứ 2 - Thứ 6: 8:00 - 17:00
+                    </p>
+                    <p class="mb-1">
+                        <i class="fas fa-clock me-2"></i>
+                        Thứ 7: Nghỉ
+                    </p>
+                    <p class="mb-1">
+                        <i class="fas fa-clock me-2"></i>
+                        Chủ nhật: Nghỉ
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h6 style="color: var(--secondary-color);">Kết nối với chúng tôi</h6>
+                    <div class="social-links">
+                        <a href="#" style="color: var(--secondary-color);" class="me-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" style="color: var(--secondary-color);" class="me-3">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" style="color: var(--secondary-color);" class="me-3">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" style="color: var(--secondary-color);">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3" style="border-color: rgba(255, 183, 77, 0.3);">
+            <div class="text-center">
+                <small>&copy; 2025 - Phòng Khám Đa Khoa. All rights reserved.</small>
+            </div>
+        </div>
+    </footer><script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+      @if (User.Identity?.IsAuthenticated == true)
+    {
+        <script>
+            // Cập nhật số lượng thông báo chưa đọc
+            function updateNotificationCount() {
+                $.get('@Url.Action("GetUnreadCount", "Notification")')
+                .done(function(data) {
+                    var $badge = $('#notificationCount');
+                    if (data.count > 0) {
+                        $badge.text(data.count).show();
+                    } else {
+                        $badge.hide();
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+                // Cập nhật số thông báo khi trang load
+                updateNotificationCount();
+                
+                // Cập nhật số thông báo mỗi 30 giây
+                setInterval(updateNotificationCount, 30000);
+            });
+        </script>
+    }
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,195 @@
+@model QLPhongKham.Models.Doctor
+@{
+    ViewData["Title"] = $"BS. {Model.FirstName} {Model.LastName}";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Doctor Info -->
+            <div class="col-lg-4">
+                <div class="doctor-profile-card">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body text-center p-4">
+                            <img src="@(Model.PhotoUrl ?? "/images/default-doctor.jpg")" 
+                                 alt="@Model.FullName" 
+                                 class="doctor-avatar-large mb-3">
+                            
+                            <h3 class="mb-2">@Model.FullName</h3>
+                            
+                            @if (!string.IsNullOrEmpty(Model.Specialty))
+                            {
+                                <span class="doctor-specialty-large mb-3">@Model.Specialty</span>
+                            }
+                            
+                            @if (!string.IsNullOrEmpty(Model.Qualification))
+                            {
+                                <p class="text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-2"></i>
+                                    @Model.Qualification
+                                </p>                            }
+                            
+                            <div class="contact-info text-start">
+                                @if (!string.IsNullOrEmpty(Model.Phone))
+                                {
+                                    <p class="mb-2">
+                                        <i class="fas fa-phone text-primary me-2"></i>
+                                        <a href="tel:@Model.Phone" class="text-decoration-none">@Model.Phone</a>
+                                    </p>
+                                }
+                                
+                                @if (!string.IsNullOrEmpty(Model.Email))
+                                {
+                                    <p class="mb-2">
+                                        <i class="fas fa-envelope text-primary me-2"></i>
+                                        <a href="mailto:@Model.Email" class="text-decoration-none">@Model.Email</a>
+                                    </p>
+                                }
+                            </div>
+                            
+                            <div class="d-grid gap-2 mt-4">
+                                <a href="@Url.Action("BookAppointment", "PatientPortal", new { doctorId = Model.DoctorId })" 
+                                   class="btn btn-primary btn-lg">
+                                    <i class="fas fa-calendar-plus me-2"></i>
+                                    Đặt lịch khám
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Doctor Details -->
+            <div class="col-lg-8">
+                <div class="doctor-details">
+                    <!-- About -->
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-user-md text-primary me-2"></i>
+                                    Giới thiệu
+                                </h5>
+                                <p class="card-text">@Model.Description</p>
+                            </div>
+                        </div>                    }
+                    
+                    <!-- Education -->
+                    @if (!string.IsNullOrEmpty(Model.Qualification))
+                    {
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-graduation-cap text-primary me-2"></i>
+                                    Bằng cấp & Chứng chỉ
+                                </h5>
+                                <p class="card-text">@Model.Qualification</p>
+                            </div>
+                        </div>
+                    }
+                    
+                    <!-- Schedule Info -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-clock text-primary me-2"></i>
+                                Lịch làm việc
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Thứ 2 - Thứ 6:</strong> 8:00 - 17:00</p>
+                                    <p><strong>Thứ 7:</strong> 8:00 - 12:00</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Chủ nhật:</strong> Nghỉ</p>
+                                    <p><strong>Khám khẩn cấp:</strong> Liên hệ hotline</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-calendar-alt text-primary me-2"></i>
+                                Đặt lịch khám
+                            </h5>
+                            <p class="card-text text-muted">
+                                Để đặt lịch khám với BS. @Model.FirstName @Model.LastName, vui lòng nhấn nút bên dưới.
+                                Chúng tôi sẽ liên hệ xác nhận lịch hẹn trong thời gian sớm nhất.
+                            </p>
+                            <div class="d-flex gap-3">
+                                <a href="@Url.Action("BookAppointment", "PatientPortal", new { doctorId = Model.DoctorId })" 
+                                   class="btn btn-primary btn-lg">
+                                    <i class="fas fa-calendar-plus me-2"></i>
+                                    Đặt lịch ngay
+                                </a>
+                                @if (!string.IsNullOrEmpty(Model.Phone))
+                                {
+                                    <a href="tel:@Model.Phone" class="btn btn-outline-primary btn-lg">
+                                        <i class="fas fa-phone me-2"></i>
+                                        Gọi điện
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back to Doctors -->
+        <div class="text-center mt-5">
+            <a href="@Url.Action("Doctors", "PatientPortal")" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>
+                Quay lại danh sách bác sĩ
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <style>
+        .doctor-avatar-large {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #f8f9fa;
+        }
+        
+        .doctor-specialty-large {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        
+        .doctor-profile-card .card {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .doctor-details .card {
+            border-radius: 15px;
+        }
+        
+        .experience-item h6 {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .contact-info a {
+            color: #333;
+        }
+        
+        .contact-info a:hover {
+            color: #667eea;
+        }
+    </style>
+}

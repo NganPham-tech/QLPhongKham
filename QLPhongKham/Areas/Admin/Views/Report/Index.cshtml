@@ -1,0 +1,514 @@
+@{
+    ViewData["Title"] = "Báo cáo & Xuất dữ liệu";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-chart-bar"></i> Báo cáo & Xuất dữ liệu</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Quick Stats -->
+                    <div class="row mb-4">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3 id="total-invoices-today">0</h3>
+                                    <p>Hóa đơn hôm nay</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-document-text"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3 id="total-revenue-today">0</h3>
+                                    <p>Doanh thu hôm nay</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-cash"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3 id="total-payments-today">0</h3>
+                                    <p>Thanh toán hôm nay</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3 id="overdue-invoices">0</h3>
+                                    <p>Hóa đơn quá hạn</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-alert-circled"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date Range Selector -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Chọn khoảng thời gian báo cáo</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="report-date-form" class="row">
+                                <div class="col-md-4">
+                                    <label for="fromDate">Từ ngày:</label>
+                                    <input type="date" id="fromDate" name="fromDate" class="form-control" value="@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="toDate">Đến ngày:</label>
+                                    <input type="date" id="toDate" name="toDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button type="button" id="load-report-btn" class="btn btn-primary">
+                                        <i class="fas fa-sync-alt"></i> Tải báo cáo
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Export Buttons -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Xuất báo cáo</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Excel Exports -->
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-file-excel text-success"></i> Xuất Excel</h5>
+                                    <div class="btn-group-vertical d-grid gap-2" role="group">
+                                        <button type="button" class="btn btn-outline-success" onclick="exportExcel('invoices')">
+                                            <i class="fas fa-file-invoice"></i> Báo cáo hóa đơn
+                                        </button>
+                                        <button type="button" class="btn btn-outline-success" onclick="exportExcel('payments')">
+                                            <i class="fas fa-credit-card"></i> Báo cáo thanh toán
+                                        </button>
+                                        <button type="button" class="btn btn-outline-success" onclick="exportExcel('overdue')">
+                                            <i class="fas fa-exclamation-triangle"></i> Hóa đơn quá hạn
+                                        </button>
+                                        <button type="button" class="btn btn-outline-success" onclick="exportExcel('financial-summary')">
+                                            <i class="fas fa-chart-pie"></i> Tổng hợp tài chính
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- PDF Exports -->
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-file-pdf text-danger"></i> Xuất PDF</h5>
+                                    <div class="btn-group-vertical d-grid gap-2" role="group">
+                                        <button type="button" class="btn btn-outline-danger" onclick="exportPdf('invoices')">
+                                            <i class="fas fa-file-invoice"></i> Báo cáo hóa đơn
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger" onclick="exportPdf('payments')">
+                                            <i class="fas fa-credit-card"></i> Báo cáo thanh toán
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger" onclick="exportPdf('financial-summary')">
+                                            <i class="fas fa-chart-pie"></i> Tổng hợp tài chính
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Doanh thu theo phương thức thanh toán</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="payment-method-chart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Top 10 bệnh nhân theo doanh thu</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="top-patients-chart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Doanh thu theo dịch vụ/thuốc</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="service-revenue-chart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Summary Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Tổng hợp tài chính</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="financial-summary-content">
+                                <p class="text-muted">Vui lòng chọn khoảng thời gian và tải báo cáo để xem dữ liệu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let paymentMethodChart, topPatientsChart, serviceRevenueChart;
+
+        $(document).ready(function() {
+            // Initialize charts
+            initializeCharts();
+            
+            // Load today's quick stats
+            loadQuickStats();
+            
+            // Load report button click
+            $('#load-report-btn').click(function() {
+                loadReportData();
+            });
+        });
+
+        function loadQuickStats() {
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Load today's financial summary
+            $.get('@Url.Action("FinancialReportData", "Report")', {
+                fromDate: today,
+                toDate: today
+            }, function(response) {
+                if (response.success) {
+                    const data = response.data;
+                    $('#total-invoices-today').text(data.TotalInvoices || 0);
+                    $('#total-revenue-today').text(formatCurrency(data.TotalInvoiceAmount || 0));
+                    $('#total-payments-today').text(data.PaymentsByMethod?.length || 0);
+                }
+            });
+        }
+
+        function loadReportData() {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            
+            if (!fromDate || !toDate) {
+                alert('Vui lòng chọn khoảng thời gian');
+                return;
+            }
+
+            // Show loading
+            $('#load-report-btn').html('<i class="fas fa-spinner fa-spin"></i> Đang tải...');
+            
+            // Load financial summary
+            $.get('@Url.Action("FinancialReportData", "Report")', { fromDate, toDate }, function(response) {
+                if (response.success) {
+                    displayFinancialSummary(response.data);
+                }
+            });
+
+            // Load charts data
+            loadChartData(fromDate, toDate);
+            
+            // Reset button
+            $('#load-report-btn').html('<i class="fas fa-sync-alt"></i> Tải báo cáo');
+        }
+
+        function loadChartData(fromDate, toDate) {
+            // Payment method chart
+            $.get('@Url.Action("GetRevenueByMethod", "Report")', { fromDate, toDate }, function(response) {
+                if (response.success) {
+                    updatePaymentMethodChart(response.data);
+                }
+            });
+
+            // Top patients chart
+            $.get('@Url.Action("GetTopPatients", "Report")', { fromDate, toDate, topCount: 10 }, function(response) {
+                if (response.success) {
+                    updateTopPatientsChart(response.data);
+                }
+            });
+
+            // Service revenue chart
+            $.get('@Url.Action("GetServiceRevenue", "Report")', { fromDate, toDate }, function(response) {
+                if (response.success) {
+                    updateServiceRevenueChart(response.data);
+                }
+            });
+        }
+
+        function initializeCharts() {
+            // Payment Method Chart
+            const ctx1 = document.getElementById('payment-method-chart').getContext('2d');
+            paymentMethodChart = new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Top Patients Chart
+            const ctx2 = document.getElementById('top-patients-chart').getContext('2d');
+            topPatientsChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Doanh thu (VND)',
+                        data: [],
+                        backgroundColor: '#36A2EB'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Service Revenue Chart
+            const ctx3 = document.getElementById('service-revenue-chart').getContext('2d');
+            serviceRevenueChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Doanh thu (VND)',
+                        data: [],
+                        backgroundColor: '#4BC0C0'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updatePaymentMethodChart(data) {
+            paymentMethodChart.data.labels = data.map(item => item.method);
+            paymentMethodChart.data.datasets[0].data = data.map(item => item.total);
+            paymentMethodChart.update();
+        }
+
+        function updateTopPatientsChart(data) {
+            topPatientsChart.data.labels = data.map(item => item.patientName);
+            topPatientsChart.data.datasets[0].data = data.map(item => item.totalAmount);
+            topPatientsChart.update();
+        }
+
+        function updateServiceRevenueChart(data) {
+            serviceRevenueChart.data.labels = data.slice(0, 10).map(item => item.name);
+            serviceRevenueChart.data.datasets[0].data = data.slice(0, 10).map(item => item.revenue);
+            serviceRevenueChart.update();
+        }
+
+        function displayFinancialSummary(data) {
+            let html = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Tổng quan</h5>
+                        <table class="table table-bordered">
+                            <tr><td>Tổng hóa đơn:</td><td>${data.TotalInvoices}</td></tr>
+                            <tr><td>Tổng giá trị hóa đơn:</td><td>${formatCurrency(data.TotalInvoiceAmount)}</td></tr>
+                            <tr><td>Tổng đã thu:</td><td>${formatCurrency(data.TotalPaidAmount)}</td></tr>
+                            <tr><td>Tổng còn nợ:</td><td>${formatCurrency(data.TotalRemainingAmount)}</td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Theo trạng thái hóa đơn</h5>
+                        <table class="table table-bordered">
+            `;
+            
+            if (data.InvoicesByStatus) {
+                data.InvoicesByStatus.forEach(status => {
+                    html += `<tr><td>${status.status}:</td><td>${status.count} (${formatCurrency(status.total)})</td></tr>`;
+                });
+            }
+            
+            html += `
+                        </table>
+                    </div>
+                </div>
+            `;
+            
+            $('#financial-summary-content').html(html);
+        }
+
+        function exportExcel(type) {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            
+            if (!fromDate || !toDate) {
+                alert('Vui lòng chọn khoảng thời gian');
+                return;
+            }
+
+            let url = '';
+            switch(type) {
+                case 'invoices':
+                    url = '@Url.Action("ExportInvoicesExcel", "Report")';
+                    break;
+                case 'payments':
+                    url = '@Url.Action("ExportPaymentsExcel", "Report")';
+                    break;
+                case 'overdue':
+                    url = '@Url.Action("ExportOverdueInvoicesExcel", "Report")';
+                    break;
+                case 'financial-summary':
+                    url = '@Url.Action("ExportFinancialSummaryExcel", "Report")';
+                    break;
+            }
+
+            if (type === 'overdue') {
+                // Overdue invoices don't need date range
+                $('<form method="post" action="' + url + '"></form>').appendTo('body').submit().remove();
+            } else {
+                $('<form method="post" action="' + url + '">' +
+                  '<input name="fromDate" value="' + fromDate + '">' +
+                  '<input name="toDate" value="' + toDate + '">' +
+                  '</form>').appendTo('body').submit().remove();
+            }
+        }
+
+        function exportPdf(type) {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            
+            if (!fromDate || !toDate) {
+                alert('Vui lòng chọn khoảng thời gian');
+                return;
+            }
+
+            let url = '';
+            switch(type) {
+                case 'invoices':
+                    url = '@Url.Action("ExportInvoicesPdf", "Report")';
+                    break;
+                case 'payments':
+                    url = '@Url.Action("ExportPaymentsPdf", "Report")';
+                    break;
+                case 'financial-summary':
+                    url = '@Url.Action("ExportFinancialSummaryPdf", "Report")';
+                    break;
+            }
+
+            $('<form method="post" action="' + url + '">' +
+              '<input name="fromDate" value="' + fromDate + '">' +
+              '<input name="toDate" value="' + toDate + '">' +
+              '</form>').appendTo('body').submit().remove();
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { 
+                style: 'currency', 
+                currency: 'VND' 
+            }).format(amount || 0);
+        }
+    </script>
+}
+
+@section Styles {
+    <style>
+        .small-box {
+            border-radius: 10px;
+            position: relative;
+            display: block;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+        
+        .small-box > .inner {
+            padding: 10px;
+        }
+        
+        .small-box > .small-box-footer {
+            position: relative;
+            text-align: center;
+            padding: 3px 0;
+            color: #fff;
+            color: rgba(255,255,255,0.8);
+            display: block;
+            z-index: 10;
+            background: rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        
+        .small-box h3 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+            padding: 0;
+            color: #fff;
+        }
+        
+        .small-box p {
+            font-size: 1rem;
+            color: #fff;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .small-box .icon {
+            transition: all .3s linear;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            z-index: 0;
+            font-size: 90px;
+            color: rgba(0,0,0,0.15);
+        }
+        
+        .bg-info { background-color: #17a2b8!important; }
+        .bg-success { background-color: #28a745!important; }
+        .bg-warning { background-color: #ffc107!important; }
+        .bg-danger { background-color: #dc3545!important; }
+    </style>
+}

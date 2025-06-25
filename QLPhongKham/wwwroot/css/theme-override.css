@@ -1,0 +1,266 @@
+/* Theme Override CSS - Áp dụng bảng màu mới */
+
+/* Color Variables */
+:root {
+    --primary-color: #2196F3;      /* Xanh dương chủ đạo */
+    --secondary-color: #FFB74D;    /* Cam nhạt cho nút & liên kết */
+    --accent-color: #FFB74D;       /* Cam nhạt cho accent */
+    --light-color: #FFFFFF;        /* Nền trắng */
+    --dark-color: #333333;         /* Text đen/xám đậm */
+    --text-color: #444444;         /* Text xám đậm */
+    --footer-color: #1A237E;       /* Footer xanh navy */
+    --footer-alt-color: #37474F;   /* Footer ghi đậm (alternative) */
+    --background-color: #FFFFFF;   /* Nền chính */
+}
+
+/* Bootstrap Override */
+.btn-primary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    color: var(--dark-color) !important;
+}
+
+.btn-primary:hover {
+    background-color: #FF9800 !important;
+    border-color: #FF9800 !important;
+    color: white !important;
+}
+
+.btn-outline-primary {
+    color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    color: var(--dark-color) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+/* Links */
+a {
+    color: var(--secondary-color);
+}
+
+a:hover {
+    color: #FF9800;
+}
+
+/* Cards */
+.card {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Alerts */
+.alert-info {
+    background-color: rgba(33, 150, 243, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.alert-warning {
+    background-color: rgba(255, 183, 77, 0.1);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+/* Badges */
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--secondary-color) !important;
+    color: var(--dark-color) !important;
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+}
+
+/* Navigation */
+.navbar-brand {
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+.nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* Pagination */
+.page-link {
+    color: var(--secondary-color);
+}
+
+.page-link:hover {
+    color: #FF9800;
+    background-color: rgba(255, 183, 77, 0.1);
+    border-color: var(--secondary-color);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Tables */
+.table-primary {
+    background-color: rgba(33, 150, 243, 0.1);
+}
+
+.table-warning {
+    background-color: rgba(255, 183, 77, 0.1);
+}
+
+/* Modal */
+.modal-header {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+/* Toasts */
+.toast-header {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Progress */
+.progress-bar {
+    background-color: var(--primary-color);
+}
+
+/* Custom utility classes */
+.text-custom-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-custom-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.bg-custom-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.bg-custom-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+.border-custom-primary {
+    border-color: var(--primary-color) !important;
+}
+
+.border-custom-secondary {
+    border-color: var(--secondary-color) !important;
+}
+
+/* Specific component overrides */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1976D2 100%) !important;
+}
+
+.service-card {
+    border-top-color: var(--primary-color) !important;
+}
+
+.service-card .card-icon {
+    color: var(--primary-color) !important;
+}
+
+.doctor-card:hover {
+    border-color: var(--secondary-color) !important;
+}
+
+/* Button variations */
+.btn-custom-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-custom-primary:hover {
+    background-color: #1976D2;
+    border-color: #1976D2;
+    color: white;
+}
+
+.btn-custom-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+.btn-custom-secondary:hover {
+    background-color: #FF9800;
+    border-color: #FF9800;
+    color: white;
+}
+
+/* Notification styling */
+.notification-badge {
+    background-color: var(--secondary-color) !important;
+    color: var(--dark-color) !important;
+}
+
+.notification-item {
+    border-left: 3px solid var(--primary-color);
+}
+
+.notification-item.unread {
+    background-color: rgba(33, 150, 243, 0.05);
+}
+
+/* Footer specific */
+.footer {
+    background-color: var(--footer-color) !important;
+    color: white !important;
+}
+
+.footer h5, .footer h6 {
+    color: var(--secondary-color) !important;
+}
+
+.footer a {
+    color: var(--secondary-color) !important;
+}
+
+.footer a:hover {
+    color: #FF9800 !important;
+}

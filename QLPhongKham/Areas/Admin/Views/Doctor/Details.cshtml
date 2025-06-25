@@ -1,0 +1,72 @@
+@model QLPhongKham.Models.Doctor
+
+@{
+    ViewData["Title"] = "Chi tiết Bác sĩ";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Chi tiết thông tin Bác sĩ</h3>
+                </div>                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img src="@(Model.PhotoUrl ?? "/images/default-doctor.jpg")" alt="@Model.FullName" 
+                                 class="img-thumbnail mb-3" style="width: 200px; height: 200px; object-fit: cover;">
+                        </div>
+                        <div class="col-md-8">
+                            <dl class="row">
+                                <dt class="col-sm-4">Họ và tên:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</dd>
+
+                                <dt class="col-sm-4">Tuổi:</dt>
+                                <dd class="col-sm-8">@Model.Age tuổi (Sinh: @Html.DisplayFor(model => model.DateOfBirth))</dd>
+
+                                <dt class="col-sm-4">Giới tính:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Gender)</dd>
+
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+
+                                <dt class="col-sm-4">Số điện thoại:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Phone)</dd>
+
+                                <dt class="col-sm-4">Chuyên khoa:</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge badge-info badge-lg">@Html.DisplayFor(model => model.Specialty)</span>
+                                </dd>                                <dt class="col-sm-4">Trình độ:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Qualification)</dd>
+
+                                <dt class="col-sm-4">Địa chỉ:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Address)</dd>
+                            </dl>
+                        </div>
+                    </div>                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <h5>Mô tả / Kinh nghiệm:</h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        @Html.Raw(Model.Description.Replace("\n", "<br/>"))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <a asp-action="Edit" asp-route-id="@Model?.DoctorId" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Chỉnh sửa
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

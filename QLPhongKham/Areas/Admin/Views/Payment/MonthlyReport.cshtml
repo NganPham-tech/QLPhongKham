@@ -1,0 +1,43 @@
+@model IEnumerable<QLPhongKham.Models.Payment>
+@{
+    ViewData["Title"] = "Báo cáo thanh toán tháng";
+}
+<h2>Báo cáo thanh toán theo tháng</h2>
+<form method="get">
+    <div class="form-group">
+        <label>Chọn tháng</label>
+        <input type="month" name="month" class="form-control" value="@Context.Request.Query["month"]" />
+        <button type="submit" class="btn btn-primary mt-2">Xem báo cáo</button>
+    </div>
+</form>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Mã giao dịch</th>
+                <th>Số hóa đơn</th>
+                <th>Phương thức</th>
+                <th>Số tiền</th>
+                <th>Trạng thái</th>
+                <th>Ngày thanh toán</th>
+            </tr>
+        </thead>
+        <tbody>        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.PaymentNumber</td>
+                <td>@item.Invoice?.InvoiceNumber</td>
+                <td>@item.PaymentMethod</td>
+                <td>@item.AmountPaid.ToString("N0")</td>
+                <td>@item.Status</td>
+                <td>@item.PaymentDate.ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else if (Context.Request.Query.ContainsKey("month"))
+{
+    <div class="alert alert-info mt-3">Không có giao dịch nào trong tháng này.</div>
+}
