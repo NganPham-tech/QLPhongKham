@@ -4,15 +4,6 @@ using QLPhongKham.Models;
 
 namespace QLPhongKham.Services
 {
-    public interface INotificationService
-    {
-        Task CreateNotificationAsync(string userId, string title, string message, string type = "Info", string? relatedUrl = null, int? appointmentId = null);
-        Task<List<Notification>> GetUserNotificationsAsync(string userId, bool unreadOnly = false);
-        Task MarkAsReadAsync(int notificationId);
-        Task<int> GetUnreadCountAsync(string userId);
-        Task NotifyAppointmentStatusChangeAsync(int appointmentId, string newStatus);
-    }
-
     public class NotificationService : INotificationService
     {
         private readonly ApplicationDbContext _context;
@@ -126,6 +117,93 @@ namespace QLPhongKham.Services
                 type,
                 "/BenhNhan/Appointment", // URL để xem lịch hẹn
                 appointmentId
+            );
+        }
+
+        public async Task NotifyAppointmentCreatedAsync(int appointmentId)
+        {
+            var appointment = await _context.Appointments
+                .Include(a => a.Patient)
+                .Include(a => a.Doctor)
+                .Include(a => a.Service)
+                .FirstOrDefaultAsync(a => a.AppointmentId == appointmentId);
+
+            if (appointment?.Patient?.Email == null) return;
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == appointment.Patient.Email);
+            if (user == null) return;
+
+            await CreateNotificationAsync(
+                user.Id,
+                "Lịch hẹn mới đã được tạo",
+                $"Lịch hẹn của bạn với bác sĩ {appointment.Doctor.FullName} cho dịch vụ {appointment.Service.Name} vào lúc {appointment.AppointmentDate:dd/MM/yyyy HH:mm} đã được tạo thành công.",
+                "Success",
+                "/BenhNhan/Appointment",
+                appointmentId
+            );
+        }
+
+        public async Task NotifyAppointmentUpdatedAsync(int appointmentId)
+        {
+            var appointment = await _context.Appointments
+                .Include(a => a.Patient)
+                .Include(a => a.Doctor)
+                .Include(a => a.Service)
+                .FirstOrDefaultAsync(a => a.AppointmentId == appointmentId);
+
+            if (appointment?.Patient?.Email == null) return;
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == appointment.Patient.Email);
+            if (user == null) return;
+
+            await CreateNotificationAsync(
+                user.Id,
+                "Lịch hẹn đã được cập nhật",
+                $"Lịch hẹn của bạn với bác sĩ {appointment.Doctor.FullName} đã được cập nhật. Thời gian mới: {appointment.AppointmentDate:dd/MM/yyyy HH:mm}",
+                "Info",
+                "/BenhNhan/Appointment",
+                appointmentId
+            );
+        }
+
+        public async Task NotifyInvoiceCreatedAsync(int invoiceId)
+        {
+            var invoice = await _context.Invoices
+                .Include(i => i.Patient)
+                .FirstOrDefaultAsync(i => i.InvoiceId == invoiceId);
+
+            if (invoice?.Patient?.Email == null) return;
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == invoice.Patient.Email);
+            if (user == null) return;
+
+            await CreateNotificationAsync(
+                user.Id,
+                "Hóa đơn mới",
+                $"Hóa đơn {invoice.InvoiceNumber} với tổng tiền {invoice.TotalAmount:N0} VNĐ đã được tạo. Vui lòng thanh toán trong thời gian sớm nhất.",
+                "Warning",
+                "/BenhNhan/Invoice"
+            );
+        }
+
+        public async Task NotifyPaymentReceivedAsync(int paymentId)
+        {
+            var payment = await _context.Payments
+                .Include(p => p.Invoice)
+                    .ThenInclude(i => i.Patient)
+                .FirstOrDefaultAsync(p => p.PaymentId == paymentId);
+
+            if (payment?.Invoice?.Patient?.Email == null) return;
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == payment.Invoice.Patient.Email);
+            if (user == null) return;
+
+            await CreateNotificationAsync(
+                user.Id,
+                "Thanh toán đã được ghi nhận",
+                $"Chúng tôi đã nhận được thanh toán {payment.AmountPaid:N0} VNĐ cho hóa đơn {payment.Invoice.InvoiceNumber}. Cảm ơn bạn!",
+                "Success",
+                "/BenhNhan/Payment"
             );
         }
     }

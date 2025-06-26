@@ -14,7 +14,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
             _context = context;
         }
 
-        // Action không cần authorization để cập nhật doctor status
+       
         public async Task<IActionResult> FixDoctorStatus()
         {
             try

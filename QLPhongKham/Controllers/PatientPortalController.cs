@@ -51,7 +51,7 @@ namespace QLPhongKham.Controllers
                 .OrderBy(d => d.FirstName)
                 .ToListAsync();
 
-            // Lấy danh sách chuyên khoa để filter
+            
             var specialties = await _context.Doctors
                 .Where(d => d.IsActive && !string.IsNullOrEmpty(d.Specialty))
                 .Select(d => d.Specialty)
@@ -125,7 +125,7 @@ namespace QLPhongKham.Controllers
             ViewBag.Services = services;
 
             return View();
-        }        // API: Lấy danh sách bác sĩ theo dịch vụ được chọn
+        }        
         [HttpGet]
         public async Task<IActionResult> GetDoctorsByService(int serviceId)
         {
@@ -169,19 +169,45 @@ namespace QLPhongKham.Controllers
             }
         }
 
-        // Xử lý đặt lịch hẹn
+        // Xử lý đặt lịch hẹn - nhận ngày và giờ riêng biệt để tránh vấn đề timezone
         [HttpPost]
-        public async Task<IActionResult> BookAppointment(int doctorId, int serviceId, DateTime appointmentDate, string notes)
+        public async Task<IActionResult> BookAppointment(int doctorId, int serviceId, string appointmentDate, string appointmentTime, string notes)
         {
             if (User.Identity?.IsAuthenticated != true)
             {
                 return Json(new { success = false, message = "Vui lòng đăng nhập để đặt lịch hẹn" });
-            }            try
+            }
+
+            try
             {
-                // Kiểm tra giờ làm việc trước khi xử lý
-                if (!IsValidWorkingTime(appointmentDate))
+                // Parse ngày và giờ riêng biệt để tránh vấn đề timezone
+                if (!DateTime.TryParse(appointmentDate, out var dateOnly))
                 {
-                    return Json(new { success = false, message = GetWorkingTimeErrorMessage(appointmentDate) });
+                    return Json(new { success = false, message = "Ngày không hợp lệ" });
+                }
+                
+                if (!TimeSpan.TryParse(appointmentTime, out var timeOnly))
+                {
+                    return Json(new { success = false, message = "Giờ không hợp lệ" });
+                }
+                
+                // Tạo DateTime từ ngày và giờ local
+                var appointmentDateTime = dateOnly.Date.Add(timeOnly);
+                
+                // Debug log để kiểm tra DateTime sau khi parse
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Original date string: {appointmentDate}");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Original time string: {appointmentTime}");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Parsed DateTime: {appointmentDateTime}");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] DateTime Kind: {appointmentDateTime.Kind}");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Date part: {appointmentDateTime.Date}");
+                System.Diagnostics.Debug.WriteLine($"[DEBUG] Time part: {appointmentDateTime.TimeOfDay}");
+                
+                // Kiểm tra giờ làm việc trước khi xử lý
+                if (!IsValidWorkingTime(appointmentDateTime))
+                {
+                    var errorMsg = GetWorkingTimeErrorMessage(appointmentDateTime);
+                    System.Diagnostics.Debug.WriteLine($"[DEBUG] Working time validation failed: {errorMsg}");
+                    return Json(new { success = false, message = errorMsg });
                 }
 
                 // Tìm patient theo user email
@@ -195,8 +221,8 @@ namespace QLPhongKham.Controllers
                 }
 
                 // Kiểm tra xung đột lịch hẹn
-                var appointmentStart = appointmentDate.AddMinutes(-30);
-                var appointmentEnd = appointmentDate.AddMinutes(30);
+                var appointmentStart = appointmentDateTime.AddMinutes(-30);
+                var appointmentEnd = appointmentDateTime.AddMinutes(30);
                 
                 var conflictingAppointment = await _context.Appointments
                     .Where(a => a.DoctorId == doctorId && 
@@ -216,7 +242,7 @@ namespace QLPhongKham.Controllers
                     PatientId = patient.PatientId,
                     DoctorId = doctorId,
                     ServiceId = serviceId,
-                    AppointmentDate = appointmentDate,
+                    AppointmentDate = appointmentDateTime,
                     Status = "Pending",
                     Notes = notes ?? "",
                     CreatedDate = DateTime.Now
@@ -248,12 +274,12 @@ namespace QLPhongKham.Controllers
                 return false;
             }
 
-            // Kiểm tra giờ làm việc (8:00 - 17:00)
+            // Kiểm tra giờ làm việc (8:00 - 17:00, bao gồm 17:00)
             var timeOfDay = appointmentDate.TimeOfDay;
             var startTime = new TimeSpan(8, 0, 0);  // 8:00 AM
             var endTime = new TimeSpan(17, 0, 0);   // 5:00 PM
 
-            if (timeOfDay < startTime || timeOfDay >= endTime)
+            if (timeOfDay < startTime || timeOfDay > endTime)
             {
                 return false;
             }
@@ -284,9 +310,9 @@ namespace QLPhongKham.Controllers
             var startTime = new TimeSpan(8, 0, 0);
             var endTime = new TimeSpan(17, 0, 0);
 
-            if (timeOfDay < startTime || timeOfDay >= endTime)
+            if (timeOfDay < startTime || timeOfDay > endTime)
             {
-                return "Phòng khám chỉ làm việc từ 8:00 đến 17:00. Vui lòng chọn giờ trong khoảng thời gian này.";
+                return "Phòng khám chỉ làm việc từ 8:00 đến 17:00 (bao gồm cả 17:00). Vui lòng chọn giờ trong khoảng thời gian này.";
             }
 
             if (IsHoliday(appointmentDate))

@@ -49,7 +49,7 @@ namespace QLPhongKham.Areas.BacSi.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var appointment = _appointmentRepo.GetById(id);
-            if (appointment == null) return NotFound();            // Kiểm tra appointment có thuộc về bác sĩ hiện tại không
+            if (appointment == null) return NotFound();            
             var currentUser = await _userService.GetCurrentUserAsync();
             if (currentUser == null) return Forbid();
             
@@ -63,7 +63,7 @@ namespace QLPhongKham.Areas.BacSi.Controllers
         public async Task<IActionResult> UpdateStatus(int id, string status)
         {
             var appointment = _appointmentRepo.GetById(id);
-            if (appointment == null) return NotFound();            // Kiểm tra quyền
+            if (appointment == null) return NotFound();            
             var currentUser = await _userService.GetCurrentUserAsync();
             if (currentUser == null) return Forbid();
             

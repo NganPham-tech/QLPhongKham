@@ -1,83 +1,98 @@
 @model QLPhongKham.Models.Medicine
 
 @{
-    ViewData["Title"] = "Thêm Thuốc mới";
+    ViewData["Title"] = "Thêm thuốc mới";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm Thuốc mới</h3>
+                    <h3 class="card-title">
+                        <i class="fas fa-pills mr-2"></i>
+                        Thêm thuốc mới
+                    </h3>
+                    <div class="card-tools">
+                        <a asp-action="Index" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Create">
+                    <form asp-action="Create" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         
-                        <div class="form-group">
-                            <label asp-for="Name" class="control-label">Tên thuốc</label>
-                            <input asp-for="Name" class="form-control" placeholder="Nhập tên thuốc" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Description" class="control-label">Mô tả</label>
-                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Mô tả chi tiết về thuốc, công dụng, cách dùng..."></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="UnitPrice" class="control-label">Giá đơn vị (VNĐ)</label>
-                                    <input asp-for="UnitPrice" class="form-control" type="number" min="0" step="100" placeholder="5000" />
-                                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" placeholder="Nhập tên thuốc" required />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="Unit" class="control-label">Đơn vị tính</label>
-                                    <select asp-for="Unit" class="form-control">
-                                        <option value="Viên">Viên</option>
-                                        <option value="Vỉ">Vỉ</option>
-                                        <option value="Hộp">Hộp</option>
-                                        <option value="Chai">Chai</option>
-                                        <option value="Lọ">Lọ</option>
-                                        <option value="Ống">Ống</option>
-                                        <option value="Túi">Túi</option>
-                                        <option value="ml">ml</option>
-                                        <option value="mg">mg</option>
-                                        <option value="g">g</option>
-                                    </select>
-                                    <span asp-validation-for="Unit" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label asp-for="Manufacturer" class="control-label">Nhà sản xuất</label>
-                                    <input asp-for="Manufacturer" class="form-control" placeholder="Tên nhà sản xuất" />
+                                    <label asp-for="Manufacturer" class="control-label"></label>
+                                    <input asp-for="Manufacturer" class="form-control" placeholder="Nhập nhà sản xuất" />
                                     <span asp-validation-for="Manufacturer" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input asp-for="IsActive" class="form-check-input" type="checkbox" checked />
-                                <label asp-for="IsActive" class="form-check-label">
-                                    Thuốc đang được kinh doanh
-                                </label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UnitPrice" class="control-label"></label>
+                                    <div class="input-group">
+                                        <input asp-for="UnitPrice" class="form-control" type="number" step="0.01" min="0" placeholder="0.00" required />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">VNĐ</span>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                                </div>
                             </div>
-                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Unit" class="control-label"></label>
+                                    <select asp-for="Unit" class="form-control">
+                                        <option value="Viên">Viên</option>
+                                        <option value="Vỉ">Vỉ</option>
+                                        <option value="Hộp">Hộp</option>
+                                        <option value="Chai">Chai</option>
+                                        <option value="Tuýp">Tuýp</option>
+                                        <option value="Lọ">Lọ</option>
+                                        <option value="Ống">Ống</option>
+                                        <option value="Gói">Gói</option>
+                                        <option value="ml">ml</option>
+                                        <option value="mg">mg</option>
+                                    </select>
+                                    <span asp-validation-for="Unit" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Mô tả về thuốc, công dụng, cách dùng..." required></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input asp-for="IsActive" class="custom-control-input" type="checkbox" checked />
+                                <label asp-for="IsActive" class="custom-control-label"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4">
                             <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i> Lưu thông tin
+                                <i class="fas fa-save"></i> Lưu thuốc
                             </button>
-                            <a asp-action="Index" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Quay lại
+                            <a asp-action="Index" class="btn btn-secondary ml-2">
+                                <i class="fas fa-times"></i> Hủy
                             </a>
                         </div>
                     </form>
@@ -89,4 +104,51 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Auto-format unit price
+            $('#UnitPrice').on('input', function() {
+                var value = $(this).val();
+                if (value && !isNaN(value)) {
+                    $(this).val(parseFloat(value).toFixed(2));
+                }
+            });
+
+            // Form validation feedback
+            $('form').on('submit', function(e) {
+                var isValid = true;
+                
+                // Check required fields
+                $('input[required], select[required], textarea[required]').each(function() {
+                    if (!$(this).val()) {
+                        $(this).addClass('is-invalid');
+                        isValid = false;
+                    } else {
+                        $(this).removeClass('is-invalid').addClass('is-valid');
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    if (typeof toastr !== 'undefined') {
+                        toastr.error('Vui lòng điền đầy đủ thông tin bắt buộc');
+                    } else {
+                        alert('Vui lòng điền đầy đủ thông tin bắt buộc');
+                    }
+                }
+            });
+
+            // Remove validation classes on input
+            $('input, select, textarea').on('input change', function() {
+                $(this).removeClass('is-invalid is-valid');
+            });
+
+            // Auto-resize textarea
+            $('textarea').on('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+        });
+    </script>
 }

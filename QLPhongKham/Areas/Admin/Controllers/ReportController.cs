@@ -212,7 +212,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
             }
         }
 
-        // API Methods for Charts/Graphs
+       
         [HttpGet]
         public async Task<IActionResult> GetRevenueByMethod(DateTime fromDate, DateTime toDate)
         {
@@ -232,7 +232,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
         {
             try
             {
-                var data = await _reportService.GetTopPatientsAsync(fromDate, toDate, topCount);
+                var data = await _reportService.GetTopPatientsAsync(topCount);
                 return Json(new { success = true, data });
             }
             catch (Exception ex)

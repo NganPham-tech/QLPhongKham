@@ -156,7 +156,7 @@
                                             <a asp-action="Edit" asp-route-id="@invoice.InvoiceId" class="btn btn-outline-primary" title="Chỉnh sửa">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <a asp-area="Admin" asp-controller="Payment" asp-action="Create" asp-route-invoiceId="@invoice.InvoiceId" class="btn btn-outline-success" title="Thanh toán">
+                                            <a asp-area="Admin" asp-controller="Payment" asp-action="CreateForInvoice" asp-route-invoiceId="@invoice.InvoiceId" class="btn btn-outline-success" title="Thanh toán">
                                                 <i class="bi bi-credit-card"></i>
                                             </a>
                                         }

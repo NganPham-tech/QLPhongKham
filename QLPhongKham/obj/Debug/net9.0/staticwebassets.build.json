@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fvfExni3dMaaDVefpvxY/20FBzLo3PI6riTzrq38ui4=",
+  "Hash": "W5lDjIV7wlRHQvbF0brd3gNd7G8X+rEdFV71FqwHlKg=",
   "Source": "QLPhongKham",
   "BasePath": "_content/QLPhongKham",
   "Mode": "Default",
@@ -4441,11 +4441,74 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "qhvmu0qt2x",
-      "Integrity": "EvmjFbkwDLnAfcUX0FNs7/XWy6tf9IFDzAoQZMXG0wg=",
+      "Fingerprint": "5ipweew5fc",
+      "Integrity": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\default-doctor.jpg.placeholder"
+    },
+    {
+      "Identity": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg",
+      "SourceId": "QLPhongKham",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\",
+      "BasePath": "_content/QLPhongKham",
+      "RelativePath": "images/doctors/4709b8c8-618d-4f96-bad4-4eac104ffa34#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yq5i14indc",
+      "Integrity": "mv7kPCf9c5lNqm1pi/2wxjpbYqApP8H5LU3HKb9d8Dc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\doctors\\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg"
+    },
+    {
+      "Identity": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\773784a9-afdd-4c71-940a-2a199e534735.jpg",
+      "SourceId": "QLPhongKham",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\",
+      "BasePath": "_content/QLPhongKham",
+      "RelativePath": "images/doctors/773784a9-afdd-4c71-940a-2a199e534735#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yltfak9zoo",
+      "Integrity": "WlKN752jVyabTspRnmSeQtqJdLOXfacrq+lhDoUIiZo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\doctors\\773784a9-afdd-4c71-940a-2a199e534735.jpg"
+    },
+    {
+      "Identity": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\775029fb-1a43-4b96-9b6c-a81193da043c.jpg",
+      "SourceId": "QLPhongKham",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\",
+      "BasePath": "_content/QLPhongKham",
+      "RelativePath": "images/doctors/775029fb-1a43-4b96-9b6c-a81193da043c#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "flerrmd1fn",
+      "Integrity": "o6XuqxxAK/Jcc1nhmCVFUmyEh/4lR+LuBPX4fQ4fXSg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\doctors\\775029fb-1a43-4b96-9b6c-a81193da043c.jpg"
     },
     {
       "Identity": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\ab9aa4e2-8ad3-4884-9e0c-d4f6ebaf4907.jpg",
@@ -17037,6 +17100,51 @@
       ]
     },
     {
+      "Route": "images/default-doctor.jpg.5ipweew5fc.placeholder",
+      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\default-doctor.jpg.placeholder",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "0"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 00:21:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5ipweew5fc"
+        },
+        {
+          "Name": "label",
+          "Value": "images/default-doctor.jpg.placeholder"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
+        }
+      ]
+    },
+    {
       "Route": "images/default-doctor.jpg.placeholder",
       "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\default-doctor.jpg.placeholder",
       "Selectors": [],
@@ -17047,7 +17155,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "201"
+          "Value": "0"
         },
         {
           "Name": "Content-Type",
@@ -17055,11 +17163,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EvmjFbkwDLnAfcUX0FNs7/XWy6tf9IFDzAoQZMXG0wg=\""
+          "Value": "\"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 18 Jun 2025 17:46:31 GMT"
+          "Value": "Thu, 26 Jun 2025 00:21:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -17069,13 +17177,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-EvmjFbkwDLnAfcUX0FNs7/XWy6tf9IFDzAoQZMXG0wg="
+          "Value": "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
         }
       ]
     },
     {
-      "Route": "images/default-doctor.jpg.qhvmu0qt2x.placeholder",
-      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\default-doctor.jpg.placeholder",
+      "Route": "images/doctors/4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg",
+      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -17084,19 +17192,56 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "201"
+          "Value": "75925"
         },
         {
           "Name": "Content-Type",
-          "Value": "application/octet-stream"
+          "Value": "image/jpeg"
         },
         {
           "Name": "ETag",
-          "Value": "\"EvmjFbkwDLnAfcUX0FNs7/XWy6tf9IFDzAoQZMXG0wg=\""
+          "Value": "\"mv7kPCf9c5lNqm1pi/2wxjpbYqApP8H5LU3HKb9d8Dc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 18 Jun 2025 17:46:31 GMT"
+          "Value": "Thu, 26 Jun 2025 00:50:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mv7kPCf9c5lNqm1pi/2wxjpbYqApP8H5LU3HKb9d8Dc="
+        }
+      ]
+    },
+    {
+      "Route": "images/doctors/4709b8c8-618d-4f96-bad4-4eac104ffa34.yq5i14indc.jpg",
+      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "75925"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mv7kPCf9c5lNqm1pi/2wxjpbYqApP8H5LU3HKb9d8Dc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 00:50:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -17106,15 +17251,179 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qhvmu0qt2x"
+          "Value": "yq5i14indc"
         },
         {
           "Name": "label",
-          "Value": "images/default-doctor.jpg.placeholder"
+          "Value": "images/doctors/4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-EvmjFbkwDLnAfcUX0FNs7/XWy6tf9IFDzAoQZMXG0wg="
+          "Value": "sha256-mv7kPCf9c5lNqm1pi/2wxjpbYqApP8H5LU3HKb9d8Dc="
+        }
+      ]
+    },
+    {
+      "Route": "images/doctors/773784a9-afdd-4c71-940a-2a199e534735.jpg",
+      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\773784a9-afdd-4c71-940a-2a199e534735.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8429"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WlKN752jVyabTspRnmSeQtqJdLOXfacrq+lhDoUIiZo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 01:19:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlKN752jVyabTspRnmSeQtqJdLOXfacrq+lhDoUIiZo="
+        }
+      ]
+    },
+    {
+      "Route": "images/doctors/773784a9-afdd-4c71-940a-2a199e534735.yltfak9zoo.jpg",
+      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\773784a9-afdd-4c71-940a-2a199e534735.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8429"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WlKN752jVyabTspRnmSeQtqJdLOXfacrq+lhDoUIiZo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 01:19:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yltfak9zoo"
+        },
+        {
+          "Name": "label",
+          "Value": "images/doctors/773784a9-afdd-4c71-940a-2a199e534735.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlKN752jVyabTspRnmSeQtqJdLOXfacrq+lhDoUIiZo="
+        }
+      ]
+    },
+    {
+      "Route": "images/doctors/775029fb-1a43-4b96-9b6c-a81193da043c.flerrmd1fn.jpg",
+      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\775029fb-1a43-4b96-9b6c-a81193da043c.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6341"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"o6XuqxxAK/Jcc1nhmCVFUmyEh/4lR+LuBPX4fQ4fXSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 01:16:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "flerrmd1fn"
+        },
+        {
+          "Name": "label",
+          "Value": "images/doctors/775029fb-1a43-4b96-9b6c-a81193da043c.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-o6XuqxxAK/Jcc1nhmCVFUmyEh/4lR+LuBPX4fQ4fXSg="
+        }
+      ]
+    },
+    {
+      "Route": "images/doctors/775029fb-1a43-4b96-9b6c-a81193da043c.jpg",
+      "AssetFile": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\775029fb-1a43-4b96-9b6c-a81193da043c.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6341"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"o6XuqxxAK/Jcc1nhmCVFUmyEh/4lR+LuBPX4fQ4fXSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 01:16:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-o6XuqxxAK/Jcc1nhmCVFUmyEh/4lR+LuBPX4fQ4fXSg="
         }
       ]
     },

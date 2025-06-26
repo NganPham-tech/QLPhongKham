@@ -88,12 +88,21 @@
                                     <label for="appointmentTime" class="form-label">Giờ khám *</label>
                                     <select id="appointmentTime" name="appointmentTime" class="form-select" required>
                                         <option value="">-- Chọn giờ --</option>
-                                        @for (int hour = 8; hour <= 16; hour++)
+                                        @for (int hour = 8; hour <= 17; hour++)
                                         {
-                                            @for (int minute = 0; minute < 60; minute += 30)
+                                            @if (hour == 17)
                                             {
-                                                var time = $"{hour:D2}:{minute:D2}";
-                                                <option value="@time">@time</option>
+                                                // Chỉ thêm 17:00, không thêm 17:30
+                                                var timeSlot = $"{hour:D2}:00";
+                                                <option value="@timeSlot">@timeSlot</option>
+                                            }
+                                            else
+                                            {
+                                                @for (int minute = 0; minute < 60; minute += 30)
+                                                {
+                                                    var timeSlot = $"{hour:D2}:{minute:D2}";
+                                                    <option value="@timeSlot">@timeSlot</option>
+                                                }
                                             }
                                         }
                                     </select>
@@ -240,11 +249,11 @@
         // Check if date is a holiday
         function checkIfHoliday(date) {
             const holidays = [
-                { month: 1, day: 1 },   // Tết Dương lịch
-                { month: 4, day: 30 },  // Giải phóng miền Nam
-                { month: 5, day: 1 },   // Quốc tế Lao động
-                { month: 9, day: 2 },   // Quốc khánh
-                { month: 12, day: 25 }  // Noel
+                { month: 1, day: 1 },   
+                { month: 4, day: 30 },  
+                { month: 5, day: 1 },   
+                { month: 9, day: 2 },  
+                { month: 12, day: 25 }  
             ];
             
             return holidays.some(holiday => 
@@ -331,7 +340,11 @@
                 return;
             }
             
-            const appointmentDateTime = new Date(date + 'T' + time);
+            // Gửi ngày và giờ riêng biệt để tránh vấn đề timezone
+            // Debug logging
+            console.log('Date:', date);
+            console.log('Time:', time);
+            console.log('Sending separate date and time to avoid timezone issues');
             
             // Disable submit button and show loading
             $('#submitBtn').prop('disabled', true);
@@ -340,7 +353,8 @@
             $.post('@Url.Action("BookAppointment", "PatientPortal")', {
                 doctorId: doctorId,
                 serviceId: serviceId,
-                appointmentDate: appointmentDateTime.toISOString(),
+                appointmentDate: date,
+                appointmentTime: time,
                 notes: notes
             })            .done(function(data) {
                 if (data.success) {

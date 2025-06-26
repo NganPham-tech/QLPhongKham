@@ -118,7 +118,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
             }
 
             return View(appointment);
-        }        // GET: Admin/Appointment/Create
+        }      
         public async Task<IActionResult> Create()
         {
             var viewModel = new AppointmentCreateViewModel
@@ -131,7 +131,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        // GET: Admin/Appointment/Create (with debug logging)
+       
         public async Task<IActionResult> CreateWithDebug()
         {
             var patients = await _context.Patients.OrderBy(p => p.FirstName).ToListAsync();
@@ -146,7 +146,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
                 Services = services
             };
 
-            // Log debug info
+          
             Console.WriteLine($"Total patients: {patients.Count}");
             Console.WriteLine($"Total doctors: {allDoctors.Count}");
             Console.WriteLine($"Active doctors: {activeDoctors.Count}");
@@ -168,20 +168,46 @@ namespace QLPhongKham.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {                    // Kiểm tra xung đột lịch hẹn - tính toán thời gian trước khi query
-                    var appointmentStart = model.AppointmentDate.AddMinutes(-30);
-                    var appointmentEnd = model.AppointmentDate.AddMinutes(30);
+                {
+                    // Kiểm tra giờ làm việc
+                    var appointmentTime = model.AppointmentDate;
+                    var hour = appointmentTime.Hour;
+                    var dayOfWeek = appointmentTime.DayOfWeek;
                     
-                    var conflictingAppointment = await _context.Appointments
+                    // Debug logging
+                    Console.WriteLine($"Server validation - AppointmentTime: {appointmentTime}, Hour: {hour}, DayOfWeek: {dayOfWeek}");
+                    
+                    // Kiểm tra cuối tuần
+                    if (dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday)
+                    {
+                        ModelState.AddModelError("AppointmentDate", "Phòng khám chỉ làm việc từ thứ 2 đến thứ 6.");
+                        await LoadDropdownData(model);
+                        return View(model);
+                    }
+                    
+                    // Kiểm tra giờ làm việc (8:00 - 17:59)
+                    if (hour < 8 || hour >= 18)
+                    {
+                        Console.WriteLine($"Working hours validation failed - Hour: {hour}");
+                        ModelState.AddModelError("AppointmentDate", "Phòng khám chỉ làm việc từ 8:00 đến 17:59. Vui lòng chọn giờ trong khoảng thời gian này.");
+                        await LoadDropdownData(model);
+                        return View(model);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Working hours validation passed - Hour: {hour}");
+                    }
+
+                    // Kiểm tra xung đột lịch hẹn - chỉ kiểm tra cùng thời gian chính xác
+                    var existingAppointment = await _context.Appointments
                         .Where(a => a.DoctorId == model.DoctorId && 
-                               a.AppointmentDate >= appointmentStart &&
-                               a.AppointmentDate <= appointmentEnd &&
+                               a.AppointmentDate == model.AppointmentDate &&
                                a.Status != "Cancelled")
                         .FirstOrDefaultAsync();
 
-                    if (conflictingAppointment != null)
+                    if (existingAppointment != null)
                     {
-                        ModelState.AddModelError("AppointmentDate", "Bác sĩ đã có lịch hẹn trong khoảng thời gian này.");
+                        ModelState.AddModelError("AppointmentDate", "Bác sĩ đã có lịch hẹn vào thời gian này.");
                         await LoadDropdownData(model);
                         return View(model);
                     }
@@ -261,21 +287,40 @@ namespace QLPhongKham.Areas.Admin.Controllers
                     if (appointment == null)
                     {
                         return NotFound();
-                    }                    // Kiểm tra xung đột lịch hẹn (trừ lịch hẹn hiện tại)
-                    var appointmentStart = model.AppointmentDate.AddMinutes(-30);
-                    var appointmentEnd = model.AppointmentDate.AddMinutes(30);
+                    }
+
+                    // Kiểm tra giờ làm việc
+                    var appointmentTime = model.AppointmentDate;
+                    var hour = appointmentTime.Hour;
+                    var dayOfWeek = appointmentTime.DayOfWeek;
                     
+                    // Kiểm tra cuối tuần
+                    if (dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday)
+                    {
+                        ModelState.AddModelError("AppointmentDate", "Phòng khám chỉ làm việc từ thứ 2 đến thứ 6.");
+                        await LoadDropdownData(model);
+                        return View(model);
+                    }
+                    
+                    // Kiểm tra giờ làm việc (8:00 - 17:59)
+                    if (hour < 8 || hour >= 18)
+                    {
+                        ModelState.AddModelError("AppointmentDate", "Phòng khám chỉ làm việc từ 8:00 đến 17:59. Vui lòng chọn giờ trong khoảng thời gian này.");
+                        await LoadDropdownData(model);
+                        return View(model);
+                    }
+
+                    // Kiểm tra xung đột lịch hẹn (trừ lịch hẹn hiện tại)                    
                     var conflictingAppointment = await _context.Appointments
                         .Where(a => a.DoctorId == model.DoctorId && 
                                a.AppointmentId != model.AppointmentId &&
-                               a.AppointmentDate >= appointmentStart &&
-                               a.AppointmentDate <= appointmentEnd &&
+                               a.AppointmentDate == model.AppointmentDate &&
                                a.Status != "Cancelled")
                         .FirstOrDefaultAsync();
 
                     if (conflictingAppointment != null)
                     {
-                        ModelState.AddModelError("AppointmentDate", "Bác sĩ đã có lịch hẹn trong khoảng thời gian này.");
+                        ModelState.AddModelError("AppointmentDate", "Bác sĩ đã có lịch hẹn vào thời gian này.");
                         await LoadDropdownData(model);
                         return View(model);
                     }
@@ -451,21 +496,17 @@ namespace QLPhongKham.Areas.Admin.Controllers
                 if (appointment == null)
                 {
                     return Json(new { success = false, message = "Không tìm thấy lịch hẹn" });
-                }                // Kiểm tra xung đột
-                var appointmentStart = newDateTime.AddMinutes(-30);
-                var appointmentEnd = newDateTime.AddMinutes(30);
-                
+                }                // Kiểm tra xung đột - chỉ kiểm tra cùng thời gian chính xác                
                 var conflictingAppointment = await _context.Appointments
                     .Where(a => a.DoctorId == appointment.DoctorId && 
                            a.AppointmentId != appointment.AppointmentId &&
-                           a.AppointmentDate >= appointmentStart &&
-                           a.AppointmentDate <= appointmentEnd &&
+                           a.AppointmentDate == newDateTime &&
                            a.Status != "Cancelled")
                     .FirstOrDefaultAsync();
 
                 if (conflictingAppointment != null)
                 {
-                    return Json(new { success = false, message = "Bác sĩ đã có lịch hẹn trong khoảng thời gian này" });
+                    return Json(new { success = false, message = "Bác sĩ đã có lịch hẹn vào thời gian này" });
                 }
 
                 appointment.AppointmentDate = newDateTime;
@@ -525,7 +566,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Admin/Appointment/GetServiceInfo
+       
         [HttpGet]
         public async Task<IActionResult> GetServiceInfo(int serviceId)
         {
@@ -551,18 +592,14 @@ namespace QLPhongKham.Areas.Admin.Controllers
             }
         }
 
-        // POST: Admin/Appointment/CheckConflict        [HttpPost]
+       
         public async Task<IActionResult> CheckConflict(int doctorId, DateTime appointmentDate, int? excludeAppointmentId = null)
         {
             try
             {
-                var appointmentStart = appointmentDate.AddMinutes(-30);
-                var appointmentEnd = appointmentDate.AddMinutes(30);
-                
                 var query = _context.Appointments
                     .Where(a => a.DoctorId == doctorId &&
-                               a.AppointmentDate >= appointmentStart &&
-                               a.AppointmentDate <= appointmentEnd &&
+                               a.AppointmentDate == appointmentDate &&
                                a.Status != "Cancelled");
 
                 if (excludeAppointmentId.HasValue)
@@ -579,7 +616,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
                     return Json(new
                     {
                         hasConflict = true,
-                        message = $"Bác sĩ đã có lịch hẹn với {conflictingAppointment.Patient.FullName} lúc {conflictingAppointment.AppointmentDate:HH:mm}"
+                        message = $"Bác sĩ đã có lịch hẹn với {conflictingAppointment.Patient.FullName} vào thời gian này"
                     });
                 }
 

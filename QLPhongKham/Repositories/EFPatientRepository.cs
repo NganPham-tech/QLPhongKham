@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QLPhongKham.Data; // ADD THIS LINE
+using QLPhongKham.Data; 
 using QLPhongKham.Models;
 using System.Collections.Generic;
 using System.Linq;

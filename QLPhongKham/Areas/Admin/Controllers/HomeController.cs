@@ -30,7 +30,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
                 var today = DateTime.Today;
                 var tomorrow = today.AddDays(1);
                 
-                // Get appointment statistics
+            
                 var allAppointments = await _context.Appointments.ToListAsync();
                 var todayAppointments = await _context.Appointments
                     .Where(a => a.AppointmentDate >= today && a.AppointmentDate < tomorrow)

@@ -57,6 +57,18 @@
       "PackagePath": "staticwebassets\\images\\default-doctor.jpg.placeholder"
     },
     {
+      "Id": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg",
+      "PackagePath": "staticwebassets\\images\\doctors\\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg"
+    },
+    {
+      "Id": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\773784a9-afdd-4c71-940a-2a199e534735.jpg",
+      "PackagePath": "staticwebassets\\images\\doctors\\773784a9-afdd-4c71-940a-2a199e534735.jpg"
+    },
+    {
+      "Id": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\775029fb-1a43-4b96-9b6c-a81193da043c.jpg",
+      "PackagePath": "staticwebassets\\images\\doctors\\775029fb-1a43-4b96-9b6c-a81193da043c.jpg"
+    },
+    {
       "Id": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\images\\doctors\\ab9aa4e2-8ad3-4884-9e0c-d4f6ebaf4907.jpg",
       "PackagePath": "staticwebassets\\images\\doctors\\ab9aa4e2-8ad3-4884-9e0c-d4f6ebaf4907.jpg"
     },

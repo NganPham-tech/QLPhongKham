@@ -295,8 +295,6 @@ namespace QLPhongKham.Areas.Admin.Controllers
         // GET: Admin/Payment/CreateForInvoice/5
         public async Task<IActionResult> CreateForInvoice(int invoiceId)
         {
-            Console.WriteLine($"=== CreateForInvoice GET - InvoiceId: {invoiceId} ===");
-
             // Lấy thông tin invoice trực tiếp từ context
             var invoice = await _context.Invoices
                 .Include(i => i.Patient)
@@ -312,10 +310,6 @@ namespace QLPhongKham.Areas.Admin.Controllers
                 TempData["Error"] = "Không tìm thấy hóa đơn.";
                 return RedirectToAction("Index", "Invoice");
             }
-
-            Console.WriteLine($"Invoice found: {invoice.InvoiceNumber}, Status: {invoice.Status}");
-            Console.WriteLine($"Total Amount: {invoice.TotalAmount}, Paid Amount: {invoice.PaidAmount}");
-            Console.WriteLine($"Remaining Amount: {invoice.RemainingAmount}");
 
             if (invoice.RemainingAmount <= 0)
             {
@@ -344,9 +338,6 @@ namespace QLPhongKham.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateForInvoice(Payment model)
         {
-            Console.WriteLine("=== CreateForInvoice POST ===");
-            Console.WriteLine($"InvoiceId: {model.InvoiceId}, Amount: {model.AmountPaid}");
-
             try
             {
                 // Lấy invoice để validate
@@ -356,94 +347,91 @@ namespace QLPhongKham.Areas.Admin.Controllers
 
                 if (invoice == null)
                 {
-                    ModelState.AddModelError("", "Không tìm thấy hóa đơn.");
-                    return View(model);
+                    TempData["Error"] = "Không tìm thấy hóa đơn.";
+                    return RedirectToAction("Index");
                 }
 
                 // Kiểm tra số tiền thanh toán
                 if (model.AmountPaid <= 0)
                 {
-                    ModelState.AddModelError("AmountPaid", "Số tiền thanh toán phải lớn hơn 0.");
-                    await ReloadCreateForInvoiceViewBagData(model.InvoiceId);
-                    return View(model);
+                    TempData["Error"] = "Số tiền thanh toán phải lớn hơn 0.";
+                    return RedirectToAction("CreateForInvoice", new { invoiceId = model.InvoiceId });
                 }
 
                 if (model.AmountPaid > invoice.RemainingAmount)
                 {
-                    ModelState.AddModelError("AmountPaid", $"Số tiền thanh toán không thể lớn hơn số tiền còn lại ({invoice.RemainingAmount:N0} VNĐ).");
-                    await ReloadCreateForInvoiceViewBagData(model.InvoiceId);
-                    return View(model);
+                    TempData["Error"] = $"Số tiền thanh toán không thể lớn hơn số tiền còn lại ({invoice.RemainingAmount:N0} VNĐ).";
+                    return RedirectToAction("CreateForInvoice", new { invoiceId = model.InvoiceId });
                 }
 
-                // Tạo payment
+                // Tạo payment number đơn giản
+                var year = DateTime.Now.Year;
+                var lastPayment = await _context.Payments
+                    .Where(p => p.CreatedDate.Year == year)
+                    .OrderByDescending(p => p.PaymentId)
+                    .FirstOrDefaultAsync();
+
+                int nextNumber = 1;
+                if (lastPayment != null && !string.IsNullOrEmpty(lastPayment.PaymentNumber))
+                {
+                    var parts = lastPayment.PaymentNumber.Split('-');
+                    if (parts.Length == 3 && int.TryParse(parts[2], out int lastNumber))
+                    {
+                        nextNumber = lastNumber + 1;
+                    }
+                }
+
+                var paymentNumber = $"PAY-{year}-{nextNumber:D4}";
+
+                // Tạo payment trực tiếp
                 var payment = new Payment
                 {
                     InvoiceId = model.InvoiceId,
-                    PaymentNumber = await GeneratePaymentNumberAsync(),
+                    PaymentNumber = paymentNumber,
                     PaymentDate = model.PaymentDate,
                     AmountPaid = model.AmountPaid,
                     PaymentMethod = model.PaymentMethod,
-                    Status = model.Status,
+                    Status = "Completed", // Luôn set Completed
                     BankTransactionId = model.BankTransactionId,
                     BankName = model.BankName,
                     CardLastFourDigits = model.CardLastFourDigits,
                     AuthorizationCode = model.AuthorizationCode,
                     TransactionFee = model.TransactionFee,
                     Notes = model.Notes,
-                    CollectedByStaffId = GetCurrentStaffId(),
-                    Invoice = invoice
+                    CollectedByStaffId = null, // Set null để tránh foreign key constraint
+                    CreatedDate = DateTime.Now
                 };
 
+                // Lưu payment vào database
                 _context.Payments.Add(payment);
 
-                // Cập nhật số tiền đã thanh toán của invoice
+                // Cập nhật invoice
                 invoice.PaidAmount += model.AmountPaid;
                 invoice.UpdatedDate = DateTime.Now;
 
-                // Nếu thanh toán đủ, cập nhật trạng thái invoice
+                // Cập nhật trạng thái invoice
                 if (invoice.RemainingAmount <= 0)
                 {
                     invoice.Status = "Paid";
                 }
+                else if (invoice.PaidAmount > 0)
+                {
+                    invoice.Status = "Partial";
+                }
 
                 await _context.SaveChangesAsync();
 
-                Console.WriteLine("Payment created successfully");
                 TempData["Success"] = "Thanh toán thành công!";
                 return RedirectToAction("Details", "Invoice", new { id = model.InvoiceId });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                ModelState.AddModelError("", "Có lỗi xảy ra: " + ex.Message);
-                
-                await ReloadCreateForInvoiceViewBagData(model.InvoiceId);
-                return View(model);
+                TempData["Error"] = "Có lỗi xảy ra: " + ex.Message;
+                return RedirectToAction("CreateForInvoice", new { invoiceId = model.InvoiceId });
             }
         }
 
         // Helper method cho CreateForInvoice
-        private async Task<string> GeneratePaymentNumberAsync()
-        {
-            var year = DateTime.Now.Year;
-            var lastPayment = await _context.Payments
-                .Where(p => p.CreatedDate.Year == year)
-                .OrderByDescending(p => p.PaymentId)
-                .FirstOrDefaultAsync();
-
-            int nextNumber = 1;
-            if (lastPayment != null)
-            {
-                var parts = lastPayment.PaymentNumber.Split('-');
-                if (parts.Length == 3 && int.TryParse(parts[2], out int lastNumber))
-                {
-                    nextNumber = lastNumber + 1;
-                }
-            }
-
-            return $"PAY-{year}-{nextNumber:D4}";
-        }
-
         private async Task ReloadCreateForInvoiceViewBagData(int invoiceId)
         {
             var invoice = await _context.Invoices
@@ -458,9 +446,116 @@ namespace QLPhongKham.Areas.Admin.Controllers
 
         private int GetCurrentStaffId()
         {
-            // TODO: Implement logic to get current staff ID from logged-in user
-            // This is a placeholder implementation
+            // Đơn giản hóa: trả về 1 cho admin
             return 1;
+        }
+
+        // GET: Admin/Payment/TestDb
+        public async Task<IActionResult> TestDb()
+        {
+            try
+            {
+                // Test basic database operations
+                var invoiceCount = await _context.Invoices.CountAsync();
+                var paymentCount = await _context.Payments.CountAsync();
+                
+                // Test creating a simple payment
+                var testInvoice = await _context.Invoices.FirstOrDefaultAsync();
+                
+                return Json(new { 
+                    success = true,
+                    invoiceCount,
+                    paymentCount,
+                    hasInvoices = testInvoice != null,
+                    sampleInvoiceId = testInvoice?.InvoiceId,
+                    sampleRemainingAmount = testInvoice?.RemainingAmount
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { 
+                    success = false, 
+                    error = ex.Message,
+                    stackTrace = ex.StackTrace
+                });
+            }
+        }
+
+        // GET: Admin/Payment/TestPayment/5
+        public async Task<IActionResult> TestPayment(int invoiceId, decimal amount = 100000)
+        {
+            try
+            {
+                Console.WriteLine($"=== TEST PAYMENT - InvoiceId: {invoiceId}, Amount: {amount} ===");
+                
+                // Lấy invoice
+                var invoice = await _context.Invoices
+                    .Include(i => i.Payments)
+                    .FirstOrDefaultAsync(i => i.InvoiceId == invoiceId);
+
+                if (invoice == null)
+                {
+                    return Json(new { success = false, error = "Invoice not found" });
+                }
+
+                // Validate amount
+                if (amount > invoice.RemainingAmount)
+                {
+                    return Json(new { success = false, error = $"Amount {amount} > remaining {invoice.RemainingAmount}" });
+                }
+
+                // Tạo payment number
+                var year = DateTime.Now.Year;
+                var paymentNumber = $"PAY-{year}-TEST{DateTime.Now:HHmmss}";
+
+                // Tạo payment
+                var payment = new Payment
+                {
+                    InvoiceId = invoiceId,
+                    PaymentNumber = paymentNumber,
+                    PaymentDate = DateTime.Now,
+                    AmountPaid = amount,
+                    PaymentMethod = "Cash",
+                    Status = "Completed",
+                    Notes = "Test payment",
+                    CollectedByStaffId = null,
+                    CreatedDate = DateTime.Now
+                };
+
+                _context.Payments.Add(payment);
+
+                // Cập nhật invoice
+                invoice.PaidAmount += amount;
+                invoice.UpdatedDate = DateTime.Now;
+
+                if (invoice.RemainingAmount <= 0)
+                {
+                    invoice.Status = "Paid";
+                }
+                else if (invoice.PaidAmount > 0)
+                {
+                    invoice.Status = "Partial";
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Json(new { 
+                    success = true, 
+                    paymentId = payment.PaymentId,
+                    paymentNumber = payment.PaymentNumber,
+                    newPaidAmount = invoice.PaidAmount,
+                    newRemainingAmount = invoice.RemainingAmount,
+                    newStatus = invoice.Status
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { 
+                    success = false, 
+                    error = ex.Message,
+                    stackTrace = ex.StackTrace
+                });
+            }
         }
     }
 }

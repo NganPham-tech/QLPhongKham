@@ -228,11 +228,65 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qhvmu0qt2x</Fingerprint>
-      <Integrity>EvmjFbkwDLnAfcUX0FNs7/XWy6tf9IFDzAoQZMXG0wg=</Integrity>
+      <Fingerprint>5ipweew5fc</Fingerprint>
+      <Integrity>47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\default-doctor.jpg.placeholder'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\doctors\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>QLPhongKham</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/QLPhongKham</BasePath>
+      <RelativePath>images/doctors/4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yq5i14indc</Fingerprint>
+      <Integrity>mv7kPCf9c5lNqm1pi/2wxjpbYqApP8H5LU3HKb9d8Dc=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\doctors\4709b8c8-618d-4f96-bad4-4eac104ffa34.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\doctors\773784a9-afdd-4c71-940a-2a199e534735.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>QLPhongKham</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/QLPhongKham</BasePath>
+      <RelativePath>images/doctors/773784a9-afdd-4c71-940a-2a199e534735.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yltfak9zoo</Fingerprint>
+      <Integrity>WlKN752jVyabTspRnmSeQtqJdLOXfacrq+lhDoUIiZo=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\doctors\773784a9-afdd-4c71-940a-2a199e534735.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\doctors\775029fb-1a43-4b96-9b6c-a81193da043c.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>QLPhongKham</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/QLPhongKham</BasePath>
+      <RelativePath>images/doctors/775029fb-1a43-4b96-9b6c-a81193da043c.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>flerrmd1fn</Fingerprint>
+      <Integrity>o6XuqxxAK/Jcc1nhmCVFUmyEh/4lR+LuBPX4fQ4fXSg=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\doctors\775029fb-1a43-4b96-9b6c-a81193da043c.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\doctors\ab9aa4e2-8ad3-4884-9e0c-d4f6ebaf4907.jpg'))">
       <SourceType>Package</SourceType>

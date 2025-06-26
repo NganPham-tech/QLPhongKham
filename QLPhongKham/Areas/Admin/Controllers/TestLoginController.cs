@@ -17,7 +17,6 @@ namespace QLPhongKham.Areas.Admin.Controllers
             _userManager = userManager;
         }
 
-        // Test action để kiểm tra điều hướng admin
         [HttpGet]
         [Route("/TestAdminLogin")]
         public async Task<IActionResult> TestAdminLogin()

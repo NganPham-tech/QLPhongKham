@@ -17,7 +17,6 @@ namespace QLPhongKham.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/Invoice
         public async Task<IActionResult> Index(string status = "", string search = "", DateTime? fromDate = null, DateTime? toDate = null)
         {
             ViewBag.CurrentStatus = status;
@@ -25,7 +24,7 @@ namespace QLPhongKham.Areas.Admin.Controllers
             ViewBag.FromDate = fromDate?.ToString("yyyy-MM-dd");
             ViewBag.ToDate = toDate?.ToString("yyyy-MM-dd");
 
-            // Sử dụng context trực tiếp thay vì service
+            
             var invoices = await _context.Invoices
                 .Include(i => i.Patient)
                 .Include(i => i.Staff)
@@ -78,6 +77,131 @@ namespace QLPhongKham.Areas.Admin.Controllers
             return View(invoice);
         }
 
+        // GET: Admin/Invoice/Create
+        public async Task<IActionResult> Create()
+        {
+            // Lấy danh sách patients
+            var patients = await _context.Patients.ToListAsync();
+            ViewBag.Patients = patients;
+
+            // Lấy danh sách services
+            var services = await _context.Services.ToListAsync();
+            ViewBag.Services = services;
+
+            // Lấy danh sách appointments chưa có hóa đơn (tất cả trừ Cancelled)
+            var appointments = await _context.Appointments
+                .Include(a => a.Patient)
+                .Include(a => a.Service)
+                .Include(a => a.Doctor)
+                .Where(a => a.Status != "Cancelled") // Cho phép tất cả trạng thái trừ Cancelled
+                .Where(a => !_context.Invoices.Any(i => i.AppointmentId == a.AppointmentId)) // Chưa có hóa đơn
+                .OrderByDescending(a => a.AppointmentDate)
+                .ToListAsync();
+            ViewBag.Appointments = appointments;
+
+            // Debug: Log số lượng appointments
+            Console.WriteLine($"=== Create Invoice GET ===");
+            Console.WriteLine($"Total appointments found: {appointments.Count}");
+            foreach (var apt in appointments.Take(3))
+            {
+                Console.WriteLine($"- {apt.Patient?.FullName}: {apt.AppointmentDate:dd/MM/yyyy HH:mm} - {apt.Status}");
+            }
+
+            var invoice = new Invoice
+            {
+                InvoiceNumber = $"INV{DateTime.Now:yyyyMMddHHmmss}",
+                CreatedDate = DateTime.Now,
+                Status = "Pending",
+                InvoiceType = "ServiceFee",
+                IsElectronic = true,
+                DiscountAmount = 0,
+                TaxAmount = 0,
+                PaidAmount = 0
+            };
+
+            return View(invoice);
+        }
+
+        // POST: Admin/Invoice/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Invoice model, int[] selectedServiceIds, decimal[] servicePrices)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // Tạo invoice number mới
+                    model.InvoiceNumber = $"INV{DateTime.Now:yyyyMMddHHmmss}";
+                    model.CreatedDate = DateTime.Now;
+                    
+                    // Tính toán các giá trị
+                    decimal subTotal = 0;
+                    
+                    if (selectedServiceIds != null && servicePrices != null)
+                    {
+                        for (int i = 0; i < selectedServiceIds.Length; i++)
+                        {
+                            subTotal += servicePrices[i];
+                        }
+                    }
+
+                    model.SubTotal = subTotal;
+                    model.TotalAmount = subTotal + model.TaxAmount - model.DiscountAmount;
+
+                    // Lưu invoice
+                    _context.Invoices.Add(model);
+                    await _context.SaveChangesAsync();
+
+                    // Tạo invoice details nếu có services
+                    if (selectedServiceIds != null && servicePrices != null)
+                    {
+                        for (int i = 0; i < selectedServiceIds.Length; i++)
+                        {
+                            var service = await _context.Services.FindAsync(selectedServiceIds[i]);
+                            if (service != null)
+                            {
+                                var detail = new InvoiceDetail
+                                {
+                                    Invoice = model, // Set required navigation property
+                                    ServiceId = selectedServiceIds[i],
+                                    Quantity = 1,
+                                    UnitPrice = servicePrices[i],
+                                    Notes = service.Name
+                                };
+                                _context.InvoiceDetails.Add(detail);
+                            }
+                        }
+                        await _context.SaveChangesAsync();
+                    }
+
+                    TempData["SuccessMessage"] = "Tạo hóa đơn thành công!";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Lỗi khi tạo hóa đơn: {ex.Message}";
+            }
+
+            // Reload data if validation fails
+            var patients = await _context.Patients.ToListAsync();
+            ViewBag.Patients = patients;
+
+            var services = await _context.Services.ToListAsync();
+            ViewBag.Services = services;
+
+            var appointments = await _context.Appointments
+                .Include(a => a.Patient)
+                .Include(a => a.Service)
+                .Include(a => a.Doctor)
+                .Where(a => a.Status == "Completed" || a.Status == "Confirmed")
+                .ToListAsync();
+            ViewBag.Appointments = appointments;
+
+            return View(model);
+        }
+
         // GET: Admin/Invoice/CreateFromAppointment/5
         public async Task<IActionResult> CreateFromAppointment(int appointmentId)
         {
@@ -101,10 +225,11 @@ namespace QLPhongKham.Areas.Admin.Controllers
 
             Console.WriteLine($"Appointment status: {appointment.Status}");
 
-            if (appointment.Status != "Completed")
+            // Chỉ từ chối cuộc hẹn đã bị hủy
+            if (appointment.Status == "Cancelled")
             {
-                Console.WriteLine("Appointment not completed");
-                TempData["Error"] = "Chỉ có thể tạo hóa đơn cho cuộc hẹn đã hoàn thành.";
+                Console.WriteLine("Cannot create invoice for cancelled appointment");
+                TempData["Error"] = "Không thể tạo hóa đơn cho cuộc hẹn đã hủy.";
                 return RedirectToAction("Index", "Appointment");
             }
 

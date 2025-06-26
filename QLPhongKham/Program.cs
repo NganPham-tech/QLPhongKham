@@ -55,6 +55,11 @@ namespace QLPhongKham
 
             var app = builder.Build();
 
+            // Test database connection
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            Console.WriteLine("Testing database connection...");
+            await TestDbConnection.TestConnection(connectionString!);
+
             // Seed roles and admin user
             using (var scope = app.Services.CreateScope())
             {
@@ -108,13 +113,6 @@ namespace QLPhongKham
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");            app.MapRazorPages();
-
-            // Seed sample data
-            using (var scope = app.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                await SampleDataSeeder.SeedSampleDataAsync(context);
-            }
 
             app.Run();
         }
