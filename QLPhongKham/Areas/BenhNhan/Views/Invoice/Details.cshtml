@@ -135,18 +135,18 @@
                             <table class="table table-borderless">
                                 <tr>
                                     <td><strong>Họ tên:</strong></td>
-                                    <td>@Model.Patient.FullName</td>
+                                    <td>@(Model.Patient?.FullName ?? "N/A")</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Ngày sinh:</strong></td>
-                                    <td>@Model.Patient.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                                    <td>@(Model.Patient?.DateOfBirth.ToString("dd/MM/yyyy") ?? "N/A")</td>
                                 </tr>                                <tr>
                                     <td><strong>Số điện thoại:</strong></td>
-                                    <td>@Model.Patient.Phone</td>
+                                    <td>@(Model.Patient?.Phone ?? "N/A")</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Địa chỉ:</strong></td>
-                                    <td>@Model.Patient.Address</td>
+                                    <td>@(Model.Patient?.Address ?? "N/A")</td>
                                 </tr>
                             </table>
                         </div>

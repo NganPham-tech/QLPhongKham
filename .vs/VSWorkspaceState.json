@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\QLPhongKham",
+    "\\QLPhongKham\\Areas",
+    "\\QLPhongKham\\Areas\\Admin",
+    "\\QLPhongKham\\Areas\\Admin\\Views",
+    "\\QLPhongKham\\Areas\\Admin\\Views\\Home",
+    "\\QLPhongKham\\Areas\\BacSi",
+    "\\QLPhongKham\\Areas\\BacSi\\Controllers",
+    "\\QLPhongKham\\Views",
+    "\\QLPhongKham\\Views\\FAQ",
+    "\\QLPhongKham\\wwwroot"
+  ],
+  "SelectedNode": "\\QLPhongKham\\Views\\FAQ",
+  "PreviewInSolutionExplorer": false
+}

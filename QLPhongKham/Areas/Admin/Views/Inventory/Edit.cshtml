@@ -1,0 +1,163 @@
+@model QLPhongKham.Models.Inventory
+
+@{
+    ViewData["Title"] = "Chỉnh Sửa Tồn Kho";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-edit me-2"></i>Chỉnh sửa thông tin tồn kho
+                    </h3>
+                    <div class="card-tools">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Thông tin thuốc -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <h5><i class="fas fa-pills"></i> Thông tin thuốc</h5>
+                                <p><strong>Tên thuốc:</strong> @Model.Medicine.Name</p>
+                                <p><strong>Mô tả:</strong> @Model.Medicine.Description</p>
+                                <p><strong>Đơn vị:</strong> @Model.Medicine.Unit</p>
+                                <p><strong>Giá:</strong> @string.Format("{0:N0} VNĐ", @Model.Medicine.UnitPrice)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="InventoryId" />
+                        <input type="hidden" asp-for="MedicineId" />
+                        <input type="hidden" asp-for="ImportDate" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="QuantityInStock" class="form-label">Số lượng trong kho</label>
+                                    <div class="input-group">
+                                        <input asp-for="QuantityInStock" class="form-control" type="number" min="0" />
+                                        <span class="input-group-text">@Model.Medicine.Unit</span>
+                                    </div>
+                                    <span asp-validation-for="QuantityInStock" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="ExpirationDate" class="form-label">Ngày hết hạn</label>
+                                    <input asp-for="ExpirationDate" class="form-control" type="date" />
+                                    <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                                    @if (Model.ExpirationDate.HasValue)
+                                    {
+                                        var daysToExpiry = (Model.ExpirationDate.Value - DateTime.Now).Days;
+                                        if (daysToExpiry < 0)
+                                        {
+                                            <small class="text-danger">Sản phẩm đã hết hạn @Math.Abs(daysToExpiry) ngày trước</small>
+                                        }
+                                        else if (daysToExpiry <= 30)
+                                        {
+                                            <small class="text-warning">Sản phẩm sẽ hết hạn trong @daysToExpiry ngày</small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-success">Còn @daysToExpiry ngày đến hạn sử dụng</small>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Nhân viên quản lý</label>
+                                    <div class="form-control bg-light text-muted">
+                                        <i class="fas fa-user me-2"></i>
+                                        @if (Model.ManagedByStaff != null)
+                                        {
+                                            <span>@Model.ManagedByStaff.Name (@Model.ManagedByStaff.Email)</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Nhân viên quản lý</span>
+                                        }
+                                    </div>
+                                    <input type="hidden" asp-for="ManagedByStaffId" />
+                                    <small class="form-text text-muted">Không thể thay đổi nhân viên quản lý</small>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="Notes" class="form-label">Ghi chú</label>
+                                    <textarea asp-for="Notes" class="form-control" rows="4" placeholder="Nhập ghi chú..."></textarea>
+                                    <span asp-validation-for="Notes" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Ngày nhập kho</label>
+                                    <input type="text" class="form-control" value="@Model.ImportDate.ToString("dd/MM/yyyy HH:mm")" readonly />
+                                    <small class="form-text text-muted">Thông tin chỉ đọc</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-save"></i> Cập nhật
+                                    </button>
+                                    <a asp-action="AdjustStock" asp-route-id="@Model.InventoryId" class="btn btn-primary ms-2">
+                                        <i class="fas fa-arrow-up-down"></i> Điều chỉnh số lượng
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@Model.InventoryId" class="btn btn-info ms-2">
+                                        <i class="fas fa-eye"></i> Xem chi tiết
+                                    </a>
+                                    <a asp-action="Index" class="btn btn-secondary ms-2">
+                                        <i class="fas fa-times"></i> Hủy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Kiểm tra ngày hết hạn
+            $('#ExpirationDate').on('change', function() {
+                var selectedDate = new Date($(this).val());
+                var today = new Date();
+                
+                if (selectedDate < today) {
+                    if (!confirm('Ngày hết hạn đã qua. Bạn có chắc chắn muốn tiếp tục?')) {
+                        $(this).val('');
+                        return;
+                    }
+                }
+            });
+            
+            // Validation form
+            $('form').on('submit', function(e) {
+                var quantity = parseInt($('#QuantityInStock').val());
+                
+                if (isNaN(quantity) || quantity < 0) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập số lượng hợp lệ (>= 0)!');
+                    $('#QuantityInStock').focus();
+                    return false;
+                }
+                
+                return confirm('Bạn có chắc chắn muốn cập nhật thông tin tồn kho?');
+            });
+        });
+    </script>
+}

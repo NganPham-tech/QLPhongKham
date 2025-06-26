@@ -20,7 +20,9 @@ namespace QLPhongKham.Areas.Admin.Controllers
         // GET: Admin/Medicine
         public async Task<IActionResult> Index()
         {
-            var medicines = await _context.Medicines.ToListAsync();
+            var medicines = await _context.Medicines
+                .Include(m => m.Inventories)
+                .ToListAsync();
             return View(medicines);
         }
 

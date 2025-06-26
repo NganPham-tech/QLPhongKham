@@ -76,6 +76,9 @@ namespace QLPhongKham.Models
         [Display(Name = "Họ và tên")]
         public string FullName => $"{FirstName} {LastName}";
 
+        [Display(Name = "Họ tên đầy đủ")]
+        public string Name => $"{FirstName} {LastName}";
+
         // Computed property for years of service
         [Display(Name = "Số năm làm việc")]
         public int YearsOfService

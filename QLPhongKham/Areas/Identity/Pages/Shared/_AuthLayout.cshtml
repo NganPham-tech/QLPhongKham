@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Phòng khám Đa khoa ABC</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Auth CSS -->
+    <link href="~/css/auth.css" rel="stylesheet" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+    <!-- Background Pattern -->
+    <div class="auth-background">
+        <div class="auth-pattern"></div>
+        <div class="auth-overlay"></div>
+    </div>
+    
+    <!-- Header -->
+    <nav class="auth-navbar">
+        <div class="container">
+            <a class="auth-brand" href="/">
+                <i class="fas fa-hospital-alt"></i>
+                <span>Phòng khám ABC</span>
+            </a>
+            <div class="auth-nav-links">
+                <a href="/" class="auth-nav-link">
+                    <i class="fas fa-home"></i>
+                    Trang chủ
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="auth-main">
+        @RenderBody()
+    </main>
+    
+    <!-- Footer -->
+    <footer class="auth-footer-bottom">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; @DateTime.Now.Year - Phòng khám Đa khoa ABC. Được phát triển với ❤️ cho sức khỏe cộng đồng.</p>
+                <div class="auth-footer-links">
+                    <a href="#" class="me-3">Chính sách bảo mật</a>
+                    <a href="#" class="me-3">Điều khoản sử dụng</a>
+                    <a href="#">Liên hệ hỗ trợ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    <!-- Auth Page Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation
+            const authCard = document.querySelector('.auth-card');
+            if (authCard) {
+                authCard.style.opacity = '0';
+                authCard.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    authCard.style.transition = 'all 0.6s ease-out';
+                    authCard.style.opacity = '1';
+                    authCard.style.transform = 'translateY(0)';
+                }, 100);
+            }
+            
+            // Add focus effects for inputs
+            const inputs = document.querySelectorAll('.auth-input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                // Check if input has value on load
+                if (input.value) {
+                    input.parentElement.classList.add('focused');
+                }
+            });
+            
+            // Add button click effect
+            const authButton = document.querySelector('.auth-button');
+            if (authButton) {
+                authButton.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('auth-button-ripple');
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

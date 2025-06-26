@@ -69,10 +69,22 @@
                                         <i class="bi bi-people me-2"></i>Nhân viên
                                     </a>
                                 </li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-person-heart me-2"></i>Bệnh nhân</a></li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Patient" asp-action="Index">
+                                        <i class="bi bi-person-heart me-2"></i>Bệnh nhân
+                                    </a>
+                                </li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-week me-2"></i>Lịch hẹn</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-file-medical me-2"></i>Bệnh án</a></li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Appointment" asp-action="Index">
+                                        <i class="bi bi-calendar-week me-2"></i>Lịch hẹn
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="MedicalRecord" asp-action="Index">
+                                        <i class="bi bi-file-medical me-2"></i>Bệnh án
+                                    </a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Service" asp-action="Index">
                                         <i class="bi bi-heart-pulse me-2"></i>Dịch vụ
@@ -81,6 +93,11 @@
                                 <li>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Medicine" asp-action="Index">
                                         <i class="bi bi-capsule me-2"></i>Thuốc
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Inventory" asp-action="Index">
+                                        <i class="bi bi-boxes me-2"></i>Tồn kho
                                     </a>
                                 </li>
                             </ul>

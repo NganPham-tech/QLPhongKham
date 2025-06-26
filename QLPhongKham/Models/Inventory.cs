@@ -20,7 +20,6 @@ namespace QLPhongKham.Models
         [Display(Name = "Ngày hết hạn")]
         public DateTime? ExpirationDate { get; set; }
 
-        [Required]
         public int ManagedByStaffId { get; set; }
 
         [DataType(DataType.Date)]
@@ -29,8 +28,10 @@ namespace QLPhongKham.Models
 
         [StringLength(200)]
         [Display(Name = "Ghi chú")]
-        public string? Notes { get; set; }        // Navigation properties
-        public required Medicine Medicine { get; set; }
-        public required Staff ManagedByStaff { get; set; }
+        public string? Notes { get; set; }
+
+        // Navigation properties
+        public Medicine? Medicine { get; set; }
+        public Staff? ManagedByStaff { get; set; }
     }
 }

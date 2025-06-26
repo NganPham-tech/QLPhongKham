@@ -1,0 +1,2118 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\LTWEB\\QLPhongKham\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\usermanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\usermanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\usermanagement\\createstaffaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\usermanagement\\createstaffaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\usermanagement\\assignrole.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\usermanagement\\assignrole.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\createsimple.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\createsimple.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\createsimplified.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\createsimplified.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\debug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\debug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\overdueinvoices.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\overdueinvoices.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\createfromappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\createfromappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\createminimal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\createminimal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\invoice\\createnolayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\invoice\\createnolayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\appointment\\debug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\appointment\\debug.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\appointment\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\appointment\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\testlogincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\testlogincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\medicinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\medicinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\medicalrecordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\debugcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\debugcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\wwwroot\\css\\auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\wwwroot\\css\\auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\wwwroot\\css\\areas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\wwwroot\\css\\areas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\bacsi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\bacsi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\bacsi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\bacsi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Migrations\\20250603142650_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:QLPhongKham\\Migrations\\20250603142650_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\PatientController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:QLPhongKham\\Areas\\NhanVien\\PatientController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:QLPhongKham\\Areas\\NhanVien\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ScaffoldingReadMe.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:QLPhongKham\\ScaffoldingReadMe.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\_viewstart.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\_viewstart.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\_viewimports.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\_viewimports.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\patient\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\patient\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\bacsi\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\bacsi\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\appointment\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\appointment\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\doctor\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\doctor\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\doctor\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\doctor\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\prescriptiondetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\prescriptiondetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\medicine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\medicine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\invoicedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\invoicedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\faq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\faq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\medicalrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\payment\\monthlyreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\payment\\monthlyreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\payment\\dailyreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\payment\\dailyreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\admin\\views\\appointment\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\admin\\views\\appointment\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\viewmodels\\usermanagementviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\viewmodels\\usermanagementviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\viewmodels\\createstaffaccountviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\viewmodels\\createstaffaccountviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\data\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\data\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\nhanvien\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\nhanvien\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\benhnhan\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\benhnhan\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\benhnhan\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\benhnhan\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\migrations\\20250608145006_initialmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\migrations\\20250608145006_initialmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\services\\ipatientlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\services\\ipatientlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\services\\idoctorlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\services\\idoctorlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\services\\doctorlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\services\\doctorlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\imedicalrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\imedicalrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\medicalrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\medicalrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\efstaffrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\efstaffrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\efpatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\efpatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\efdoctorrepository .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\efdoctorrepository .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\appointmentrepository .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\appointmentrepository .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\istaffrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\istaffrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\idoctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\idoctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\repositories\\iappointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\repositories\\iappointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\nhanvien\\_viewstart.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\nhanvien\\_viewstart.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\benhnhan\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\benhnhan\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\nhanvien\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\nhanvien\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\benhnhan\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\benhnhan\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\bacsi\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\bacsi\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\bacsi\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\bacsi\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\nhanvien\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\nhanvien\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\services\\userservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\services\\userservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\services\\patientlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\services\\patientlinkingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\account\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\account\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\account\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\account\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\account\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\account\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\areas\\identity\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\areas\\identity\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\qlphongkham.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\qlphongkham.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|d:\\ltweb\\qlphongkham\\qlphongkham\\qlphongkham.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2EB41DB3-7090-3D7C-B1E8-0295499FFECA}|QLPhongKham\\QLPhongKham.csproj|solutionrelative:qlphongkham\\qlphongkham.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CreateSimple.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimple.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimple.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimple.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimple.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:48.624Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateSimplified.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimplified.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimplified.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimplified.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateSimplified.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:48.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Debug.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Debug.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Debug.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Debug.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Debug.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:46.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Edit.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Edit.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Edit.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:45.652Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Index.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:45.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\Index.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\Index.cshtml",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T15:16:23.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateStaffAccount.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\CreateStaffAccount.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\CreateStaffAccount.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\CreateStaffAccount.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\CreateStaffAccount.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T15:25:11.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AssignRole.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\AssignRole.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\AssignRole.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\AssignRole.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\UserManagement\\AssignRole.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T15:17:43.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OverdueInvoices.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\OverdueInvoices.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\OverdueInvoices.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\OverdueInvoices.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\OverdueInvoices.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:44.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateMinimal.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateMinimal.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateMinimal.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateMinimal.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateMinimal.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:42.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CreateNoLayout.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateNoLayout.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateNoLayout.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateNoLayout.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateNoLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:39.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Debug.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Debug.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Debug.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Debug.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Debug.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:37.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Create.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Create.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Create.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Create.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:39:34.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Details.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Details.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Details.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:37:12.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "TestLoginController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\TestLoginController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\TestLoginController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\TestLoginController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\TestLoginController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:39:14.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\StaffController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\StaffController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:39:11.164Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CreateFromAppointment.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateFromAppointment.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateFromAppointment.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateFromAppointment.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Invoice\\CreateFromAppointment.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T16:37:12.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ServiceController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\ServiceController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\ServiceController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\ServiceController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\ServiceController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:39:08.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\ReportController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\ReportController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\ReportController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\ReportController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAkwDQAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:39:04.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "MedicineController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\MedicineController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\MedicineController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\MedicineController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\MedicineController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAgwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:38:53.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UserManagementController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\UserManagementController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\UserManagementController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\UserManagementController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\UserManagementController.cs",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAkwM8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:11:07.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "MedicalRecordController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\MedicalRecordController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\MedicalRecordController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\MedicalRecordController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\MedicalRecordController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwCMAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:38:48.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "InvoiceController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\InvoiceController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\InvoiceController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\InvoiceController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\InvoiceController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:38:41.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAYwE4AAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:38:26.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "DebugController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\DebugController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\DebugController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\DebugController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\DebugController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBAAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:38:16.14Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\PaymentController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\PaymentController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\PaymentController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAiwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T09:46:57.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AppointmentController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\AppointmentController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\AppointmentController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\AppointmentController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\AppointmentController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T16:38:03.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "auth.css",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\auth.css",
+              "RelativeDocumentMoniker": "QLPhongKham\\wwwroot\\css\\auth.css",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\auth.css",
+              "RelativeToolTip": "QLPhongKham\\wwwroot\\css\\auth.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIQCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-25T16:37:19.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAO8AAAAAAAAAAAAawPkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T15:44:26.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "areas.css",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\areas.css",
+              "RelativeDocumentMoniker": "QLPhongKham\\wwwroot\\css\\areas.css",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\areas.css",
+              "RelativeToolTip": "QLPhongKham\\wwwroot\\css\\areas.css",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-08T10:35:55.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "DoctorController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\DoctorController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Controllers\\DoctorController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Controllers\\DoctorController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Controllers\\DoctorController.cs",
+              "ViewState": "AgIAACMBAAAAAAAAAAAQwDABAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T14:25:13.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Patient\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\Patient\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Patient\\Index.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\Patient\\Index.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAD8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-22T07:49:23.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "AppointmentController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Controllers\\AppointmentController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BacSi\\Controllers\\AppointmentController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Controllers\\AppointmentController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BacSi\\Controllers\\AppointmentController.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAcwE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:12:55.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:33:48.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Appointment.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Appointment.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Appointment.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Appointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T13:56:39.155Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BacSi\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BacSi\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAcwDAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:12:24.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BacSi\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BacSi\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAFsBAAAAAAAAAAAcwG0BAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:19:16.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAcwJwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T17:05:09.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAcwE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T15:52:03.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "_ViewImports.cshtml.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\_ViewImports.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T14:07:36.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "_ViewStart.cshtml.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T14:07:38.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Patient.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Patient.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Patient.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Patient.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Patient.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAkwEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T13:50:53.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Edit.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Edit.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Edit.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T15:41:24.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Staff.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Staff.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Staff.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Staff.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Staff.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAwwF8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:08:33.773Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:35:06.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Service.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Service.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Service.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Service.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Service.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAA5wCAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T13:56:06.992Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Edit.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Edit.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Edit.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T15:41:22.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Delete.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Delete.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Delete.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Doctor\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T15:41:22.828Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "PrescriptionDetail.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\PrescriptionDetail.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\PrescriptionDetail.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\PrescriptionDetail.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\PrescriptionDetail.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAQwBkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:00:37.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Payment.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Payment.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Payment.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAIwCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:13:21.939Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\ApplicationDbContext.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAcwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:15:14.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "Article.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Article.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Article.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Article.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Article.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:28:15.457Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Medicine.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Medicine.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Medicine.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Medicine.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Medicine.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:01:16.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "InvoiceDetail.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\InvoiceDetail.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\InvoiceDetail.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\InvoiceDetail.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\InvoiceDetail.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAIwCUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:12:35.992Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Invoice.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Invoice.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Invoice.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Invoice.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA3wCsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:11:35.921Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Inventory.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Inventory.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Inventory.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Inventory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:01:51.644Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\ErrorViewModel.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:57:49.058Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "FAQ.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\FAQ.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\FAQ.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\FAQ.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\FAQ.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:28:11.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "MedicalRecord.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\MedicalRecord.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\MedicalRecord.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\MedicalRecord.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\MedicalRecord.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAA0wDMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T13:57:27.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Notification.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Notification.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:28:06.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "Prescription.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Prescription.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Prescription.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Prescription.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Prescription.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAQwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:00:01.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Doctor.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Models\\Doctor.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Models\\Doctor.cs",
+              "RelativeToolTip": "QLPhongKham\\Models\\Doctor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:09:10.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "MonthlyReport.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Payment\\MonthlyReport.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Payment\\MonthlyReport.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Payment\\MonthlyReport.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Payment\\MonthlyReport.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAiwCgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-22T10:29:37.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T15:20:21.006Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ViewState": "AgIAAPcAAAAAAAAAAAAUwAgBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T17:04:24.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ViewState": "AgIAABEBAAAAAAAAAAAcwDwBAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T15:52:05.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "DailyReport.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Payment\\DailyReport.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Payment\\DailyReport.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Payment\\DailyReport.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Payment\\DailyReport.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAiwCgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-22T10:01:56.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T14:33:21.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "style.css",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\style.css",
+              "RelativeDocumentMoniker": "QLPhongKham\\wwwroot\\css\\style.css",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\style.css",
+              "RelativeToolTip": "QLPhongKham\\wwwroot\\css\\style.css",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAiwNAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-03T15:09:28.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Index.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Admin\\Views\\Appointment\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-19T15:36:25.842Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ViewModels\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\ViewModels\\DashboardViewModel.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ViewModels\\DashboardViewModel.cs",
+              "RelativeToolTip": "QLPhongKham\\ViewModels\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T15:43:25.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "UserManagementViewModels.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ViewModels\\UserManagementViewModels.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\ViewModels\\UserManagementViewModels.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ViewModels\\UserManagementViewModels.cs",
+              "RelativeToolTip": "QLPhongKham\\ViewModels\\UserManagementViewModels.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAwwBIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:51:10Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "CreateStaffAccountViewModel.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ViewModels\\CreateStaffAccountViewModel.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\ViewModels\\CreateStaffAccountViewModel.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ViewModels\\CreateStaffAccountViewModel.cs",
+              "RelativeToolTip": "QLPhongKham\\ViewModels\\CreateStaffAccountViewModel.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAADwvwQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T15:07:02.9Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Program.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Program.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Program.cs",
+              "RelativeToolTip": "QLPhongKham\\Program.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAcwGQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T13:47:59.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "IServiceRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IServiceRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\IServiceRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IServiceRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\IServiceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:44:38.553Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "RoleSeeder.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Data\\RoleSeeder.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Data\\RoleSeeder.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Data\\RoleSeeder.cs",
+              "RelativeToolTip": "QLPhongKham\\Data\\RoleSeeder.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAcwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:39:33.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "PatientController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\PatientController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\NhanVien\\PatientController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\PatientController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\NhanVien\\PatientController.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAUwE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:15:49.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "AppointmentController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\AppointmentController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\NhanVien\\AppointmentController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\AppointmentController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\NhanVien\\AppointmentController.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAUwGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:15:17.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\HomeController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\NhanVien\\HomeController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\HomeController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\NhanVien\\HomeController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAUwCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:14:38.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\HomeController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BenhNhan\\HomeController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\HomeController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BenhNhan\\HomeController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAA2wC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:13:34.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "AppointmentController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\AppointmentController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BenhNhan\\AppointmentController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\AppointmentController.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BenhNhan\\AppointmentController.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAcwFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:14:04.485Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "QLPhongKham\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T15:31:06.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "20250608145006_InitialMigration.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Migrations\\20250608145006_InitialMigration.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Migrations\\20250608145006_InitialMigration.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Migrations\\20250608145006_InitialMigration.cs",
+              "RelativeToolTip": "QLPhongKham\\Migrations\\20250608145006_InitialMigration.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:50:06.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "IPatientLinkingService.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\IPatientLinkingService.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Services\\IPatientLinkingService.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\IPatientLinkingService.cs",
+              "RelativeToolTip": "QLPhongKham\\Services\\IPatientLinkingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:47:17.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "IDoctorLinkingService.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\IDoctorLinkingService.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Services\\IDoctorLinkingService.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\IDoctorLinkingService.cs",
+              "RelativeToolTip": "QLPhongKham\\Services\\IDoctorLinkingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:48:21.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "DoctorLinkingService.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\DoctorLinkingService.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Services\\DoctorLinkingService.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\DoctorLinkingService.cs",
+              "RelativeToolTip": "QLPhongKham\\Services\\DoctorLinkingService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:49:38.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "IMedicalRecordRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IMedicalRecordRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\IMedicalRecordRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IMedicalRecordRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\IMedicalRecordRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:43:48.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\ServiceRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\ServiceRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\ServiceRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:45:01.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "MedicalRecordRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\MedicalRecordRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\MedicalRecordRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\MedicalRecordRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\MedicalRecordRepository.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAcwCUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:44:15.921Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 91,
+              "Title": "EFStaffRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\EFStaffRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\EFStaffRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\EFStaffRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\EFStaffRepository.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAcwB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:50:18.116Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 92,
+              "Title": "EFPatientRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\EFPatientRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\EFPatientRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\EFPatientRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\EFPatientRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:44:21.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 93,
+              "Title": "EFDoctorRepository .cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\EFDoctorRepository .cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\EFDoctorRepository .cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\EFDoctorRepository .cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\EFDoctorRepository .cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAA2wCcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:47:14.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 94,
+              "Title": "AppointmentRepository .cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\AppointmentRepository .cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\AppointmentRepository .cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\AppointmentRepository .cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\AppointmentRepository .cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:43:19.327Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 95,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\Repository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\Repository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\Repository.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAiwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:37:36.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 96,
+              "Title": "IStaffRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IStaffRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\IStaffRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IStaffRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\IStaffRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:48:21.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 97,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\IRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:36:55.092Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 98,
+              "Title": "IPatientRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IPatientRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\IPatientRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IPatientRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\IPatientRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:42:58.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 99,
+              "Title": "IDoctorRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IDoctorRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\IDoctorRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IDoctorRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\IDoctorRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:45:56.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 100,
+              "Title": "IAppointmentRepository.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IAppointmentRepository.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Repositories\\IAppointmentRepository.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Repositories\\IAppointmentRepository.cs",
+              "RelativeToolTip": "QLPhongKham\\Repositories\\IAppointmentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:42:51.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 101,
+              "Title": "_ViewStart.cshtml.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T10:34:38.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 102,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BenhNhan\\_ViewStart.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\_ViewStart.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BenhNhan\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:30:00.551Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 103,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\NhanVien\\_ViewImports.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\_ViewImports.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\NhanVien\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:31:40.975Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 104,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BenhNhan\\_ViewImports.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BenhNhan\\_ViewImports.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BenhNhan\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:30:45.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 105,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BacSi\\Views\\_ViewImports.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BacSi\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:30:58.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 106,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\BacSi\\Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\BacSi\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\BacSi\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:29:45.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 107,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\NhanVien\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T10:28:36.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 108,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAK4BAAAAAAAAAAAwwMEBAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T14:34:06.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 109,
+              "Title": "UserService .cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\UserService .cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Services\\UserService .cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\UserService .cs",
+              "RelativeToolTip": "QLPhongKham\\Services\\UserService .cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:46:46.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 110,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\IUserService.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Services\\IUserService.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\IUserService.cs",
+              "RelativeToolTip": "QLPhongKham\\Services\\IUserService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:46:13.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 111,
+              "Title": "PatientLinkingService.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\PatientLinkingService.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Services\\PatientLinkingService.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Services\\PatientLinkingService.cs",
+              "RelativeToolTip": "QLPhongKham\\Services\\PatientLinkingService.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAwwEgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:47:44.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 112,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T16:56:17.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 113,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:42:02.967Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 114,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAYwBsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:42:03.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 115,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:24:51.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 116,
+              "Title": "Logout.cshtml.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml.cs",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T08:13:44.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 117,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:24:52.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 118,
+              "Title": "Logout.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAYwA8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T16:36:53.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 119,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T15:45:55.969Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 120,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T15:25:53.462Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 121,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\_ViewImports.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:42:08.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 122,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T15:26:01.54Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 123,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "QLPhongKham\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "QLPhongKham\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:42:07.238Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ScaffoldingReadMe.txt",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ScaffoldingReadMe.txt",
+              "RelativeDocumentMoniker": "QLPhongKham\\ScaffoldingReadMe.txt",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\ScaffoldingReadMe.txt",
+              "RelativeToolTip": "QLPhongKham\\ScaffoldingReadMe.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-06-03T15:24:41.201Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 124,
+              "Title": "site.css",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "QLPhongKham\\wwwroot\\css\\site.css",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "QLPhongKham\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAABkAAAAAAAAAAAAiwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-03T15:08:37.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 125,
+              "Title": "QLPhongKham",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\QLPhongKham.csproj",
+              "RelativeDocumentMoniker": "QLPhongKham\\QLPhongKham.csproj",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\QLPhongKham.csproj",
+              "RelativeToolTip": "QLPhongKham\\QLPhongKham.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-03T13:20:33.201Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "20250603142650_InitialCreate.cs",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Migrations\\20250603142650_InitialCreate.cs",
+              "RelativeDocumentMoniker": "QLPhongKham\\Migrations\\20250603142650_InitialCreate.cs",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\Migrations\\20250603142650_InitialCreate.cs",
+              "RelativeToolTip": "QLPhongKham\\Migrations\\20250603142650_InitialCreate.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:26:50.453Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 126,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\appsettings.json",
+              "RelativeDocumentMoniker": "QLPhongKham\\appsettings.json",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\appsettings.json",
+              "RelativeToolTip": "QLPhongKham\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-03T14:18:45.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 127,
+              "Title": "QLPhongKham.csproj",
+              "DocumentMoniker": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\QLPhongKham.csproj",
+              "RelativeDocumentMoniker": "QLPhongKham\\QLPhongKham.csproj",
+              "ToolTip": "D:\\LTWEB\\QLPhongKham\\QLPhongKham\\QLPhongKham.csproj",
+              "RelativeToolTip": "QLPhongKham\\QLPhongKham.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-03T13:50:26.145Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+@model QLPhongKham.Models.Inventory
+
+@{
+    ViewData["Title"] = "Điều chỉnh Tồn Kho";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-arrow-up-down me-2"></i>Điều chỉnh tồn kho
+                    </h3>
+                    <div class="card-tools">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Thông tin thuốc -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <h5><i class="fas fa-pills"></i> Thông tin thuốc</h5>
+                                <p><strong>Tên thuốc:</strong> @Model.Medicine.Name</p>
+                                <p><strong>Đơn vị:</strong> @Model.Medicine.Unit</p>
+                                <p><strong>Số lượng hiện tại:</strong> <span class="badge badge-primary">@Model.QuantityInStock @Model.Medicine.Unit</span></p>
+                                @if (Model.ExpirationDate.HasValue)
+                                {
+                                    <p><strong>Hạn sử dụng:</strong> @Model.ExpirationDate.Value.ToString("dd/MM/yyyy")</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <form asp-action="AdjustStock" method="post">
+                        <input type="hidden" asp-for="InventoryId" />
+                        <input type="hidden" asp-for="MedicineId" />
+                        <input type="hidden" asp-for="ImportDate" />
+                        <input type="hidden" asp-for="ExpirationDate" />
+                        <input type="hidden" asp-for="ManagedByStaffId" />
+                        <input type="hidden" name="CurrentStock" value="@Model.QuantityInStock" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="AdjustmentType" class="form-label">Loại điều chỉnh</label>
+                                    <select name="AdjustmentType" id="AdjustmentType" class="form-control" required>
+                                        <option value="">-- Chọn loại điều chỉnh --</option>
+                                        <option value="increase">Tăng số lượng (Nhập hàng)</option>
+                                        <option value="decrease">Giảm số lượng (Xuất hàng)</option>
+                                        <option value="set">Đặt số lượng cụ thể</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="AdjustmentQuantity" class="form-label">Số lượng điều chỉnh</label>
+                                    <input type="number" name="AdjustmentQuantity" id="AdjustmentQuantity" class="form-control" min="0" required />
+                                    <small class="form-text text-muted">
+                                        <span id="adjustment-hint"></span>
+                                    </small>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="Reason" class="form-label">Lý do điều chỉnh</label>
+                                    <textarea name="Reason" id="Reason" class="form-control" rows="3" placeholder="Nhập lý do điều chỉnh..." required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6>Xem trước kết quả</h6>
+                                        <p>Số lượng hiện tại: <span id="current-display">@Model.QuantityInStock</span> @Model.Medicine.Unit</p>
+                                        <p>Số lượng sau điều chỉnh: <span id="new-quantity" class="font-weight-bold text-primary">@Model.QuantityInStock</span> @Model.Medicine.Unit</p>
+                                        <div id="warning-message" class="alert alert-warning d-none">
+                                            <i class="fas fa-exclamation-triangle"></i> Cảnh báo: Số lượng sau điều chỉnh sẽ âm!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success" id="submit-btn">
+                                        <i class="fas fa-save"></i> Xác nhận điều chỉnh
+                                    </button>
+                                    <a asp-action="Index" class="btn btn-secondary ms-2">
+                                        <i class="fas fa-times"></i> Hủy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var currentStock = @Model.QuantityInStock;
+            
+            function updatePreview() {
+                var adjustmentType = $('#AdjustmentType').val();
+                var adjustmentQuantity = parseInt($('#AdjustmentQuantity').val()) || 0;
+                var newQuantity = currentStock;
+                
+                if (adjustmentType === 'increase') {
+                    newQuantity = currentStock + adjustmentQuantity;
+                    $('#adjustment-hint').text('Số lượng sẽ được cộng thêm vào kho');
+                } else if (adjustmentType === 'decrease') {
+                    newQuantity = currentStock - adjustmentQuantity;
+                    $('#adjustment-hint').text('Số lượng sẽ được trừ khỏi kho');
+                } else if (adjustmentType === 'set') {
+                    newQuantity = adjustmentQuantity;
+                    $('#adjustment-hint').text('Số lượng trong kho sẽ được đặt thành giá trị này');
+                }
+                
+                $('#new-quantity').text(newQuantity);
+                
+                // Hiển thị cảnh báo nếu số lượng âm
+                if (newQuantity < 0) {
+                    $('#warning-message').removeClass('d-none');
+                    $('#submit-btn').prop('disabled', true);
+                } else {
+                    $('#warning-message').addClass('d-none');
+                    $('#submit-btn').prop('disabled', false);
+                }
+            }
+            
+            $('#AdjustmentType, #AdjustmentQuantity').on('change input', updatePreview);
+            
+            // Validation form
+            $('form').on('submit', function(e) {
+                if (!$('#AdjustmentType').val()) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn loại điều chỉnh!');
+                    return false;
+                }
+                
+                if (!$('#AdjustmentQuantity').val()) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập số lượng điều chỉnh!');
+                    return false;
+                }
+                
+                if (!$('#Reason').val().trim()) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập lý do điều chỉnh!');
+                    return false;
+                }
+                
+                return confirm('Bạn có chắc chắn muốn thực hiện điều chỉnh này?');
+            });
+        });
+    </script>
+}

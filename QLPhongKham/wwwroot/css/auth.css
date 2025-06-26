@@ -1,0 +1,644 @@
+/* ==========================================================================
+   Medical Theme Authentication Styles
+   Phong cách giao diện đăng nhập/đăng ký cho phòng khám
+   ========================================================================== */
+
+/* CSS Variables - Medical Color Palette */
+:root {
+    --medical-primary: #2563eb;      /* Medical Blue */
+    --medical-primary-light: #3b82f6;
+    --medical-primary-dark: #1e40af;
+    --medical-secondary: #06b6d4;    /* Cyan */
+    --medical-success: #10b981;      /* Medical Green */
+    --medical-success-light: #34d399;
+    --medical-warning: #f59e0b;      /* Amber */
+    --medical-danger: #ef4444;       /* Red */
+    --medical-white: #ffffff;
+    --medical-gray-50: #f8fafc;
+    --medical-gray-100: #f1f5f9;
+    --medical-gray-200: #e2e8f0;
+    --medical-gray-300: #cbd5e1;
+    --medical-gray-400: #94a3b8;
+    --medical-gray-500: #64748b;
+    --medical-gray-600: #475569;
+    --medical-gray-700: #334155;
+    --medical-gray-800: #1e293b;
+    --medical-gray-900: #0f172a;
+    
+    /* Shadows */
+    --medical-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --medical-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --medical-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --medical-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Border Radius */
+    --medical-radius-sm: 0.375rem;
+    --medical-radius: 0.5rem;
+    --medical-radius-lg: 0.75rem;
+    --medical-radius-xl: 1rem;
+    
+    /* Transitions */
+    --medical-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --medical-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+.auth-body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--medical-gray-700);
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-secondary) 100%);
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background Pattern */
+.auth-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.auth-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    background-size: 100px 100px;
+    animation: float 20s ease-in-out infinite;
+}
+
+.auth-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(37, 99, 235, 0.1);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+}
+
+/* Navigation */
+.auth-navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.auth-navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.auth-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--medical-primary);
+    text-decoration: none;
+    transition: var(--medical-transition);
+}
+
+.auth-brand:hover {
+    color: var(--medical-primary-dark);
+    text-decoration: none;
+}
+
+.auth-brand i {
+    font-size: 2rem;
+    margin-right: 0.75rem;
+    color: var(--medical-success);
+}
+
+.auth-nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.auth-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: var(--medical-gray-600);
+    text-decoration: none;
+    border-radius: var(--medical-radius);
+    transition: var(--medical-transition);
+    font-weight: 500;
+}
+
+.auth-nav-link:hover {
+    color: var(--medical-primary);
+    background: var(--medical-gray-100);
+    text-decoration: none;
+}
+
+.auth-nav-link i {
+    margin-right: 0.5rem;
+}
+
+/* Main Container */
+.auth-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+    padding: 2rem 1rem;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* Authentication Card */
+.auth-card {
+    background: var(--medical-white);
+    border-radius: var(--medical-radius-xl);
+    box-shadow: var(--medical-shadow-xl);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Card Header */
+.auth-header {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-primary-light) 100%);
+    color: var(--medical-white);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.auth-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.1;
+}
+
+.auth-logo {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+}
+
+.auth-title {
+    position: relative;
+    z-index: 1;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.025em;
+}
+
+.auth-subtitle {
+    position: relative;
+    z-index: 1;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Card Body */
+.auth-body {
+    padding: 2.5rem 2rem;
+}
+
+/* Form Groups */
+.auth-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form-group:last-child {
+    margin-bottom: 2rem;
+}
+
+/* Input Groups */
+.auth-input-group {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.auth-input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--medical-gray-400);
+    font-size: 1.1rem;
+    z-index: 2;
+    transition: var(--medical-transition);
+}
+
+.auth-input-group.focused .auth-input-icon {
+    color: var(--medical-primary);
+}
+
+.auth-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid var(--medical-gray-200);
+    border-radius: var(--medical-radius-lg);
+    font-size: 1rem;
+    background: var(--medical-white);
+    transition: var(--medical-transition);
+    outline: none;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-input:focus {
+    border-color: var(--medical-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.auth-input::placeholder {
+    color: var(--medical-gray-400);
+    opacity: 0;
+    transition: var(--medical-transition);
+}
+
+.auth-input:focus::placeholder {
+    opacity: 1;
+}
+
+/* Labels */
+.auth-label {
+    position: absolute;
+    left: 3rem;
+    top: 1rem;
+    color: var(--medical-gray-500);
+    font-size: 1rem;
+    font-weight: 500;
+    pointer-events: none;
+    transition: var(--medical-transition);
+    z-index: 2;
+    background: var(--medical-white);
+    padding: 0 0.25rem;
+}
+
+.auth-input-group.focused .auth-label,
+.auth-input:focus + .auth-label {
+    transform: translateY(-2.2rem) scale(0.85);
+    color: var(--medical-primary);
+    font-weight: 600;
+}
+
+/* Error Text */
+.auth-error-text {
+    display: block;
+    color: var(--medical-danger);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* Validation Summary */
+.auth-validation-summary {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--medical-radius);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--medical-danger);
+}
+
+.auth-validation-summary ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.auth-validation-summary li {
+    margin-bottom: 0.25rem;
+}
+
+/* Checkbox */
+.auth-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.auth-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.auth-checkbox-custom {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--medical-gray-300);
+    border-radius: var(--medical-radius-sm);
+    margin-right: 0.75rem;
+    transition: var(--medical-transition);
+    background: var(--medical-white);
+}
+
+.auth-checkbox-input:checked + .auth-checkbox-label .auth-checkbox-custom {
+    background: var(--medical-primary);
+    border-color: var(--medical-primary);
+}
+
+.auth-checkbox-input:checked + .auth-checkbox-label .auth-checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--medical-white);
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.auth-checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--medical-gray-700);
+    transition: var(--medical-transition);
+}
+
+.auth-checkbox-label:hover {
+    color: var(--medical-primary);
+}
+
+/* Submit Button */
+.auth-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-primary-light) 100%);
+    color: var(--medical-white);
+    border: none;
+    border-radius: var(--medical-radius-lg);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--medical-transition);
+    position: relative;
+    overflow: hidden;
+    text-transform: none;
+    letter-spacing: 0.025em;
+    box-shadow: var(--medical-shadow-lg);
+}
+
+.auth-button:hover {
+    background: linear-gradient(135deg, var(--medical-primary-dark) 0%, var(--medical-primary) 100%);
+    transform: translateY(-1px);
+    box-shadow: var(--medical-shadow-xl);
+}
+
+.auth-button:active {
+    transform: translateY(0);
+}
+
+.auth-button i {
+    margin-right: 0.5rem;
+}
+
+/* Button Ripple Effect */
+.auth-button-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Card Footer */
+.auth-footer {
+    background: var(--medical-gray-50);
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--medical-gray-200);
+}
+
+.auth-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+}
+
+.auth-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--medical-primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: var(--medical-radius);
+    transition: var(--medical-transition);
+}
+
+.auth-link:hover {
+    color: var(--medical-primary-dark);
+    background: rgba(37, 99, 235, 0.05);
+    text-decoration: none;
+}
+
+.auth-link i {
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.auth-footer-bottom {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem 0;
+    margin-top: auto;
+    color: var(--medical-gray-600);
+    font-size: 0.875rem;
+}
+
+.auth-footer-links {
+    margin-top: 1rem;
+}
+
+.auth-footer-links a {
+    color: var(--medical-primary);
+    text-decoration: none;
+    transition: var(--medical-transition);
+}
+
+.auth-footer-links a:hover {
+    color: var(--medical-primary-dark);
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-main {
+        padding: 1rem;
+        min-height: calc(100vh - 160px);
+    }
+    
+    .auth-card {
+        border-radius: var(--medical-radius-lg);
+    }
+    
+    .auth-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .auth-body {
+        padding: 2rem 1.5rem;
+    }
+    
+    .auth-footer {
+        padding: 1.5rem;
+    }
+    
+    .auth-title {
+        font-size: 1.5rem;
+    }
+    
+    .auth-logo {
+        font-size: 2.5rem;
+        padding: 0.75rem;
+    }
+    
+    .auth-navbar .container {
+        padding: 0 1rem;
+    }
+    
+    .auth-brand {
+        font-size: 1.25rem;
+    }
+    
+    .auth-brand i {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-main {
+        padding: 0.5rem;
+    }
+    
+    .auth-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .auth-body {
+        padding: 1.5rem 1rem;
+    }
+    
+    .auth-footer {
+        padding: 1rem;
+    }
+    
+    .auth-input {
+        padding: 0.875rem 0.875rem 0.875rem 2.75rem;
+    }
+    
+    .auth-input-icon {
+        left: 0.875rem;
+        font-size: 1rem;
+    }
+    
+    .auth-label {
+        left: 2.75rem;
+        top: 0.875rem;
+        font-size: 0.9rem;
+    }
+    
+    .auth-button {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Loading Animation */
+.auth-loading {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.auth-loaded {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Success States */
+.auth-input.success {
+    border-color: var(--medical-success);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.auth-input-group.success .auth-input-icon {
+    color: var(--medical-success);
+}
+
+/* Focus Visible for Accessibility */
+.auth-button:focus-visible,
+.auth-link:focus-visible,
+.auth-nav-link:focus-visible {
+    outline: 2px solid var(--medical-primary);
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .auth-background,
+    .auth-navbar,
+    .auth-footer-bottom {
+        display: none;
+    }
+    
+    .auth-card {
+        box-shadow: none;
+        border: 1px solid var(--medical-gray-300);
+    }
+}

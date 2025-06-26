@@ -80,7 +80,7 @@
                     <div class="dropdown">
                         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
                             <i class="bi bi-person-circle me-1"></i>
-                            @User.Identity.Name
+                            @(User.Identity?.Name ?? "User")
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/Admin/Profile"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>

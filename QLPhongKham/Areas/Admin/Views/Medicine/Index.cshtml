@@ -9,8 +9,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Danh sách Thuốc</h3>
+                    <h3 class="card-title">
+                        <i class="fas fa-pills me-2"></i>Danh sách Thuốc
+                    </h3>
                     <div class="card-tools">
+                        <a asp-controller="Inventory" asp-action="Index" class="btn btn-info me-2">
+                            <i class="fas fa-boxes"></i> Quản lý Tồn kho
+                        </a>
                         <a asp-action="Create" class="btn btn-primary">
                             <i class="fas fa-plus"></i> Thêm thuốc mới
                         </a>
@@ -46,6 +51,7 @@
                                     <th>Giá đơn vị</th>
                                     <th>Đơn vị</th>
                                     <th>Nhà sản xuất</th>
+                                    <th>Tồn kho</th>
                                     <th>Trạng thái</th>
                                     <th>Thao tác</th>
                                 </tr>
@@ -53,8 +59,15 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    var inventory = item.Inventories.FirstOrDefault();
+                                    var totalStock = item.Inventories.Sum(i => i.QuantityInStock);
+                                    
                                     <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>                                        <td>
+                                        <td>
+                                            <div class="fw-bold">@Html.DisplayFor(modelItem => item.Name)</div>
+                                            <small class="text-muted">Mã: MED-@item.MedicineId.ToString("D4")</small>
+                                        </td>
+                                        <td>
                                             @if (item.Description != null && item.Description.Length > 50)
                                             {
                                                 @(item.Description.Substring(0, 50) + "...")
@@ -68,6 +81,32 @@
                                         <td>@Html.DisplayFor(modelItem => item.Unit)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Manufacturer)</td>
                                         <td>
+                                            @if (inventory != null)
+                                            {
+                                                <div class="d-flex align-items-center">
+                                                    <span class="badge @(totalStock == 0 ? "bg-danger" : totalStock <= 10 ? "bg-warning" : "bg-success") me-2">
+                                                        @totalStock @item.Unit
+                                                    </span>
+                                                    @if (inventory.ExpirationDate.HasValue)
+                                                    {
+                                                        var daysToExpiry = (inventory.ExpirationDate.Value - DateTime.Now).Days;
+                                                        if (daysToExpiry < 0)
+                                                        {
+                                                            <small class="text-danger">Hết hạn</small>
+                                                        }
+                                                        else if (daysToExpiry <= 30)
+                                                        {
+                                                            <small class="text-warning">@daysToExpiry ngày</small>
+                                                        }
+                                                    }
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">Chưa có trong kho</span>
+                                            }
+                                        </td>
+                                        <td>
                                             @if (item.IsActive)
                                             {
                                                 <span class="badge badge-success">Đang kinh doanh</span>
@@ -79,13 +118,37 @@
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a asp-action="Details" asp-route-id="@item.MedicineId" class="btn btn-info btn-sm" title="Xem chi tiết">
+                                                <!-- Thao tác tồn kho -->
+                                                @if (inventory != null)
+                                                {
+                                                    <a asp-controller="Inventory" asp-action="AdjustStock" asp-route-id="@inventory.InventoryId" 
+                                                       class="btn btn-primary btn-sm" title="Điều chỉnh tồn kho">
+                                                        <i class="fas fa-arrow-up-down"></i>
+                                                    </a>
+                                                    <a asp-controller="Inventory" asp-action="Edit" asp-route-id="@inventory.InventoryId" 
+                                                       class="btn btn-info btn-sm" title="Sửa thông tin tồn kho">
+                                                        <i class="fas fa-boxes"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="Inventory" asp-action="Create" asp-route-medicineId="@item.MedicineId" 
+                                                       class="btn btn-success btn-sm" title="Thêm vào tồn kho">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                }
+                                                
+                                                <!-- Thao tác thuốc -->
+                                                <a asp-action="Details" asp-route-id="@item.MedicineId" 
+                                                   class="btn btn-info btn-sm" title="Xem chi tiết">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a asp-action="Edit" asp-route-id="@item.MedicineId" class="btn btn-warning btn-sm" title="Chỉnh sửa">
+                                                <a asp-action="Edit" asp-route-id="@item.MedicineId" 
+                                                   class="btn btn-warning btn-sm" title="Chỉnh sửa">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a asp-action="Delete" asp-route-id="@item.MedicineId" class="btn btn-danger btn-sm" title="Xóa" 
+                                                <a asp-action="Delete" asp-route-id="@item.MedicineId" 
+                                                   class="btn btn-danger btn-sm" title="Xóa" 
                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa thuốc này?')">
                                                     <i class="fas fa-trash"></i>
                                                 </a>

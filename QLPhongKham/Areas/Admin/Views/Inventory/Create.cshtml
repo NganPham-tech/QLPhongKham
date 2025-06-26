@@ -1,0 +1,162 @@
+@model QLPhongKham.Models.Inventory
+
+@{
+    ViewData["Title"] = "Thêm Tồn Kho";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-plus me-2"></i>Thêm mới tồn kho
+                    </h3>
+                    <div class="card-tools">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @TempData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <h6>Vui lòng kiểm tra và sửa các lỗi sau:</h6>
+                            <ul class="mb-0">
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="MedicineId" class="form-label">Thuốc</label>
+                                    <select asp-for="MedicineId" class="form-control">
+                                        <option value="">-- Chọn thuốc --</option>
+                                        @if (ViewBag.Medicines != null)
+                                        {
+                                            var medicines = ViewBag.Medicines as List<QLPhongKham.Models.Medicine>;
+                                            if (medicines != null)
+                                            {
+                                                @foreach (var medicine in medicines)
+                                                {
+                                                    <option value="@medicine.MedicineId" 
+                                                            selected="@(ViewBag.SelectedMedicineId != null && ViewBag.SelectedMedicineId.ToString() == medicine.MedicineId.ToString())">
+                                                        @medicine.Name (@medicine.Unit)
+                                                    </option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                    <span asp-validation-for="MedicineId" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="QuantityInStock" class="form-label">Số lượng trong kho</label>
+                                    <input asp-for="QuantityInStock" class="form-control" type="number" min="0" />
+                                    <span asp-validation-for="QuantityInStock" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="ExpirationDate" class="form-label">Ngày hết hạn</label>
+                                    <input asp-for="ExpirationDate" class="form-control" type="date" />
+                                    <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Nhân viên quản lý</label>
+                                    <div class="form-control bg-light text-muted">
+                                        <i class="fas fa-user me-2"></i>
+                                        @if (ViewBag.CurrentUserEmail != null)
+                                        {
+                                            <span>@ViewBag.CurrentUserEmail (User hiện tại)</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Admin (Tự động gán)</span>
+                                        }
+                                    </div>
+                                    <small class="form-text text-muted">Tự động sử dụng tài khoản đang đăng nhập</small>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="Notes" class="form-label">Ghi chú</label>
+                                    <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Nhập ghi chú (tùy chọn)"></textarea>
+                                    <span asp-validation-for="Notes" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-save"></i> Lưu
+                                    </button>
+                                    <a asp-action="Index" class="btn btn-secondary ms-2">
+                                        <i class="fas fa-times"></i> Hủy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Auto-focus vào dropdown Medicine nếu chưa có giá trị được chọn
+            if (!$('#MedicineId').val()) {
+                $('#MedicineId').focus();
+            }
+            
+            // Validation cho form
+            $('form').on('submit', function(e) {
+                if (!$('#MedicineId').val()) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn thuốc!');
+                    $('#MedicineId').focus();
+                    return false;
+                }
+                
+                if (!$('#QuantityInStock').val() || $('#QuantityInStock').val() < 0) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập số lượng hợp lệ!');
+                    $('#QuantityInStock').focus();
+                    return false;
+                }
+            });
+        });
+    </script>
+}

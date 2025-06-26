@@ -278,25 +278,25 @@
             <div class="info-title">THÔNG TIN BỆNH NHÂN</div>
             <div class="info-item">
                 <span class="info-label">Họ tên:</span>
-                <strong>@Model.Patient.FullName</strong>
+                <strong>@(Model.Patient?.FullName ?? "N/A")</strong>
             </div>
             <div class="info-item">
                 <span class="info-label">Ngày sinh:</span>
-                @Model.Patient.DateOfBirth.ToString("dd/MM/yyyy") (@Model.Patient.Age tuổi)
+                @(Model.Patient?.DateOfBirth.ToString("dd/MM/yyyy") ?? "N/A") (@(Model.Patient?.Age.ToString() ?? "N/A") tuổi)
             </div>
             <div class="info-item">
                 <span class="info-label">Giới tính:</span>
-                @Model.Patient.Gender
+                @(Model.Patient?.Gender ?? "N/A")
             </div>
             <div class="info-item">
                 <span class="info-label">Số điện thoại:</span>
-                @Model.Patient.Phone
+                @(Model.Patient?.Phone ?? "N/A")
             </div>
             <div class="info-item">
                 <span class="info-label">Email:</span>
-                @Model.Patient.Email
+                @(Model.Patient?.Email ?? "N/A")
             </div>
-            @if (!string.IsNullOrEmpty(Model.Patient.Address))
+            @if (!string.IsNullOrEmpty(Model.Patient?.Address))
             {
                 <div class="info-item">
                     <span class="info-label">Địa chỉ:</span>
@@ -401,7 +401,7 @@
         <div class="signature-box">
             <div class="signature-title">BỆNH NHÂN</div>
             <div class="signature-line"></div>
-            <div>@Model.Patient.FullName</div>
+            <div>@(Model.Patient?.FullName ?? "_______________")</div>
         </div>
         <div class="signature-box">
             <div class="signature-title">THU NGÂN</div>

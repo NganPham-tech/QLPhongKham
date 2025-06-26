@@ -497,7 +497,7 @@ namespace QLPhongKham.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
 
-                    b.Property<int>("AppointmentId")
+                    b.Property<int?>("AppointmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("CompanyInfo")
@@ -542,9 +542,6 @@ namespace QLPhongKham.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("RemainingAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
@@ -575,7 +572,8 @@ namespace QLPhongKham.Migrations
                     b.HasKey("InvoiceId");
 
                     b.HasIndex("AppointmentId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AppointmentId] IS NOT NULL");
 
                     b.HasIndex("CreatedDate");
 
@@ -1112,8 +1110,7 @@ namespace QLPhongKham.Migrations
                     b.HasOne("QLPhongKham.Models.Appointment", "Appointment")
                         .WithOne("Invoice")
                         .HasForeignKey("QLPhongKham.Models.Invoice", "AppointmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("QLPhongKham.Models.Patient", "Patient")
                         .WithMany("Invoices")

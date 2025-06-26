@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo Test - Auto Invoice Creation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-case { border: 1px solid #ccc; margin: 10px 0; padding: 15px; }
+        .success { border-color: green; background-color: #f0fff0; }
+        .warning { border-color: orange; background-color: #fff8dc; }
+        .error { border-color: red; background-color: #ffe4e1; }
+        .steps { margin: 10px 0; }
+        .step { margin: 5px 0; padding: 5px; background-color: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Demo Test - Tính năng Tự động Tạo Hóa đơn</h1>
+    
+    <div class="test-case success">
+        <h3>✅ Test Case 1: Admin cập nhật appointment thành "Completed"</h3>
+        <div class="steps">
+            <div class="step">1. Đăng nhập với tài khoản Admin</div>
+            <div class="step">2. Truy cập Admin Dashboard → Quản lý lịch hẹn</div>
+            <div class="step">3. Click vào một appointment có status "Pending" hoặc "In Progress"</div>
+            <div class="step">4. Click nút "Completed" trong modal chi tiết</div>
+            <div class="step">
+                <strong>Kết quả mong đợi:</strong>
+                <ul>
+                    <li>Status appointment được cập nhật thành "Completed"</li>
+                    <li>Hiển thị toast notification: "Cập nhật trạng thái thành công... Hóa đơn đã được tạo tự động."</li>
+                    <li>Hóa đơn mới xuất hiện trong danh sách hóa đơn</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-case success">
+        <h3>✅ Test Case 2: Doctor cập nhật appointment của mình</h3>
+        <div class="steps">
+            <div class="step">1. Đăng nhập với tài khoản Doctor (BacSi)</div>
+            <div class="step">2. Truy cập Dashboard Bác sĩ → Lịch hẹn của tôi</div>
+            <div class="step">3. Click "Details" trên một appointment</div>
+            <div class="step">4. Cập nhật status thành "Completed"</div>
+            <div class="step">
+                <strong>Kết quả mong đợi:</strong>
+                <ul>
+                    <li>Status được cập nhật</li>
+                    <li>TempData hiển thị: "Hóa đơn {InvoiceNumber} đã được tạo tự động."</li>
+                    <li>Chỉ doctor owner mới có thể cập nhật</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-case success">
+        <h3>✅ Test Case 3: Staff cập nhật appointment</h3>
+        <div class="steps">
+            <div class="step">1. Đăng nhập với tài khoản Staff (NhanVien)</div>
+            <div class="step">2. Truy cập Dashboard Nhân viên → Quản lý lịch hẹn</div>
+            <div class="step">3. Click "Edit" trên appointment</div>
+            <div class="step">4. Thay đổi Status thành "Completed" và Submit</div>
+            <div class="step">
+                <strong>Kết quả mong đợi:</strong>
+                <ul>
+                    <li>Appointment được cập nhật</li>
+                    <li>Hóa đơn được tạo tự động nếu chưa có</li>
+                    <li>TempData thông báo về việc tạo hóa đơn</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-case warning">
+        <h3>⚠️ Test Case 4: Appointment đã có hóa đơn</h3>
+        <div class="steps">
+            <div class="step">1. Lặp lại Test Case 1 với cùng appointment đã completed</div>
+            <div class="step">2. Thử cập nhật status khác hoặc cập nhật lại "Completed"</div>
+            <div class="step">
+                <strong>Kết quả mong đợi:</strong>
+                <ul>
+                    <li>Không tạo hóa đơn mới (duplicate)</li>
+                    <li>Console log: "Invoice already exists for appointment {id}"</li>
+                    <li>Thông báo bình thường về việc cập nhật status</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-case warning">
+        <h3>⚠️ Test Case 5: User không có Staff record</h3>
+        <div class="steps">
+            <div class="step">1. Tạo user mới không có Staff/Doctor record tương ứng</div>
+            <div class="step">2. Thử cập nhật appointment status thành "Completed"</div>
+            <div class="step">
+                <strong>Kết quả mong đợi:</strong>
+                <ul>
+                    <li>Hệ thống fallback sử dụng Staff ID = 1</li>
+                    <li>Hóa đơn vẫn được tạo thành công</li>
+                    <li>Console log: "Could not determine current staff ID" (Admin) hoặc sử dụng fallback</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-case error">
+        <h3>🔥 Test Case 6: Error handling</h3>
+        <div class="steps">
+            <div class="step">1. Tạo appointment với Service ID không tồn tại (manually in DB)</div>
+            <div class="step">2. Thử cập nhật status thành "Completed"</div>
+            <div class="step">
+                <strong>Kết quả mong đợi:</strong>
+                <ul>
+                    <li>Status appointment vẫn được cập nhật</li>
+                    <li>TempData["Warning"]: "Cập nhật trạng thái thành công nhưng không thể tạo hóa đơn tự động."</li>
+                    <li>Console log ghi lại lỗi chi tiết</li>
+                    <li>User workflow không bị gián đoạn</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>🔍 Debugging Tools</h2>
+    <div class="test-case">
+        <h3>Browser Console Logs</h3>
+        <div class="steps">
+            <p>Mở Developer Tools → Console để xem các log sau:</p>
+            <div class="step"><code>Auto-created invoice {InvoiceNumber} for completed appointment {id}</code></div>
+            <div class="step"><code>Invoice already exists for appointment {id}</code></div>
+            <div class="step"><code>Could not determine current staff ID for invoice creation</code></div>
+            <div class="step"><code>Failed to create invoice for appointment {id}: {error}</code></div>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Database Verification</h3>
+        <div class="steps">
+            <p>Kiểm tra trực tiếp trong database:</p>
+            <div class="step">
+                <strong>Invoices Table:</strong><br>
+                <code>SELECT * FROM Invoices WHERE AppointmentId = {appointment_id}</code>
+            </div>
+            <div class="step">
+                <strong>Appointments Table:</strong><br>
+                <code>SELECT * FROM Appointments WHERE Status = 'Completed'</code>
+            </div>
+            <div class="step">
+                <strong>Join Query:</strong><br>
+                <code>
+                    SELECT a.AppointmentId, a.Status, i.InvoiceNumber, i.CreatedDate<br>
+                    FROM Appointments a<br>
+                    LEFT JOIN Invoices i ON a.AppointmentId = i.AppointmentId<br>
+                    WHERE a.Status = 'Completed'
+                </code>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>📋 Test Results Checklist</h2>
+    <div class="test-case">
+        <div class="steps">
+            <div class="step">☐ Admin có thể tạo hóa đơn tự động khi complete appointment</div>
+            <div class="step">☐ Doctor chỉ có thể cập nhật appointment của mình</div>
+            <div class="step">☐ Staff có thể tạo hóa đơn qua Edit form</div>
+            <div class="step">☐ Không tạo duplicate invoice cho cùng appointment</div>
+            <div class="step">☐ Error handling hoạt động đúng</div>
+            <div class="step">☐ User notifications hiển thị chính xác</div>
+            <div class="step">☐ Fallback mechanism cho missing staff record</div>
+            <div class="step">☐ Console logs cung cấp thông tin debug hữu ích</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; padding: 20px; background-color: #e8f5e8; border: 1px solid #4caf50;">
+        <h3>🎯 Success Criteria</h3>
+        <p><strong>Tính năng được coi là thành công khi:</strong></p>
+        <ul>
+            <li>100% appointment có status "Completed" đều có hóa đơn tương ứng</li>
+            <li>Không có duplicate invoice cho cùng appointment</li>
+            <li>Tất cả user roles (Admin, Doctor, Staff) đều có thể trigger tạo hóa đơn</li>
+            <li>Error handling không ảnh hưởng đến main workflow</li>
+            <li>User experience mượt mà với notifications rõ ràng</li>
+        </ul>
+    </div>
+</body>
+</html>
